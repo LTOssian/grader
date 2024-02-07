@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  pg_db:
+    image: postgres:16-alpine
+    container_name: grader_db
+    restart: always
+    environment:
+      POSTGRES_USER: grader_user
+      POSTGRES_PASSWORD: grader_hetic
+      POSTGRES_DB: grader
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+      - ./db_migrations:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+
+  grader_backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      target: dev
+    container_name: grader_server
+    restart: always
+    ports:
+      - "4001:4001"
+    depends_on:
+      - pg_db
+    environment:
+      DATABASE_URL: postgres://grader_user:grader_hetic@postgres:5432/grader
