@@ -1,0 +1,8 @@
+# db volume
+pg_data 
+
+node_modules
+dist
+DS_Store
+.env
+.vscode
