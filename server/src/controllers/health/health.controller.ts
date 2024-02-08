@@ -1,5 +1,5 @@
 import { ErrorMessageEnum } from "../../common/constants";
-import { HealthServiceSingleton } from "../../services/health/health.service";
+import { HealthServiceSingleton } from "../../repository/health/health.repository";
 import { NextFunction, Request, Response } from "express";
 import SingletonWrapper from "../../common/helpers/singleton-wrapper";
 import ValidationError from "../../common/errors/validation.error";
