@@ -29,4 +29,4 @@ services:
     depends_on:
       - pg_db
     environment:
-      DATABASE_URL: postgres://grader_user:grader_hetic@postgres:5432/grader
+      DATABASE_URL: postgres://grader_user:grader_hetic@pg_db:5432/grader
