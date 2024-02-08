@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 create table if not exists
   groups (
     group_id uuid not null default uuid_generate_v4 (),
