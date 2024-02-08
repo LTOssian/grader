@@ -1,21 +1,49 @@
-import express, { Express, NextFunction, Request, Response, Router } from "express";
+import { AppRouterSingleton } from "./infrastructure/web/routers/app.router";
+import { ErrorHandler } from "./infrastructure/web/middlewares/error-handler";
+import express, { Express } from "express";
 import morgan from "morgan";
-const app: Express = express();
+import SingletonWrapper from "./common/helpers/singleton-wrapper";
 
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
-app.use(morgan("dev"));
-app.use(express.json());
+class ExpressApp {
+  private _app: Express;
+  private _appIsInitialized: boolean = false;
 
-app.use("/", (res: Response, req: Request) => {
-  res.json("health");
-});
+  public constructor() {
+    this._app = express();
+  }
 
-const PORT: string | number = process.env.PORT || 4001;
-app.listen(PORT, () => {
-  console.log(process.env.DATABASE_URL);
-  console.log(`Server listening on http://localhost:${PORT}`);
-});
+  public build(): Express {
+    this.initializeApp();
+    return this._app;
+  }
+
+  public initializeApp(): void {
+    if (!this._appIsInitialized) {
+      this.setAppSettings();
+      this.setDevMiddlewares();
+      this.setAppRouter();
+      this.setErrorMiddlewares();
+    }
+
+    this._appIsInitialized = true;
+  }
+
+  private setAppSettings(): void {
+    this._app.use(express.json());
+    this._app.use(express.urlencoded({ extended: true }));
+  }
+
+  private setDevMiddlewares(): void {
+    this._app.use(morgan("tiny"));
+  }
+
+  private setAppRouter(): void {
+    this._app.use("/api/", AppRouterSingleton.getRouter());
+  }
+
+  private setErrorMiddlewares(): void {
+    this._app.use(ErrorHandler);
+  }
+}
+
+export const ExpressAppSingleton = SingletonWrapper.makeSingleton(new ExpressApp()).getInstance();
