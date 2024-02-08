@@ -4,8 +4,8 @@ import { StudentGradesTables } from "./student-grades.type";
 import { StudentsTable } from "./students-table.type";
 
 export interface Database {
-  student: StudentsTable;
-  group: GroupsTable;
-  studentGrades: StudentGradesTables;
-  groupClasses: GroupClassesTable;
+  students: StudentsTable;
+  groups: GroupsTable;
+  student_grades: StudentGradesTables;
+  group_classes: GroupClassesTable;
 }
