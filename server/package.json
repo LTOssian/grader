@@ -2,10 +2,10 @@
   "name": "grader-server",
   "version": "1.0.0",
   "description": "server of the fullstack application grader",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc && concurrently \"npx tsc --watch\" \"node --watch ./src/dist/index.js\" "
+    "dev": "tsc && concurrently \"npx tsc --watch\" \"node --watch ./dist/app.js\" "
   },
   "author": "Louisan Tchitoula",
   "license": "ISC",
