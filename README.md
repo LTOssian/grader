@@ -11,15 +11,14 @@ L'application Grader vise à générer les bulletins de notes d'étudiants sous 
 Si vous avez Docker, suivez cette suite de commande :
 
 ```bash
-makefile compose-start
+make up && make logs
 ```
 
 Sinon, suivez cette suite de commande. Il faut impérativement avoir `npm` :
 
 ```bash
-makefile migrate <nom de votre db postgres créer en amont>
 touch .env <<< blabla db
-makefile start
+make install && make start
 ```
 
 Interagissez avec l'api via `http://localhost:4001`
