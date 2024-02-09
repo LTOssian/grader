@@ -1,7 +1,7 @@
 import SingletonWrapper from "../../common/helpers/singleton-wrapper";
 import { DbClient } from "../../infrastructure/database/db-client";
 
-export class HealthService {
+class HealthRepository {
   public async getById(healthId: number): Promise<string | null> {
     const groups = await DbClient.selectFrom("groups").selectAll().execute();
 
@@ -9,4 +9,4 @@ export class HealthService {
   }
 }
 
-export const HealthServiceSingleton = SingletonWrapper.makeSingleton(new HealthService()).getInstance();
+export const HealthRepositorySingleton = SingletonWrapper.makeSingleton(new HealthRepository()).getInstance();
