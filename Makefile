@@ -1,5 +1,7 @@
 # bring up the services
 up:
+	cd server && npm run build
+	cd ..
 	docker-compose up -d
 
 # bring down the services

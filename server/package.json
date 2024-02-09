@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc && concurrently \"npx tsc --watch\" \"node --watch ./dist/app.js\" "
+    "start:dev": "tsc && concurrently \"npx tsc --watch\" \"node --watch ./dist/app.js\" ",
+    "build": "tsc",
+    "start:prod": "node ./dist/app.js"
   },
   "author": "Louisan Tchitoula",
   "license": "ISC",

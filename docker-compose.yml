@@ -20,7 +20,8 @@ services:
       context: ./server
       dockerfile: Dockerfile
       target: dev
-    container_name: grader_server
+    container_name: grader_backend
+    image: grader_backend
     restart: always
     ports:
       - "4001:4001"

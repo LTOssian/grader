@@ -8,17 +8,42 @@ L'application Grader vise à générer les bulletins de notes d'étudiants sous 
 
 ## Installation
 
-Si vous avez Docker, suivez cette suite de commande :
+### Avec Docker
 
 ```bash
 make up && make logs
 ```
 
-Sinon, suivez cette suite de commande. Il faut impérativement avoir `npm` :
+Environnement de production ou de développement ?
+
+```yml
+# dans le docker-compose, changez la target des services grader_backend et grader_frontend pour l'usage
+grader_backend:
+    ...
+    target: prod #ou dev, par défaut dev
+    ...
+```
+
+### Sans Docker
 
 ```bash
-touch .env <<< blabla db
-make install && make start
+# depuis la racine
+cd server
+
+# mettez en place la base de donnée
+psql -U username -d database_name -a -f ./db_migrations/migrations_1_init_db.sql
+
+# mettez en place le .env
+echo "DATABASE_URL=<URL de votre database ici>" > .env
+
+# installer les dépendances et lancer l'app
+npm install && npm run build
+npm run start:prod #ou start:dev
+
+# depuis le racine
+cd client
+npm install && npm run build
+npm run start:prod #ou start:dev
 ```
 
 Interagissez avec l'api via `http://localhost:4001`
