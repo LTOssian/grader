@@ -12,4 +12,4 @@ class App {
   }
 }
 
-App.main();
+App.main().catch(console.error);

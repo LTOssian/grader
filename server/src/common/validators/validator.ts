@@ -1,6 +1,7 @@
 import { NewGroup } from "../../infrastructure/database/interfaces/groups-table.type";
+import { NewStudent } from "../../infrastructure/database/interfaces/students-table.type";
+import { requiredCredentialsRule } from "./rules";
 import SingletonWrapper from "../helpers/singleton-wrapper";
-import { requiredRule } from "./rules";
 
 export type TValidationResult = {
   isValid: boolean;
@@ -41,4 +42,9 @@ export class CustomValidator<T> {
 }
 
 export const groupValidatorSingleton = SingletonWrapper.makeSingleton(new CustomValidator<NewGroup>()).getInstance();
-groupValidatorSingleton.addRule((newGroup) => requiredRule(newGroup.name));
+groupValidatorSingleton.addRule((newGroup) => requiredCredentialsRule(newGroup));
+
+export const studentValidatorSingleton = SingletonWrapper.makeSingleton(
+  new CustomValidator<Partial<NewStudent>>()
+).getInstance();
+studentValidatorSingleton.addRule((newStudent) => requiredCredentialsRule(newStudent));

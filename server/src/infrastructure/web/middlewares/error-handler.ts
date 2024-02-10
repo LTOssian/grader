@@ -8,11 +8,14 @@ export const ErrorHandler = (
   res: Response,
   next: NextFunction
 ): void => {
-  console.info("error middleware is reached"); // debug
+  // console.info("error middleware is reached"); // debug
 
   if (err instanceof ValidationError || err instanceof NotFoundError) {
     res.status(err.code).json({
       error: err.message,
+      ...(err instanceof ValidationError && {
+        fields: err.validationErrors,
+      }),
       data: null,
     });
     return;
