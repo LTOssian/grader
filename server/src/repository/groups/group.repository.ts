@@ -32,7 +32,7 @@ class GroupRepository {
     // check validity of the id
     await this.getGroupById(credentials);
 
-    const deletedRows = await DbClient.deleteFrom("groups").where("group_id", "=", credentials.group_id).execute();
+    await DbClient.deleteFrom("groups").where("group_id", "=", credentials.group_id).execute();
   }
 
   public async getGroupById(credentials: Pick<Group, "group_id">): Promise<Group> {
@@ -41,7 +41,7 @@ class GroupRepository {
       .where("group_id", "=", credentials.group_id)
       .executeTakeFirst();
 
-    if (!rows) throw new NotFoundError({ message: ErrorMessageEnum.UNKNOWN_ID, code: 404 });
+    if (!rows) throw new NotFoundError({ message: ErrorMessageEnum.UNKNOWN_GROUP, code: 404 });
 
     return rows;
   }
