@@ -19,7 +19,7 @@ class GroupRepository {
    * @param credentials name of the group
    */
   public async createGroup(credentials: NewGroup): Promise<Group> {
-    const [rows] = await DbClient.insertInto("groups").values(credentials).returning(["group_id", "name"]).execute();
+    const [rows] = await DbClient.insertInto("groups").values(credentials).returningAll().execute();
 
     return rows;
   }

@@ -1,7 +1,7 @@
 import { ErrorMessageEnum } from "../../common/constants";
 import NotFoundError from "../../common/errors/not-found.error";
 import { DbClient } from "../../infrastructure/database/db-client";
-import { Student } from "../../infrastructure/database/interfaces/students-table.type";
+import { NewStudent, Student } from "../../infrastructure/database/interfaces/students-table.type";
 
 class StudentRepository {
   public async getStudentsFromGroup(credentials: Pick<Student, "group_id">): Promise<Student[]> {
@@ -21,6 +21,12 @@ class StudentRepository {
     const rows = baseQuery.executeTakeFirst();
 
     if (!rows) throw new NotFoundError({ message: ErrorMessageEnum.UNKNOWN_ID, code: 404 });
+
+    return rows;
+  }
+
+  public async createStudentFromGroup(credentials: NewStudent): Promise<Student> {
+    const [rows] = await DbClient.insertInto("students").values(credentials).returningAll().execute();
 
     return rows;
   }
