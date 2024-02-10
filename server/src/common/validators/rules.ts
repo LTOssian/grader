@@ -2,7 +2,7 @@ import { ErrorMessageEnum } from "../constants";
 import { ValidationResult } from "./validator";
 
 /**
- * CHecks that the values exists
+ * Checks that the values exists
  * @param value
  * @returns Object with isValid and list of strings
  */
