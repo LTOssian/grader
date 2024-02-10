@@ -1,6 +1,6 @@
-import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";
 import { groupController } from "../../../../controllers/groups/group.controller";
 import RouterMaker from "../interfaces/router.abstract";
+import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";
 
 class GroupRouter extends RouterMaker {
   public constructor() {

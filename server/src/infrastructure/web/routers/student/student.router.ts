@@ -1,4 +1,4 @@
-import { StudentControllerSingleton } from "../../../../controllers/students/student.controller";
+import { studentController } from "../../../../controllers/students/student.controller";
 import RouterMaker from "../interfaces/router.abstract";
 import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";
 
@@ -9,8 +9,8 @@ class StudentRouter extends RouterMaker {
   }
 
   protected initRoutes(): void {
-    this._router.get("/:group_id", StudentControllerSingleton.getStudentsFromGroup);
+    this._router.get("/:group_id", studentController.getStudentsFromGroup);
   }
 }
 
-export const StudentRouterSingleton = SingletonWrapper.makeSingleton(new StudentRouter()).getInstance();
+export const studentRouterSingleton = SingletonWrapper.makeSingleton(new StudentRouter()).getInstance();

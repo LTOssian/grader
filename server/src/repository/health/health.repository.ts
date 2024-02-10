@@ -1,4 +1,3 @@
-import SingletonWrapper from "../../common/helpers/singleton-wrapper";
 import { DbClient } from "../../infrastructure/database/db-client";
 
 class HealthRepository {
@@ -9,4 +8,4 @@ class HealthRepository {
   }
 }
 
-export const HealthRepositorySingleton = SingletonWrapper.makeSingleton(new HealthRepository()).getInstance();
+export const healthRepository = new HealthRepository();
