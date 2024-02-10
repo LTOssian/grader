@@ -50,6 +50,32 @@ class StudentController {
       next(e);
     }
   }
+
+  public async getStudentFromGroupById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { group_id, student_id } = req.params;
+
+      const { isValid, errors } = studentValidatorSingleton.validate({ group_id, student_id });
+
+      if (!isValid)
+        throw new ValidationError({
+          message: ErrorMessageEnum.UNKNOWN_ID,
+          code: 403,
+          errors: errors,
+        });
+
+      // Validate that the group exists
+      await groupRepository.getGroupById({ group_id });
+
+      const student = await studentRepository.getStudentByID({ group_id, student_id });
+
+      res.json({
+        data: student,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export const studentController = new StudentController();

@@ -12,13 +12,13 @@ class StudentRepository {
     return rows;
   }
 
-  public async getStudentsByID(credentials: Partial<Pick<Student, "group_id" | "student_id">>) {
-    const baseQuery = await DbClient.selectFrom("students").selectAll();
+  public async getStudentByID(credentials: Pick<Student, "group_id" | "student_id">) {
+    const baseQuery = DbClient.selectFrom("students")
+      .selectAll()
+      .where("group_id", "=", credentials.group_id)
+      .where("student_id", "=", credentials.student_id);
 
-    if (credentials.group_id) baseQuery.where("group_id", "=", credentials.group_id);
-    if (credentials.student_id) baseQuery.where("student_id", "=", credentials.student_id);
-
-    const rows = baseQuery.executeTakeFirst();
+    const rows = await baseQuery.executeTakeFirst();
 
     if (!rows) throw new NotFoundError({ message: ErrorMessageEnum.UNKNOWN_STUDENT, code: 404 });
 
