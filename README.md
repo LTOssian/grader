@@ -46,6 +46,6 @@ npm install && npm run build
 npm run start:prod #ou start:dev
 ```
 
-Interagissez avec l'api via `http://localhost:4001`
+Interagissez avec l'api via `http://localhost:4001/api/`
 
-Interagissez avec le client via `http://localhost:3001`
+Interagissez avec le client via `http://localhost:3001/`
