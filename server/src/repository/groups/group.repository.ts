@@ -9,9 +9,9 @@ class GroupRepository {
    * @returns List of groups
    */
   public async getGroups(): Promise<Group[]> {
-    const result = await DbClient.selectFrom("groups").selectAll().execute();
+    const rows = await DbClient.selectFrom("groups").selectAll().execute();
 
-    return result;
+    return rows;
   }
 
   /**
@@ -19,19 +19,31 @@ class GroupRepository {
    * @param credentials name of the group
    */
   public async createGroup(credentials: NewGroup): Promise<Group> {
-    const [result] = await DbClient.insertInto("groups").values(credentials).returning(["group_id", "name"]).execute();
+    const [rows] = await DbClient.insertInto("groups").values(credentials).returning(["group_id", "name"]).execute();
 
-    return result;
+    return rows;
   }
 
   /**
    * Delete a row from the group table
    * @param credentials group_id of the group
    */
-  public async deleteGroup(credentials: { group_id: string }): Promise<void> {
-    const deletedRows = await DbClient.deleteFrom("groups").where("group_id", "=", credentials.group_id).execute();
+  public async deleteGroup(credentials: Pick<Group, "group_id">): Promise<void> {
+    // check validity of the id
+    await this.getGroupById(credentials);
 
-    if (deletedRows.length === 0) throw new NotFoundError({ message: ErrorMessageEnum.UNKNOWN_ID, code: 404 });
+    const deletedRows = await DbClient.deleteFrom("groups").where("group_id", "=", credentials.group_id).execute();
+  }
+
+  public async getGroupById(credentials: Pick<Group, "group_id">): Promise<Group> {
+    const rows = await DbClient.selectFrom("groups")
+      .selectAll()
+      .where("group_id", "=", credentials.group_id)
+      .executeTakeFirst();
+
+    if (!rows) throw new NotFoundError({ message: ErrorMessageEnum.UNKNOWN_ID, code: 404 });
+
+    return rows;
   }
 }
 
