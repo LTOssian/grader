@@ -10,7 +10,7 @@ class AppRouter extends RouterMaker {
   }
 
   protected initRoutes(): void {
-    this._router.use("/health/", HealthRouterSingleton.getRouter());
+    this._router.use("/health", HealthRouterSingleton.getRouter());
     this._router.use("/groups", groupRouterSingleton.getRouter());
   }
 }
