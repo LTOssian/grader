@@ -5,6 +5,6 @@ export interface GroupsTable {
   name: string;
 }
 
-export type Groups = Selectable<GroupsTable>;
-export type NewGroups = Insertable<GroupsTable>;
-export type GroupsUpdate = Updateable<GroupsTable>;
+export type Group = Selectable<GroupsTable>;
+export type NewGroup = Insertable<GroupsTable>;
+export type GroupUpdate = Updateable<GroupsTable>;
