@@ -1,5 +1,9 @@
+import { ErrorMessageEnum } from "../../common/constants";
+import { groupRepository } from "../../repository/groups/group.repository";
 import { NextFunction, Request, Response } from "express";
 import { studentRepository } from "../../repository/students/student.repository";
+import { studentValidatorSingleton } from "../../common/validators/validator";
+import ValidationError from "../../common/errors/validation.error";
 
 class StudentController {
   public constructor() {}
@@ -8,9 +12,10 @@ class StudentController {
     try {
       const { group_id } = req.params;
 
-      // validate group
+      // Validate that the group exists
+      await groupRepository.getGroupById({ group_id });
 
-      const students = await studentRepository.getStudentsFromGroup(group_id);
+      const students = await studentRepository.getStudentsFromGroup({ group_id });
 
       res.json({
         data: students,
@@ -21,7 +26,30 @@ class StudentController {
     }
   }
 
-  public async createStudent(req: Request, res: Response, next: NextFunction) {}
+  public async postStudent(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { group_id, firstname, lastname, email } = req.body;
+      const { isValid, errors } = studentValidatorSingleton.validate({ group_id, firstname, lastname });
+
+      if (!isValid)
+        throw new ValidationError({
+          message: ErrorMessageEnum.FIELD_REQUIRED,
+          code: 403,
+          errors: errors,
+        });
+
+      // Validate that the group exists
+      await groupRepository.getGroupById({ group_id });
+
+      const student = await studentRepository.createStudentFromGroup({ group_id, firstname, lastname, email });
+
+      res.status(201).json({
+        data: student,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export const studentController = new StudentController();
