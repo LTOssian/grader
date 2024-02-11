@@ -32,7 +32,10 @@ class GradeRepository {
       .values({
         ...credentials,
         grade: gradeCalculatorServiceSingleton.calculateGrade({
-          report: JSON.parse(JSON.stringify(credentials.report)), // very hacky but otherwise ts struggles
+          // very hacky but otherwise ts struggles,
+          // issue due to express.json() setting which converts the report in an object
+          // when it is supposed to be a stringified json
+          report: JSON.parse(JSON.stringify(credentials.report)),
         }),
         report: JSON.stringify(credentials.report),
       })
