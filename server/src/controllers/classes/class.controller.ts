@@ -28,7 +28,7 @@ class ClassController {
   public async postClass(req: Request, res: Response, next: NextFunction) {
     try {
       const { group_id, name, coefficient } = req.body;
-      const { isValid, errors } = classValidatorSingleton.validate({
+      const { isValid, errors, message } = classValidatorSingleton.validate({
         group_id,
         name,
         coefficient: Number(coefficient),
@@ -36,7 +36,7 @@ class ClassController {
 
       if (!isValid)
         throw new ValidationError({
-          message: ErrorMessageEnum.FIELD_REQUIRED,
+          message: message,
           code: 403,
           errors: errors,
         });

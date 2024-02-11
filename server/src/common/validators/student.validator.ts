@@ -1,6 +1,6 @@
 import { CustomValidator } from "./interfaces/validator";
 import { NewStudent } from "../../infrastructure/database/interfaces/students-table.type";
-import { requiredCredentialsRule } from "./rules";
+import { requiredCredentialsRule } from "./rules/required.rule";
 import SingletonWrapper from "../helpers/singleton-wrapper";
 
 export const studentValidatorSingleton = SingletonWrapper.makeSingleton(

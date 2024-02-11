@@ -30,11 +30,14 @@ class GradeController {
     try {
       const { group_id } = req.params;
       const { student_id, report } = req.body;
-      const { isValid, errors } = gradeValidatorSingleton.validate({ student_id, report });
+      const { isValid, errors, message } = gradeValidatorSingleton.validate({
+        student_id,
+        report: JSON.stringify(report),
+      });
 
       if (!isValid)
         throw new ValidationError({
-          message: ErrorMessageEnum.FIELD_REQUIRED,
+          message: message,
           code: 403,
           errors: errors,
         });
