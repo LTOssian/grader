@@ -18,7 +18,7 @@ export const validReportRule = (
   console.log(typeof credentials.report);
 
   (
-    JSON.parse(credentials.report) as {
+    credentials.report as unknown as {
       class: string;
       coefficient: number;
       grade: number;

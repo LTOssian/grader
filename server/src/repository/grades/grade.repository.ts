@@ -1,5 +1,6 @@
 import { DbClient } from "../../infrastructure/database/db-client";
 import { ErrorMessageEnum } from "../../common/constants";
+import { gradeCalculatorServiceSingleton } from "../../service/grade-calculator.service";
 import { Grades, NewGrades } from "../../infrastructure/database/interfaces/student-grades.type";
 import { Group } from "../../infrastructure/database/interfaces/groups-table.type";
 import NotFoundError from "../../common/errors/not-found.error";
@@ -13,15 +14,7 @@ class GradeRepository {
   public async getGradesFromGroup(credentials: Pick<Group, "group_id">): Promise<Partial<Grades>[]> {
     const rows = await DbClient.selectFrom("student_grades")
       .innerJoin("students", "students.student_id", "student_grades.student_id")
-      .select([
-        "student_grades_id",
-        "students.firstname",
-        "students.lastname",
-        "students.email",
-        "report",
-        "grade",
-        "created_at",
-      ])
+      .select(["student_grades_id", "students.firstname", "students.lastname", "students.email", "grade", "created_at"])
       .where("students.group_id", "=", credentials.group_id)
       .execute();
 
@@ -33,14 +26,20 @@ class GradeRepository {
    * @param credentials contains the student_id, the grade and the report
    * @returns The grade created
    */
-  public async createGradeFromStudent(credentials: Omit<NewGrades, "grade">): Promise<Grades> {
+  public async createGradeFromStudent(credentials: Omit<NewGrades, "grade">): Promise<Omit<Grades, "report">> {
+    console.log(credentials.report[0]);
     const [rows] = await DbClient.insertInto("student_grades")
       .values({
         ...credentials,
-        grade: 0,
+        grade: gradeCalculatorServiceSingleton.calculateGrade({
+          // very hacky but otherwise ts struggles,
+          // issue due to express.json() setting which converts the report in an object
+          // when it is supposed to be a stringified json
+          report: JSON.parse(JSON.stringify(credentials.report)),
+        }),
         report: JSON.stringify(credentials.report),
       })
-      .returningAll()
+      .returning(["student_grades_id", "student_id", "grade", "created_at"])
       .execute();
 
     return rows;
