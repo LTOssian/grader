@@ -21,7 +21,7 @@ export class CustomValidator<T> {
 
     for (const rule of this.rules) {
       const result = rule(value);
-      console.log(result);
+
       if (!result.isValid) {
         TValidationResult.isValid = false;
         TValidationResult.errors.push(...result.errors);
