@@ -1,5 +1,6 @@
 import { DbClient } from "../../infrastructure/database/db-client";
 import { ErrorMessageEnum } from "../../common/constants";
+import { gradeCalculatorServiceSingleton } from "../../service/grade-calculator.service";
 import { Grades, NewGrades } from "../../infrastructure/database/interfaces/student-grades.type";
 import { Group } from "../../infrastructure/database/interfaces/groups-table.type";
 import NotFoundError from "../../common/errors/not-found.error";
@@ -13,15 +14,7 @@ class GradeRepository {
   public async getGradesFromGroup(credentials: Pick<Group, "group_id">): Promise<Partial<Grades>[]> {
     const rows = await DbClient.selectFrom("student_grades")
       .innerJoin("students", "students.student_id", "student_grades.student_id")
-      .select([
-        "student_grades_id",
-        "students.firstname",
-        "students.lastname",
-        "students.email",
-        "report",
-        "grade",
-        "created_at",
-      ])
+      .select(["student_grades_id", "students.firstname", "students.lastname", "students.email", "grade", "created_at"])
       .where("students.group_id", "=", credentials.group_id)
       .execute();
 
@@ -34,10 +27,13 @@ class GradeRepository {
    * @returns The grade created
    */
   public async createGradeFromStudent(credentials: Omit<NewGrades, "grade">): Promise<Grades> {
+    console.log(credentials.report[0]);
     const [rows] = await DbClient.insertInto("student_grades")
       .values({
         ...credentials,
-        grade: 0,
+        grade: gradeCalculatorServiceSingleton.calculateGrade({
+          report: JSON.parse(JSON.stringify(credentials.report)), // very hacky but otherwise ts struggles
+        }),
         report: JSON.stringify(credentials.report),
       })
       .returningAll()
