@@ -23,7 +23,7 @@ class ClassRepository {
     // check validity of the id
     await this.getClassById(credentials);
 
-    await DbClient.deleteFrom("group_classes").where("class_id", "=", credentials.class_id);
+    await DbClient.deleteFrom("group_classes").where("class_id", "=", credentials.class_id).execute();
   }
 
   public async getClassById(credentials: Pick<Classes, "class_id">): Promise<Classes> {

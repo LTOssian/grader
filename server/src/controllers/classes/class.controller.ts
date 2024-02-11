@@ -27,7 +27,7 @@ class ClassController {
 
   public async postClass(req: Request, res: Response, next: NextFunction) {
     try {
-      const { group_id, name, coefficient } = req.params;
+      const { group_id, name, coefficient } = req.body;
       const { isValid, errors } = classValidatorSingleton.validate({
         group_id,
         name,
