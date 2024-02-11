@@ -26,7 +26,7 @@ class GradeRepository {
    * @param credentials contains the student_id, the grade and the report
    * @returns The grade created
    */
-  public async createGradeFromStudent(credentials: Omit<NewGrades, "grade">): Promise<Grades> {
+  public async createGradeFromStudent(credentials: Omit<NewGrades, "grade">): Promise<Omit<Grades, "report">> {
     console.log(credentials.report[0]);
     const [rows] = await DbClient.insertInto("student_grades")
       .values({
@@ -39,7 +39,7 @@ class GradeRepository {
         }),
         report: JSON.stringify(credentials.report),
       })
-      .returningAll()
+      .returning(["student_grades_id", "student_id", "grade", "created_at"])
       .execute();
 
     return rows;
