@@ -35,6 +35,11 @@ class GroupRepository {
     await DbClient.deleteFrom("groups").where("group_id", "=", credentials.group_id).execute();
   }
 
+  /**
+   * Gets the group of the specified id
+   * @param credentials group_id to get
+   * @returns The group
+   */
   public async getGroupById(credentials: Pick<Group, "group_id">): Promise<Group> {
     const rows = await DbClient.selectFrom("groups")
       .selectAll()

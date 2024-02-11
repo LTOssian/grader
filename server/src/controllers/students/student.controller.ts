@@ -2,7 +2,7 @@ import { ErrorMessageEnum } from "../../common/constants";
 import { groupRepository } from "../../repository/groups/group.repository";
 import { NextFunction, Request, Response } from "express";
 import { studentRepository } from "../../repository/students/student.repository";
-import { studentValidatorSingleton } from "../../common/validators/validator";
+import { studentValidatorSingleton } from "../../common/validators/student.validator";
 import ValidationError from "../../common/errors/validation.error";
 
 class StudentController {

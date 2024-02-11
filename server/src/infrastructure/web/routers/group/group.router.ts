@@ -10,7 +10,7 @@ class GroupRouter extends RouterMaker {
   }
 
   protected initRoutes(): void {
-    this._router.get("/", groupController.getAllGroup);
+    this._router.get("/", groupController.getAllGroups);
     this._router.post("/", groupController.postGroup);
     this._router.delete("/:group_id", groupController.deleteGroup);
     this._router.get("/:group_id/student/:student_id", studentController.getStudentFromGroupById);

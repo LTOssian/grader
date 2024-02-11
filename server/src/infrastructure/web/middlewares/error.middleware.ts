@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import NotFoundError from "../../../common/errors/not-found.error";
 import ValidationError from "../../../common/errors/validation.error";
 
-export const ErrorHandler = (
+export const ErrorMiddleware = (
   err: ValidationError | NotFoundError | Error,
   req: Request,
   res: Response,

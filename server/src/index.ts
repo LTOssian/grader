@@ -1,5 +1,5 @@
 import { AppRouterSingleton } from "./infrastructure/web/routers/app.router";
-import { ErrorHandler } from "./infrastructure/web/middlewares/error-handler";
+import { ErrorMiddleware } from "./infrastructure/web/middlewares/error.middleware";
 import express, { Express } from "express";
 import morgan from "morgan";
 import SingletonWrapper from "./common/helpers/singleton-wrapper";
@@ -42,7 +42,7 @@ class ExpressApp {
   }
 
   private setErrorMiddlewares(): void {
-    this._app.use(ErrorHandler);
+    this._app.use(ErrorMiddleware);
   }
 }
 
