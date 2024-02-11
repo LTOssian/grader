@@ -16,6 +16,7 @@ class GradeRepository {
       .innerJoin("students", "students.student_id", "student_grades.student_id")
       .select(["student_grades_id", "students.firstname", "students.lastname", "students.email", "grade", "created_at"])
       .where("students.group_id", "=", credentials.group_id)
+      .orderBy("created_at", "desc")
       .execute();
 
     return rows;
