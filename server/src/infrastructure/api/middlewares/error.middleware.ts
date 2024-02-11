@@ -9,6 +9,7 @@ export const ErrorMiddleware = (
   next: NextFunction
 ): void => {
   // console.info("error middleware is reached"); // debug
+  res.setHeader("Content-Type", "application/json");
 
   if (err instanceof ValidationError || err instanceof NotFoundError) {
     res.status(err.code).json({

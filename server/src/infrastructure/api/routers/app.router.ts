@@ -2,6 +2,7 @@ import { groupRouterSingleton } from "./group/group.router";
 import { healthRouterSingleton } from "./health/health.router";
 import RouterMaker from "./interfaces/router.abstract";
 import SingletonWrapper from "../../../common/helpers/singleton-wrapper";
+import { pdfRouterSingleton } from "./pdf/pdf.router";
 
 class AppRouter extends RouterMaker {
   public constructor() {
@@ -12,6 +13,7 @@ class AppRouter extends RouterMaker {
   protected initRoutes(): void {
     this._router.use("/health/", healthRouterSingleton.getRouter());
     this._router.use("/groups", groupRouterSingleton.getRouter());
+    this._router.use("/generate", pdfRouterSingleton.getRouter());
   }
 }
 
