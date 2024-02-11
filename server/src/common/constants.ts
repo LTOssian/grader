@@ -3,6 +3,7 @@ export enum ErrorMessageEnum {
   UNKNOWN_ID = "This ID does not match.",
   UNKNOWN_GROUP = "This ID does not match any group.",
   UNKNOWN_STUDENT = "This ID does not match any student.",
+  UNKNOWN_CLASS = "This ID does not match any class.",
   BAD_REQUEST = "Bad request.",
   FIELD_REQUIRED = "This field is required.",
 }

@@ -1,3 +1,4 @@
+import { classRouterSingleton } from "./class/class.router";
 import { groupRouterSingleton } from "./group/group.router";
 import { healthRouterSingleton } from "./health/health.router";
 import { studentRouterSingleton } from "./student/student.router";
@@ -14,6 +15,7 @@ class AppRouter extends RouterMaker {
     this._router.use("/health/", healthRouterSingleton.getRouter());
     this._router.use("/students/", studentRouterSingleton.getRouter());
     this._router.use("/groups", groupRouterSingleton.getRouter());
+    this._router.use("/classes", classRouterSingleton.getRouter());
   }
 }
 
