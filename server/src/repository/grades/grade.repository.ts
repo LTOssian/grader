@@ -3,6 +3,7 @@ import { ErrorMessageEnum } from "../../common/constants";
 import { gradeCalculatorServiceSingleton } from "../../service/grade-calculator.service";
 import { Grades, NewGrades } from "../../infrastructure/database/interfaces/student-grades.type";
 import { Group } from "../../infrastructure/database/interfaces/groups-table.type";
+import { IGeneratorCredentials } from "../../service/pdf-generator.service";
 import NotFoundError from "../../common/errors/not-found.error";
 
 class GradeRepository {
@@ -64,18 +65,10 @@ class GradeRepository {
    * @param credentials contains the grade's id
    * @returns The grade
    */
-  public async getGradeById(credentials: Pick<Grades, "student_grades_id">): Promise<Partial<Grades>> {
+  public async getGradeById(credentials: Pick<Grades, "student_grades_id">): Promise<IGeneratorCredentials> {
     const rows = await DbClient.selectFrom("student_grades")
       .innerJoin("students", "students.student_id", "student_grades.student_id")
-      .select([
-        "student_grades_id",
-        "students.firstname",
-        "students.lastname",
-        "students.email",
-        "report",
-        "grade",
-        "created_at",
-      ])
+      .select(["students.firstname", "students.lastname", "students.email", "report", "grade", "created_at"])
       .where("student_grades_id", "=", credentials.student_grades_id)
       .executeTakeFirst();
 

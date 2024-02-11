@@ -11,7 +11,7 @@ export interface GradesTables {
     }[]
   >;
   grade: number;
-  created_at: Generated<ColumnType<Date, never, never>>;
+  created_at: Generated<Date>;
 }
 
 export type Grades = Selectable<GradesTables>;
