@@ -9,7 +9,7 @@ class ClassRouter extends RouterMaker {
   }
 
   protected initRoutes(): void {
-    this._router.get("/:group_id", classController.getAllClassesFromGroup);
+    this._router.get("/", classController.getAllClassesFromGroup);
     this._router.post("/", classController.postClass);
     this._router.delete("/:class_id", classController.deleteClass);
   }

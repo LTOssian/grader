@@ -9,7 +9,8 @@ class StudentRouter extends RouterMaker {
   }
 
   protected initRoutes(): void {
-    this._router.get("/:group_id", studentController.getStudentsFromGroup);
+    this._router.get("/", studentController.getStudentsFromGroup);
+    this._router.get("/:student_id", studentController.getStudentFromGroupById);
     this._router.post("/", studentController.postStudent);
   }
 }
