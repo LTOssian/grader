@@ -1,8 +1,9 @@
-import { TValidationResult } from "./interfaces/validation.type";
+import { ErrorMessageEnum } from "../../constants";
+import { TValidationResult } from "../interfaces/validation.type";
 
 /**
  * Checks that all given fields are truthy and non-empty
- * @param value object with the fields
+ * @param credentials contains the fields
  * @returns boolean isValid & list of missingKeys
  */
 export const requiredCredentialsRule = (credentials: Record<string, any>): TValidationResult => {
@@ -17,8 +18,8 @@ export const requiredCredentialsRule = (credentials: Record<string, any>): TVali
   }
 
   if (missingKeys.length > 0) {
-    return { isValid: false, errors: missingKeys };
+    return { isValid: false, errors: missingKeys, message: ErrorMessageEnum.FIELD_REQUIRED };
   }
 
-  return { isValid: true, errors: [] };
+  return { isValid: true, errors: [], message: "" };
 };

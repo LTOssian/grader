@@ -17,13 +17,15 @@ export class CustomValidator<T> {
    * @returns object with isValid boolean and list of errors
    */
   public validate(value: T): TValidationResult {
-    const TValidationResult: TValidationResult = { isValid: true, errors: [] };
+    const TValidationResult: TValidationResult = { isValid: true, errors: [], message: "" };
 
     for (const rule of this.rules) {
       const result = rule(value);
+      console.log(result);
       if (!result.isValid) {
         TValidationResult.isValid = false;
         TValidationResult.errors.push(...result.errors);
+        TValidationResult.message = result.message;
       }
     }
 

@@ -22,10 +22,10 @@ class GroupController {
   public async postGroup(req: Request, res: Response, next: NextFunction) {
     try {
       const { name } = req.body;
-      const { isValid, errors } = groupValidatorSingleton.validate({ name });
+      const { isValid, errors, message } = groupValidatorSingleton.validate({ name });
       if (!isValid)
         throw new ValidationError({
-          message: ErrorMessageEnum.FIELD_REQUIRED,
+          message: message,
           code: 403,
           errors: errors,
         });
