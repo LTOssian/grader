@@ -60,3 +60,4 @@ select
     ]) as email 
 from 
     exampleGroupId;
+    
