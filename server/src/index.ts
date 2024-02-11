@@ -1,5 +1,5 @@
-import { AppRouterSingleton } from "./infrastructure/web/routers/app.router";
-import { ErrorMiddleware } from "./infrastructure/web/middlewares/error.middleware";
+import { AppRouterSingleton } from "./infrastructure/api/routers/app.router";
+import { ErrorMiddleware } from "./infrastructure/api/middlewares/error.middleware";
 import express, { Express } from "express";
 import morgan from "morgan";
 import SingletonWrapper from "./common/helpers/singleton-wrapper";

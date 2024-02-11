@@ -29,11 +29,11 @@ class StudentController {
   public async postStudent(req: Request, res: Response, next: NextFunction) {
     try {
       const { group_id, firstname, lastname, email } = req.body;
-      const { isValid, errors } = studentValidatorSingleton.validate({ group_id, firstname, lastname });
+      const { isValid, errors, message } = studentValidatorSingleton.validate({ group_id, firstname, lastname });
 
       if (!isValid)
         throw new ValidationError({
-          message: ErrorMessageEnum.FIELD_REQUIRED,
+          message: message,
           code: 403,
           errors: errors,
         });
@@ -55,7 +55,7 @@ class StudentController {
     try {
       const { group_id, student_id } = req.params;
 
-      const { isValid, errors } = studentValidatorSingleton.validate({ group_id, student_id });
+      const { isValid, errors, message } = studentValidatorSingleton.validate({ group_id, student_id });
 
       if (!isValid)
         throw new ValidationError({

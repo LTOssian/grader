@@ -1,6 +1,6 @@
 import { ColumnType, Generated, Insertable, JSONColumnType, Selectable, Updateable } from "kysely";
 
-export interface StudentGradesTables {
+export interface GradesTables {
   student_grades_id: Generated<string>;
   student_id: string;
   report: JSONColumnType<
@@ -14,6 +14,6 @@ export interface StudentGradesTables {
   created_at: Generated<ColumnType<Date, never, never>>;
 }
 
-export type StudentGrades = Selectable<StudentGradesTables>;
-export type NewStudentGrades = Insertable<StudentGradesTables>;
-export type StudentGradesUpdate = Updateable<StudentGradesTables>;
+export type Grades = Selectable<GradesTables>;
+export type NewGrades = Insertable<GradesTables>;
+export type GradesUpdate = Updateable<GradesTables>;

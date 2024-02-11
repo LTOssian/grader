@@ -4,7 +4,7 @@ export default abstract class RouterMaker {
   protected _router: Router;
 
   public constructor() {
-    this._router = Router();
+    this._router = Router({ mergeParams: true });
   }
 
   public getRouter(): Router {
