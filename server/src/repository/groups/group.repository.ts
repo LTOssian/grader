@@ -36,7 +36,7 @@ class GroupRepository {
   }
 
   /**
-   * Dets the group of the specified id
+   * Gets the group of the specified id
    * @param credentials group_id to get
    * @returns The group
    */
