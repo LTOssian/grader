@@ -7,7 +7,7 @@ import ValidationError from "../../common/errors/validation.error";
 class GroupController {
   public constructor() {}
 
-  public async getAllGroup(req: Request, res: Response, next: NextFunction) {
+  public async getAllGroups(req: Request, res: Response, next: NextFunction) {
     try {
       const groups = await groupRepository.getGroups();
 
