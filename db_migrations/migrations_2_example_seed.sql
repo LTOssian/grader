@@ -1,6 +1,6 @@
 with exampleGroupId as (
-    insert into groups (name)
-    values ('Groupe Exemple')
+    insert into groups (group_id, name)
+    values ('5573463f-8b5c-4a11-8bba-243b9b873d14', 'Groupe Exemple')
     returning group_id
 )
 
