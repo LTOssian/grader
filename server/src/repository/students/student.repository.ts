@@ -9,6 +9,7 @@ class StudentRepository {
       .selectAll()
       .where("group_id", "=", credentials.group_id)
       .execute();
+
     return rows;
   }
 

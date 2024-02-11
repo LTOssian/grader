@@ -1,4 +1,4 @@
-import { TValidationResult } from "./interfaces/validator";
+import { TValidationResult } from "./interfaces/validation.type";
 
 /**
  * Checks that all given fields are truthy and non-empty

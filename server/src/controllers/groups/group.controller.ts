@@ -1,6 +1,6 @@
 import { ErrorMessageEnum } from "../../common/constants";
 import { groupRepository } from "../../repository/groups/group.repository";
-import { groupValidatorSingleton } from "../../common/validators/validator";
+import { groupValidatorSingleton } from "../../common/validators/group.validator";
 import { NextFunction, Request, Response } from "express";
 import ValidationError from "../../common/errors/validation.error";
 
