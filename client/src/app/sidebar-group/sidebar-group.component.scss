@@ -1,0 +1,71 @@
+aside {
+  height: -webkit-fill-available;
+  padding: 48px 16px;
+
+  border-right: 1px solid var(--clr-black-primary);
+
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 32px;
+
+  // for safari's weird behaviours...
+  user-select: none;
+
+  .logotype-container,
+  .group-name {
+    cursor: pointer;
+  }
+
+  .divider {
+    height: 1px;
+    width: 4rem;
+
+    background-color: var(--clr-black-primary);
+  }
+
+  .groups-container {
+    width: 100%;
+
+    border-radius: var(--border-radius);
+    border: 1px solid var(--clr-black-primary);
+
+    > :first-child,
+    > :last-child {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      color: var(--clr-white-primary);
+      background-color: var(--clr-black-primary);
+    }
+  }
+
+  .groups-container,
+  .group-list {
+    display: flex;
+    flex-flow: column;
+    gap: 8px;
+
+    > * {
+      padding: 8px;
+    }
+  }
+
+  .group-list {
+    list-style: none;
+    color: var(--clr-accent-purple);
+
+    > li {
+      span {
+        width: 132px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

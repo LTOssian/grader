@@ -1,0 +1,50 @@
+<aside>
+  <div class="logotype-container" (click)="navigateToHome()">
+    <img
+      [src]="assetsStore.logotypeSvg.path"
+      [alt]="assetsStore.logotypeSvg.alt"
+    />
+  </div>
+  <div class="divider"></div>
+  <div class="groups-container">
+    <div class="groups-container-title">
+      <span>Groupes</span>
+      <button>
+        <img
+          (click)="groupListIsVisible = !groupListIsVisible"
+          [src]="
+            groupListIsVisible
+              ? assetsStore.arrowDownSvg.path
+              : assetsStore.arrowUpSvg.path
+          "
+          [alt]="
+            groupListIsVisible
+              ? assetsStore.arrowDownSvg.alt
+              : assetsStore.arrowUpSvg.alt
+          "
+        />
+      </button>
+    </div>
+    @if (groupListIsVisible) {
+    <ul class="group-list">
+      @for (group of groups(); track group.group_id) {
+      <li
+        class="group-container"
+        (click)="navigateToGroup({ group_id: group.group_id })"
+      >
+        <span class="group-name" [title]="group.name">
+          {{ group.name }}
+        </span>
+        <button class="group-delete">
+          <img
+            [src]="assetsStore.trashSvg.path"
+            [alt]="assetsStore.trashSvg.alt"
+          />
+        </button>
+      </li>
+      }
+    </ul>
+    }
+    <button>Ajouter un groupe</button>
+  </div>
+</aside>
