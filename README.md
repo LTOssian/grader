@@ -11,17 +11,8 @@ L'application Grader vise à générer les bulletins de notes d'étudiants sous 
 ### Avec Docker
 
 ```bash
-make up && make logs
-```
-
-Environnement de production ou de développement ?
-
-```yml
-# dans le docker-compose, changez la target des services grader_backend et grader_frontend pour l'usage
-grader_backend:
-    ...
-    target: prod #ou dev, par défaut dev
-    ...
+make up-dev # ou make up-prod
+make logs
 ```
 
 ### Sans Docker
@@ -43,9 +34,9 @@ npm run start:prod #ou start:dev
 # depuis le racine
 cd client
 npm install && npm run build
-npm run start:prod #ou start:dev
+npm run start #ou start
 ```
 
 Interagissez avec l'api via `http://localhost:4001/api/`
 
-Interagissez avec le client via `http://localhost:3001/`
+Interagissez avec le client via `http://localhost:4200/` en dev ou `http://localhost:8080/` en prod

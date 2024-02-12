@@ -2,10 +2,11 @@ FROM node:21-alpine as build
 
 WORKDIR /home/app
 
-COPY package.json .
+COPY package*.json .
 
 RUN npm install
 
+# Dev target
 FROM build as dev
 
 COPY ./src/ .
@@ -16,9 +17,21 @@ EXPOSE 4001
 
 CMD [ "npm", "run", "start:dev" ]
 
-FROM build as prod
+FROM build as prod_build
 
-COPY ./dist/ .
+COPY . .
+
+RUN npm run build
+
+FROM node:21-alpine as prod
+
+WORKDIR /home/app
+
+COPY --from=prod_build /home/app/package*.json .
+
+RUN npm install --only=production
+
+COPY --from=prod_build /home/app/dist/ ./dist/
 
 EXPOSE 4001
 
