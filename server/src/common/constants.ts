@@ -10,9 +10,9 @@ export enum ErrorMessageEnum {
 }
 
 export enum MentionEnum {
-  BAD = "Attention.",
-  NO = "Sans mention.",
-  GOOD = "Bien.",
-  VERY_GOOD = "Très bien.",
-  EXCELLENT = "Félicitations.",
+  BAD_MENTION = "Attention.",
+  NO_MENTION = "Sans mention.",
+  GOOD_MENTION = "Bien.",
+  VERY_GOOD_MENTION = "Très bien.",
+  EXCELLENT_MENTION = "Félicitations.",
 }
