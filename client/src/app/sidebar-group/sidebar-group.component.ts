@@ -3,7 +3,7 @@ import { JsonPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { Group } from '../interfaces/group.model';
+import { GroupModel } from '../interfaces/group.model';
 import { GroupService } from '../services/group.service';
 import { AssetPath } from '../../assets/assets-path';
 
@@ -19,7 +19,7 @@ export class SidebarGroupComponent {
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
 
-  public groups = signal<Group[]>([]);
+  public groups = signal<GroupModel[]>([]);
   public groupListIsVisible = true;
 
   public assetsStore = {
@@ -48,7 +48,7 @@ export class SidebarGroupComponent {
       .subscribe((groupData) => this.groups.set(groupData.data));
   }
 
-  navigateToGroup({ group_id }: Pick<Group, 'group_id'>) {
+  navigateToGroup({ group_id }: Pick<GroupModel, 'group_id'>) {
     return this.router.navigateByUrl(`/group/${group_id}`);
   }
 
