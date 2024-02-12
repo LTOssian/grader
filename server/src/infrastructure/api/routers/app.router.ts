@@ -1,8 +1,8 @@
 import { groupRouterSingleton } from "./group/group.router";
 import { healthRouterSingleton } from "./health/health.router";
+import { pdfRouterSingleton } from "./pdf/pdf.router";
 import RouterMaker from "./interfaces/router.abstract";
 import SingletonWrapper from "../../../common/helpers/singleton-wrapper";
-import { pdfRouterSingleton } from "./pdf/pdf.router";
 
 class AppRouter extends RouterMaker {
   public constructor() {
