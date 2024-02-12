@@ -8,3 +8,11 @@ export enum ErrorMessageEnum {
   UNKNOWN_ID = "This ID does not match.",
   UNKNOWN_STUDENT = "This ID does not match any student.",
 }
+
+export enum MentionEnum {
+  BAD_MENTION = "Attention.",
+  NO_MENTION = "Sans mention.",
+  GOOD_MENTION = "Bien.",
+  VERY_GOOD_MENTION = "Très bien.",
+  EXCELLENT_MENTION = "Félicitations.",
+}
