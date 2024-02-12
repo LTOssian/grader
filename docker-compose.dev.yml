@@ -8,6 +8,8 @@ services:
     volumes:
       - ./server:/home/app
       - /home/app/node_modules
+    environment:
+      - CLIENT_ORIGIN=http://localhost:4200
 
   grader_frontend:
     build:
