@@ -1,8 +1,9 @@
 # bring up the services
-up:
-	cd server && npm run build
-	cd ..
+up-prod:
 	docker-compose up -d
+
+up-dev:
+	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
 
 # bring down the services
 down:
