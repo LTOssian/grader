@@ -32,7 +32,7 @@ export class PdfGeneratorService {
   }
 
   /**
-   *
+   * Starts the wanted type of generation
    * @param res response stream
    */
   public async initDocumentGeneration(res: Response) {

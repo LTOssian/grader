@@ -1,9 +1,9 @@
+import { gradeDateFormattter } from "../../../../common/helpers/date-formatter";
+import { gradeRepository } from "../../../../repository/grades/grade.repository";
+import { IGeneratorCredentials, PdfGeneratorService } from "../../../../service/pdf-generator.service";
 import { NextFunction, Request, Response } from "express";
 import RouterMaker from "../interfaces/router.abstract";
-import { IGeneratorCredentials, pdfGeneratorServiceSingleton } from "../../../../service/pdf-generator.service";
-import { gradeRepository } from "../../../../repository/grades/grade.repository";
 import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";
-import { gradeDateFormattter } from "../../../../common/helpers/date-formatter";
 
 class PdfRouter extends RouterMaker {
   public constructor() {
@@ -17,6 +17,8 @@ class PdfRouter extends RouterMaker {
         res.setHeader("Content-Type", "application/pdf");
 
         const { grade_id } = req.params;
+        const version = req.query.version as "simple" | "complete" | undefined;
+
         const credentials: IGeneratorCredentials = await gradeRepository.getGradeById({ student_grades_id: grade_id });
 
         res.setHeader(
@@ -26,7 +28,7 @@ class PdfRouter extends RouterMaker {
           })}-.pdf`
         );
 
-        pdfGeneratorServiceSingleton.generate(credentials, res);
+        new PdfGeneratorService(credentials, res, version);
       } catch (e) {
         next(e);
       }
