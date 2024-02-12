@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  grader_backend:
+    build:
+      target: dev
+    volumes:
+      - ./server:/home/app
+      - /home/app/node_modules
+
+  grader_frontend:
+    build:
+      target: dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./client:/home/app
+      - /home/app/node_modules

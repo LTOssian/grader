@@ -19,7 +19,7 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-      target: dev
+      target: prod
     container_name: grader_backend
     image: grader_backend
     restart: always
@@ -31,3 +31,19 @@ services:
       - pg_db
     environment:
       DATABASE_URL: postgres://grader_user:grader_hetic@pg_db:5432/grader
+
+  grader_frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      target: prod
+    container_name: grader_frontend
+    image: grader_frontend
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./client:/home/app
+      - /home/app/node_modules
+    depends_on:
+      - grader_backend
