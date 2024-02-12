@@ -31,10 +31,10 @@ echo "DATABASE_URL=<URL de votre database ici>" > .env
 npm install && npm run build
 npm run start:prod #ou start:dev
 
-# depuis le racine
+# depuis la racine
 cd client
 npm install && npm run build
-npm run start #ou start
+npm run start
 ```
 
 Interagissez avec l'api via `http://localhost:4001/api/`
