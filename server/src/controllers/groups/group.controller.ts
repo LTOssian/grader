@@ -1,4 +1,4 @@
-import { ErrorMessageEnum } from "../../common/constants";
+import { capitalizeFormatter } from "../../common/helpers/capitalize-formatter";
 import { groupRepository } from "../../repository/groups/group.repository";
 import { groupValidatorSingleton } from "../../common/validators/group.validator";
 import { NextFunction, Request, Response } from "express";
@@ -30,7 +30,7 @@ class GroupController {
           errors: errors,
         });
 
-      const group = await groupRepository.createGroup({ name });
+      const group = await groupRepository.createGroup({ name: capitalizeFormatter(name) });
 
       res.status(201).json({
         data: group,

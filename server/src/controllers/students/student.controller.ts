@@ -1,3 +1,4 @@
+import { capitalizeFormatter } from "../../common/helpers/capitalize-formatter";
 import { ErrorMessageEnum } from "../../common/constants";
 import { groupRepository } from "../../repository/groups/group.repository";
 import { NextFunction, Request, Response } from "express";
@@ -29,7 +30,11 @@ class StudentController {
   public async postStudent(req: Request, res: Response, next: NextFunction) {
     try {
       const { group_id, firstname, lastname, email } = req.body;
-      const { isValid, errors, message } = studentValidatorSingleton.validate({ group_id, firstname, lastname });
+      const { isValid, errors, message } = studentValidatorSingleton.validate({
+        group_id,
+        firstname: capitalizeFormatter(firstname),
+        lastname: capitalizeFormatter(lastname),
+      });
 
       if (!isValid)
         throw new ValidationError({
