@@ -1,8 +1,8 @@
-import { capitalizeFormatter } from "../../common/helpers/capitalize-formatter";
-import { groupRepository } from "../../repository/groups/group.repository";
-import { groupValidatorSingleton } from "../../common/validators/group.validator";
+import { capitalizeFormatter } from "../../../../common/helpers/capitalize-formatter";
+import { groupRepository } from "../../../../repositories/groups/group.repository";
+import { groupValidatorSingleton } from "../../../../common/validators/group.validator";
 import { NextFunction, Request, Response } from "express";
-import ValidationError from "../../common/errors/validation.error";
+import ValidationError from "../../../../common/errors/validation.error";
 
 class GroupController {
   public constructor() {}

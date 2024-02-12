@@ -1,9 +1,9 @@
-import { classRepository } from "../../repository/classes/class.repository";
-import { classValidatorSingleton } from "../../common/validators/class.validator";
-import { ErrorMessageEnum } from "../../common/constants";
-import { groupRepository } from "../../repository/groups/group.repository";
+import { classRepository } from "../../../../repositories/classes/class.repository";
+import { classValidatorSingleton } from "../../../../common/validators/class.validator";
+import { ErrorMessageEnum } from "../../../../common/constants";
+import { groupRepository } from "../../../../repositories/groups/group.repository";
 import { NextFunction, Request, Response } from "express";
-import ValidationError from "../../common/errors/validation.error";
+import ValidationError from "../../../../common/errors/validation.error";
 
 class ClassController {
   public constructor() {}

@@ -1,4 +1,4 @@
-import { pdfController } from "../../../../controllers/pdf/pdf.controller";
+import { pdfController } from "../../controllers/pdf/pdf.controller";
 import RouterMaker from "../interfaces/router.abstract";
 import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";
 

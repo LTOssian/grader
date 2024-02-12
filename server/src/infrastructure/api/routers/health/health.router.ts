@@ -1,4 +1,4 @@
-import { healthController } from "../../../../controllers/health/health.controller";
+import { healthController } from "../../controllers/health/health.controller";
 import RouterMaker from "../interfaces/router.abstract";
 import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";
 

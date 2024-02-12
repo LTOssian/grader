@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { gradeDateFormattter } from "../../common/helpers/date-formatter";
-import { gradeRepository } from "../../repository/grades/grade.repository";
-import { IGeneratorCredentials, PdfGeneratorService } from "../../service/pdf-generator.service";
+import { gradeDateFormattter } from "../../../../common/helpers/date-formatter";
+import { gradeRepository } from "../../../../repositories/grades/grade.repository";
+import { IGeneratorCredentials, PdfGeneratorService } from "../../../../service/pdf-generator.service";
 
 class PdfController {
   public constructor() {}

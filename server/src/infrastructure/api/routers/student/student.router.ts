@@ -1,4 +1,4 @@
-import { studentController } from "../../../../controllers/students/student.controller";
+import { studentController } from "../../controllers/students/student.controller";
 import RouterMaker from "../interfaces/router.abstract";
 import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";
 

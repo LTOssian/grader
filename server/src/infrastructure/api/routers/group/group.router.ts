@@ -1,6 +1,6 @@
 import { classRouterSingleton } from "../class/class.router";
 import { gradeRouterSingleton } from "../grade/grade.router";
-import { groupController } from "../../../../controllers/groups/group.controller";
+import { groupController } from "../../controllers/groups/group.controller";
 import { studentRouterSingleton } from "../student/student.router";
 import RouterMaker from "../interfaces/router.abstract";
 import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";

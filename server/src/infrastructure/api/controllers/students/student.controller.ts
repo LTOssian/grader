@@ -1,10 +1,10 @@
-import { capitalizeFormatter } from "../../common/helpers/capitalize-formatter";
-import { ErrorMessageEnum } from "../../common/constants";
-import { groupRepository } from "../../repository/groups/group.repository";
+import { capitalizeFormatter } from "../../../../common/helpers/capitalize-formatter";
+import { ErrorMessageEnum } from "../../../../common/constants";
+import { groupRepository } from "../../../../repositories/groups/group.repository";
 import { NextFunction, Request, Response } from "express";
-import { studentRepository } from "../../repository/students/student.repository";
-import { studentValidatorSingleton } from "../../common/validators/student.validator";
-import ValidationError from "../../common/errors/validation.error";
+import { studentRepository } from "../../../../repositories/students/student.repository";
+import { studentValidatorSingleton } from "../../../../common/validators/student.validator";
+import ValidationError from "../../../../common/errors/validation.error";
 
 class StudentController {
   public constructor() {}

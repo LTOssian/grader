@@ -1,7 +1,7 @@
-import { ErrorMessageEnum } from "../../common/constants";
-import { healthRepository } from "../../repository/health/health.repository";
+import { ErrorMessageEnum } from "../../../../common/constants";
+import { healthRepository } from "../../../../repositories/health/health.repository";
 import { NextFunction, Request, Response } from "express";
-import ValidationError from "../../common/errors/validation.error";
+import ValidationError from "../../../../common/errors/validation.error";
 
 class HealthController {
   public constructor() {}

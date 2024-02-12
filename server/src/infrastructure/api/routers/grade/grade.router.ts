@@ -1,4 +1,4 @@
-import { gradeController } from "../../../../controllers/grades/grade.controller";
+import { gradeController } from "../../controllers/grades/grade.controller";
 import RouterMaker from "../interfaces/router.abstract";
 import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";
 

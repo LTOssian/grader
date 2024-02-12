@@ -1,4 +1,4 @@
-import { classController } from "../../../../controllers/classes/class.controller";
+import { classController } from "../../controllers/classes/class.controller";
 import RouterMaker from "../interfaces/router.abstract";
 import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";
 

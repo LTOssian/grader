@@ -1,10 +1,10 @@
-import { ErrorMessageEnum } from "../../common/constants";
-import { gradeRepository } from "../../repository/grades/grade.repository";
-import { gradeValidatorSingleton } from "../../common/validators/grade.validator";
-import { groupRepository } from "../../repository/groups/group.repository";
+import { ErrorMessageEnum } from "../../../../common/constants";
+import { gradeRepository } from "../../../../repositories/grades/grade.repository";
+import { gradeValidatorSingleton } from "../../../../common/validators/grade.validator";
+import { groupRepository } from "../../../../repositories/groups/group.repository";
 import { NextFunction, Request, Response } from "express";
-import { studentRepository } from "../../repository/students/student.repository";
-import ValidationError from "../../common/errors/validation.error";
+import { studentRepository } from "../../../../repositories/students/student.repository";
+import ValidationError from "../../../../common/errors/validation.error";
 
 class GradeController {
   public constructor() {}
