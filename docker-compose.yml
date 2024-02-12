@@ -21,7 +21,7 @@ services:
       dockerfile: Dockerfile
       target: prod
     container_name: grader_backend
-    image: grader_backend
+    image: grader_backend:prod
     restart: always
     ports:
       - "4001:4001"
@@ -38,7 +38,7 @@ services:
       dockerfile: Dockerfile
       target: prod
     container_name: grader_frontend
-    image: grader_frontend
+    image: grader_frontend:prod
     restart: always
     ports:
       - "8080:80"

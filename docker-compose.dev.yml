@@ -4,6 +4,7 @@ services:
   grader_backend:
     build:
       target: dev
+    image: grader_backend:dev
     volumes:
       - ./server:/home/app
       - /home/app/node_modules
@@ -11,6 +12,7 @@ services:
   grader_frontend:
     build:
       target: dev
+    image: grader_frontend:dev
     ports:
       - "4200:4200"
     volumes:
