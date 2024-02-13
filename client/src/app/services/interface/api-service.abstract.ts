@@ -6,6 +6,7 @@ import { environment } from '../../../environment/environment';
 @Injectable()
 export abstract class ApiServiceMaker {
   protected abstract apiEndpoint: string;
+
   protected httpClient = inject(HttpClient);
 
   protected getAllEntities<T>(params?: HttpParams): Observable<{ data: T }> {
@@ -15,5 +16,15 @@ export abstract class ApiServiceMaker {
     );
 
     return results;
+  }
+
+  protected deleteEntityById<T>(
+    entityId: string,
+    params?: HttpParams
+  ): Observable<void> {
+    return this.httpClient.delete<void>(
+      `${environment.apiBaseUrl}${this.apiEndpoint}/${entityId}`,
+      { params }
+    );
   }
 }

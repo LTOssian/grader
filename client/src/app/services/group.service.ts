@@ -17,4 +17,12 @@ export class GroupService extends ApiServiceMaker {
   public getAllGroups() {
     return this.getAllEntities<GroupModel[]>();
   }
+
+  /**
+   * Deletes a group with its id
+   * @param groupId uuid of the group
+   */
+  public deleteGroupById(groupId: string) {
+    return this.deleteEntityById(groupId);
+  }
 }
