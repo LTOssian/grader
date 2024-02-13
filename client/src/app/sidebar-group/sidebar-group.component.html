@@ -1,10 +1,10 @@
 <aside>
-  <div class="logotype-container" (click)="navigateToHome()">
+  <a class="logotype-container" [routerLink]="['']">
     <img
       [src]="assetsStore.logotypeSvg.path"
       [alt]="assetsStore.logotypeSvg.alt"
     />
-  </div>
+  </a>
   <div class="divider"></div>
   <div class="groups-container">
     <div class="groups-container-title">
@@ -28,14 +28,18 @@
     @if (groupListIsVisible) {
     <ul class="group-list">
       @for (group of groups(); track group.group_id) {
-      <li
-        class="group-container"
-        (click)="navigateToGroup({ group_id: group.group_id })"
-      >
-        <span class="group-name" [title]="group.name">
+      <li class="group-container">
+        <a
+          class="group-name"
+          [title]="group.name"
+          (click)="navigateToGroup({ group_id: group.group_id })"
+        >
           {{ group.name }}
-        </span>
-        <button class="group-delete">
+        </a>
+        <button
+          class="group-delete"
+          (click)="removeGroupFromList({ group_id: group.group_id })"
+        >
           <img
             [src]="assetsStore.trashSvg.path"
             [alt]="assetsStore.trashSvg.alt"
