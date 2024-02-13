@@ -5,9 +5,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Subject, switchMap } from 'rxjs';
 
-import { AssetPath } from '../../assets/assets-path';
-import { GroupModel } from '../interfaces/group.model';
-import { GroupService } from '../services/group.service';
+import { AssetPath } from '../../../assets/assets-path';
+import { GroupModel } from '../../interfaces/group.model';
+import { GroupService } from '../../services/group.service';
 
 @Component({
   selector: 'app-sidebar-group',

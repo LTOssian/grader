@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { GroupHomeComponent } from './group-home/group-home.component';
+import { GroupHomeComponent } from './components/group-home/group-home.component';
 import { EmptyHomeComponent } from './components/empty-home/empty-home.component';
 
 export const routes: Routes = [
