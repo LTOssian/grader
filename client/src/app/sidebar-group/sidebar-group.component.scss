@@ -54,11 +54,14 @@ aside {
 
   .group-list {
     list-style: none;
-    color: var(--clr-accent-purple);
 
-    > li {
-      span {
+    > .group-container {
+      .group-name {
         width: 132px;
+
+        color: var(--clr-accent-purple);
+        font-weight: 500;
+        text-decoration: none;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
