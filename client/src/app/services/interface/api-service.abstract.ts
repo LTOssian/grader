@@ -1,4 +1,4 @@
-import { environment } from '../../../environment/environment';
+import { environment } from '../../../environments/environment';
 import { ErrorModel } from '../../interfaces/error-model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
