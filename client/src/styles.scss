@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+:root {
+  --clr-black-primary: #1e1e1e;
+  --clr-black-secondary: rgba(30, 30, 30, 0.6);
+  --clr-white-primary: #f4f7fe;
+  --clr-white-secondary: #fff;
+
+  --clr-accent-purple: #7b7aff;
+  --clr-accent-red: #ff7a7a;
+
+  --fs-title: 2rem;
+  --fs-body: 1.125rem;
+  --fs-small: 0.75rem;
+
+  --ff-primary: "Inter", sans-serif;
+
+  --border-radius: 4px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+body {
+  background-color: var(--clr-white-primary);
+}
+
+button {
+  background: none;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: var(--fs-title);
+  font-weight: 600;
+}
+
+app-root {
+  min-height: 100vh;
+
+  font-size: var(--fs-body);
+  font-family: var(--ff-primary);
+
+  display: flex;
+}

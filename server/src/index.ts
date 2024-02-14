@@ -1,5 +1,6 @@
 import { AppRouterSingleton } from "./infrastructure/api/routers/app.router";
 import { ErrorMiddleware } from "./infrastructure/api/middlewares/error.middleware";
+import cors from "cors";
 import express, { Express } from "express";
 import morgan from "morgan";
 import SingletonWrapper from "./common/helpers/singleton-wrapper";
@@ -31,6 +32,11 @@ class ExpressApp {
   private setAppSettings(): void {
     this._app.use(express.json());
     this._app.use(express.urlencoded({ extended: true }));
+    this._app.use(
+      cors({
+        origin: process.env.CLIENT_ORIGIN,
+      })
+    );
   }
 
   private setDevMiddlewares(): void {

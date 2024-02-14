@@ -1,0 +1,53 @@
+<div class="modal-container">
+  <h1>
+    {{ title }}
+  </h1>
+
+  <!-- Error display -->
+  @if (formState) {
+  <div class="error-container">
+    <p>{{ formState.error }}</p>
+    <ul>
+      @for (field of formState.fields; track field) {
+      <li>{{ field }}</li>
+      }
+    </ul>
+  </div>
+  }
+
+  <!-- Form -->
+  @if (modalFormGroup) {
+  <form
+    class="form-container"
+    [formGroup]="modalFormGroup"
+    (ngSubmit)="onSubmit()"
+  >
+    @for (controlField of modalFormGroup.value | keyvalue; track
+    controlField.key) {
+    <div class="form-field">
+      <label [for]="controlField.key">{{
+        getLabelNameFromInputs(controlField.key)
+      }}</label>
+      <input
+        [type]="getTypeOf(controlField.value)"
+        [name]="controlField.key"
+        [id]="controlField.key"
+        [placeholder]="getPlaceholderFromInputs(controlField.key)"
+        [formControlName]="getFormControlKey(controlField.key)"
+      />
+    </div>
+    }
+
+    <app-modal-form-button
+      [buttonText]="'Terminer et sortir'"
+    ></app-modal-form-button>
+    <app-modal-form-button
+      [buttonText]="'Annuler'"
+      [confirm]="false"
+      (click)="cancelModal()"
+    ></app-modal-form-button>
+  </form>
+  }
+</div>
+
+<div class="modal-overlay" (click)="cancelModal()"></div>

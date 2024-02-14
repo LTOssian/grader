@@ -31,6 +31,7 @@ services:
       - pg_db
     environment:
       DATABASE_URL: postgres://grader_user:grader_hetic@pg_db:5432/grader
+      CLIENT_ORIGIN: http://localhost:8080
 
   grader_frontend:
     build:
@@ -42,8 +43,5 @@ services:
     restart: always
     ports:
       - "8080:80"
-    volumes:
-      - ./client:/home/app
-      - /home/app/node_modules
     depends_on:
       - grader_backend
