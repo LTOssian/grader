@@ -28,6 +28,10 @@
   vertical-align: baseline;
 }
 
+body {
+  background-color: var(--clr-white-primary);
+}
+
 button {
   background: none;
   cursor: pointer;
