@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
 import { ApiServiceMaker } from './interface/api-service.abstract';
-import { HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { GroupModel } from '../interfaces/group.model';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +20,8 @@ export class GroupService extends ApiServiceMaker {
    * Deletes a group with its id
    * @param groupId uuid of the group
    */
-  public deleteGroupById(groupId: string) {
-    return this.deleteEntityById(groupId);
+  public deleteGroupById({ group_id }: Pick<GroupModel, 'group_id'>) {
+    return this.deleteEntityById(group_id);
   }
 
   /**
