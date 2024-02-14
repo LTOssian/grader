@@ -18,7 +18,11 @@ export const requiredCredentialsRule = (credentials: Record<string, any>): TVali
   }
 
   if (missingKeys.length > 0) {
-    return { isValid: false, errors: missingKeys, message: ErrorMessageEnum.FIELD_REQUIRED };
+    return {
+      isValid: false,
+      errors: missingKeys,
+      message: missingKeys.length === 1 ? ErrorMessageEnum.FIELD_REQUIRED : ErrorMessageEnum.MULTIPLE_FIELDS_REQUIRED,
+    };
   }
 
   return { isValid: true, errors: [], message: "" };

@@ -1,6 +1,7 @@
 export enum ErrorMessageEnum {
   BAD_REQUEST = "Bad request.",
   FIELD_REQUIRED = "This field is required.",
+  MULTIPLE_FIELDS_REQUIRED = "These fields are required.",
   INVALID_DATA = "Validation error. Check your credentials.",
   UNKNOWN_CLASS = "This ID does not match any class.",
   UNKNOWN_GRADE = "This ID does not match any grade.",
