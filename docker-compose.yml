@@ -43,8 +43,5 @@ services:
     restart: always
     ports:
       - "8080:80"
-    volumes:
-      - ./client:/home/app
-      - /home/app/node_modules
     depends_on:
       - grader_backend

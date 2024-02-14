@@ -1,9 +1,9 @@
 # bring up the services
 up-prod:
-	docker-compose --project-name grader_prod up -d
+	docker-compose --project-name grader_prod up -d --build
 
 up-dev:
-	docker-compose --project-name grader_dev -f docker-compose.yml -f docker-compose.dev.yml up -d
+	docker-compose --project-name grader_dev -f docker-compose.yml -f docker-compose.dev.yml up -d --build
 
 # bring down the services
 down-prod:
