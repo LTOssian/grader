@@ -31,7 +31,7 @@ class ClassController {
       const { isValid, errors, message } = classValidatorSingleton.validate({
         group_id,
         name,
-        coefficient: Number(coefficient),
+        coefficient,
       });
 
       if (!isValid)
