@@ -1,31 +1,40 @@
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { JsonPipe } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Subject, switchMap } from 'rxjs';
+import {
+  MdbModalModule,
+  MdbModalRef,
+  MdbModalService,
+} from 'mdb-angular-ui-kit/modal';
 
 import { AssetPath } from '../../../assets/assets-path';
+import { BuildFormByModalFormTypeService } from '../../services/build-form-by-modal-form-type.service';
 import { GroupModel } from '../../interfaces/group.model';
 import { GroupService } from '../../services/group.service';
+import { ModalCreateFormComponent } from '../modal-create-form/modal-create-form.component';
 
 @Component({
   selector: 'app-sidebar-group',
   standalone: true,
-  imports: [JsonPipe, RouterLink],
+  imports: [JsonPipe, MdbModalModule, RouterLink],
   templateUrl: './sidebar-group.component.html',
   styleUrl: './sidebar-group.component.scss',
 })
 export class SidebarGroupComponent {
-  private groupService = inject(GroupService);
+  private buildModalFormService = inject(BuildFormByModalFormTypeService);
   private destroyRef = inject(DestroyRef);
-  private activatedRoute = inject(ActivatedRoute);
+  private groupService = inject(GroupService);
+  private modalService = inject(MdbModalService);
   private router = inject(Router);
 
   public groups = signal<GroupModel[]>([]);
   public groupListIsVisible = true;
-
   private getGroupsTrigger$ = new Subject<void>();
+
+  private modalCreateRef: MdbModalRef<ModalCreateFormComponent> | null = null;
 
   public assetsStore = {
     trashSvg: {
@@ -85,5 +94,21 @@ export class SidebarGroupComponent {
         this.getGroupsTrigger$.next();
       })
       .add(() => this.navigateToHome());
+  }
+
+  public openModalForm() {
+    this.modalCreateRef = this.modalService.open(ModalCreateFormComponent, {
+      data: {
+        title: 'Ajoutez un groupe',
+        inputs: [
+          {
+            name: 'Nom',
+            type: 'text',
+          },
+        ],
+        modalFormGroup:
+          this.buildModalFormService.buildFormByModalFormType('group'),
+      },
+    });
   }
 }
