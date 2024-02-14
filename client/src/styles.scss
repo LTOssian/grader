@@ -11,7 +11,8 @@
   --clr-accent-red: #ff7a7a;
 
   --fs-title: 2rem;
-  --fs-body: 1.1rem;
+  --fs-body: 1.125rem;
+  --fs-small: 0.75rem;
 
   --ff-primary: "Inter", sans-serif;
 
@@ -32,6 +33,11 @@ button {
   cursor: pointer;
 }
 
+h1 {
+  font-size: var(--fs-title);
+  font-weight: 600;
+}
+
 app-root {
   min-height: 100vh;
 
@@ -39,9 +45,4 @@ app-root {
   font-family: var(--ff-primary);
 
   display: flex;
-
-  h1 {
-    font-size: var(--fs-title);
-    font-weight: 600;
-  }
 }
