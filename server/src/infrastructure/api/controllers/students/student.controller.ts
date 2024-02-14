@@ -32,8 +32,8 @@ class StudentController {
       const { group_id, firstname, lastname, email } = req.body;
       const { isValid, errors, message } = studentValidatorSingleton.validate({
         group_id,
-        firstname: capitalizeFormatter(firstname),
-        lastname: capitalizeFormatter(lastname),
+        firstname,
+        lastname,
       });
 
       if (!isValid)
@@ -46,7 +46,12 @@ class StudentController {
       // Validate that the group exists
       await groupRepository.getGroupById({ group_id });
 
-      const student = await studentRepository.createStudentFromGroup({ group_id, firstname, lastname, email });
+      const student = await studentRepository.createStudentFromGroup({
+        group_id,
+        firstname: capitalizeFormatter(firstname),
+        lastname: capitalizeFormatter(lastname),
+        email,
+      });
 
       res.status(201).json({
         data: student,
