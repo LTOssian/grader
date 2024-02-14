@@ -18,7 +18,7 @@ import { ModalCreateFormComponent } from '../modal-create-form/modal-create-form
 import {
   ModalFailMessage,
   ModalSuccesMessage,
-} from '../../interfaces/form-model';
+} from '../../interfaces/form.model';
 
 @Component({
   selector: 'app-sidebar-group',
@@ -93,7 +93,7 @@ export class SidebarGroupComponent {
    */
   public removeGroupFromList({ group_id }: Pick<GroupModel, 'group_id'>) {
     this.groupService
-      .deleteGroupById(group_id)
+      .deleteGroupById({ group_id })
       .subscribe(() => {
         this.getGroupsTrigger$.next();
       })
