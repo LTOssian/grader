@@ -15,6 +15,10 @@ import { BuildFormByModalFormTypeService } from '../../services/build-form-by-mo
 import { GroupModel } from '../../interfaces/group.model';
 import { GroupService } from '../../services/group.service';
 import { ModalCreateFormComponent } from '../modal-create-form/modal-create-form.component';
+import {
+  ModalFailMessage,
+  ModalSuccesMessage,
+} from '../../interfaces/form-model';
 
 @Component({
   selector: 'app-sidebar-group',
@@ -96,19 +100,28 @@ export class SidebarGroupComponent {
       .add(() => this.navigateToHome());
   }
 
+  /**
+   * Opens a modal and listens for its close state to perform a new fetch if it is successful
+   */
   public openModalForm() {
     this.modalCreateRef = this.modalService.open(ModalCreateFormComponent, {
       data: {
         title: 'Ajoutez un groupe',
-        inputs: [
-          {
-            name: 'Nom',
-            type: 'text',
-          },
-        ],
+        labelsByInput: {
+          name: 'Nom',
+        },
+        entityToCreate: 'group',
         modalFormGroup:
           this.buildModalFormService.buildFormByModalFormType('group'),
       },
     });
+
+    this.modalCreateRef.onClose.subscribe(
+      (message: ModalFailMessage | ModalSuccesMessage) => {
+        if (!message.isSuccess) return;
+        console.info(message.message);
+        this.getGroupsTrigger$.next();
+      }
+    );
   }
 }
