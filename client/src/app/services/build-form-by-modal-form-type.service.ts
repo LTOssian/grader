@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FormType } from '../interfaces/form-model';
+import { FormType } from '../interfaces/form.model';
 
 @Injectable({
   providedIn: 'root',
