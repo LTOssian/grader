@@ -12,7 +12,7 @@ export const requiredCredentialsRule = (credentials: Record<string, any>): TVali
   // Loop over keys and store every keys with no values
   for (const key of Object.keys(credentials)) {
     const value = credentials[key];
-    if (value === undefined || value === null || value === "") {
+    if (value === undefined || value === null || value === "" || value <= 0) {
       missingKeys.push(key);
     }
   }
