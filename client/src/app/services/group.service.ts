@@ -25,4 +25,15 @@ export class GroupService extends ApiServiceMaker {
   public deleteGroupById(groupId: string) {
     return this.deleteEntityById(groupId);
   }
+
+  /**
+   * Creates a new group
+   * @param body object containing the gorup name
+   * @returns An error object or the new group object
+   */
+  public createGroupWithBody(body: Omit<GroupModel, 'group_id'>) {
+    return this.createEntityWithBody<Omit<GroupModel, 'group_id'>, GroupModel>(
+      body
+    );
+  }
 }

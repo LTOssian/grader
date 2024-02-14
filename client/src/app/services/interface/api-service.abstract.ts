@@ -1,7 +1,8 @@
+import { environment } from '../../../environment/environment';
+import { ErrorModel } from '../../interfaces/error-model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environment/environment';
 
 @Injectable()
 export abstract class ApiServiceMaker {
@@ -24,6 +25,17 @@ export abstract class ApiServiceMaker {
   ): Observable<void> {
     return this.httpClient.delete<void>(
       `${environment.apiBaseUrl}${this.apiEndpoint}/${entityId}`,
+      { params }
+    );
+  }
+
+  protected createEntityWithBody<T, R = T>(
+    body: T,
+    params?: HttpParams
+  ): Observable<{ data: R } | ErrorModel> {
+    return this.httpClient.post<{ data: R }>(
+      `${environment.apiBaseUrl}${this.apiEndpoint}/`,
+      body,
       { params }
     );
   }
