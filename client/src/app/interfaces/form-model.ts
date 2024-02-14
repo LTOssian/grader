@@ -1,6 +1,16 @@
-export interface FormModel {
-  name: string;
-  type: string;
+export type FormType = 'group' | 'student' | 'class';
+
+interface ModalMessage {
+  isSuccess: boolean;
 }
 
-export type FormType = 'group' | 'student' | 'class';
+export interface ModalSuccesMessage extends ModalMessage {
+  isSuccess: true;
+  message: string;
+  entity: object;
+}
+
+export interface ModalFailMessage extends ModalMessage {
+  isSuccess: false;
+  message: string;
+}
