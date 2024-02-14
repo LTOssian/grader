@@ -29,6 +29,7 @@ export class ModalCreateFormComponent {
   // Modal bound properties
   public title: string | null = null;
   public labelsByInput: Record<string, string> | null = null;
+  public placeholdersByInput: Record<string, string | number> | null = null;
   public entityToCreate: FormType | null = null;
   public modalFormGroup: FormGroup | null = null;
 
@@ -48,17 +49,26 @@ export class ModalCreateFormComponent {
    * @param controlField
    * @returns param as string
    */
-  public getFormControlKey(controlFieldKey: unknown): string {
+  public getFormControlKey(controlFieldKey: any): string {
     return controlFieldKey as string;
   }
 
   /**
-   * Gets the value of the label via the labelsByInputs record
-   * @param keyValue form control key
-   * @returns the label of the specified input
+   * Gets the value of the label of the input
+   * @param controlFieldKey name of the input
+   * @returns the label of the specified input as string
    */
-  public getLabelNameFromInputs(keyValue: unknown): string {
-    return this.labelsByInput?.[keyValue as string] || '';
+  public getLabelNameFromInputs(controlFieldKey: any): string {
+    return this.labelsByInput?.[controlFieldKey] || '';
+  }
+
+  /**
+   * Gets the value of the placeholder of the input
+   * @param controlFieldKey name of the input
+   * @returns the placeholder of the specified input as string
+   */
+  public getPlaceholderFromInputs(controlFieldKey: any): string {
+    return this.placeholdersByInput?.[controlFieldKey].toString() || '';
   }
 
   /**

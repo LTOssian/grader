@@ -110,6 +110,9 @@ export class SidebarGroupComponent {
         labelsByInput: {
           name: 'Nom',
         },
+        placeholdersByInput: {
+          name: 'Entrez le nom du groupe',
+        },
         entityToCreate: 'group',
         modalFormGroup:
           this.buildModalFormService.buildFormByModalFormType('group'),

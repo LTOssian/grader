@@ -32,6 +32,7 @@
         [type]="getTypeOf(controlField.value)"
         [name]="controlField.key"
         [id]="controlField.key"
+        [placeholder]="getPlaceholderFromInputs(controlField.key)"
         [formControlName]="getFormControlKey(controlField.key)"
       />
     </div>
