@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-empty-home',
+  selector: 'app-empty',
   standalone: true,
   imports: [],
   template: ` <div class="empty-home-container">
@@ -23,6 +23,6 @@ import { Component, Input } from '@angular/core';
     }
   `,
 })
-export class EmptyHomeComponent {
+export class EmptyComponent {
   @Input() emptyIndication: string = 'Sélectionnez ou ajoutez un groupe';
 }
