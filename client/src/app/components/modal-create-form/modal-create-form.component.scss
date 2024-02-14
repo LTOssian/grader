@@ -26,12 +26,15 @@
     display: flex;
     flex-flow: column;
     width: 100%;
+    gap: 16px;
 
     .form-field {
       display: flex;
       flex-flow: column;
       align-items: flex-start;
       gap: 0px;
+      margin-bottom: 16px;
+
       label {
         color: var(--clr-accent-purple);
         font-size: var(--fs-small);
@@ -51,6 +54,19 @@
         font-size: var(--fs-body);
         color: var(--clr-white-primary);
       }
+    }
+  }
+
+  .error-container {
+    color: var(--clr-accent-red);
+
+    p {
+      font-size: var(--fs-body);
+    }
+
+    ul {
+      padding: 0 32px;
+      font-size: var(--fs-small);
     }
   }
 }

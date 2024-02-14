@@ -2,8 +2,26 @@
   <h1>
     {{ title }}
   </h1>
+
+  <!-- Error display -->
+  @if (formState) {
+  <div class="error-container">
+    <p>{{ formState.error }}</p>
+    <ul>
+      @for (field of formState.fields; track field) {
+      <li>{{ field }}</li>
+      }
+    </ul>
+  </div>
+  }
+
+  <!-- Form -->
   @if (modalFormGroup) {
-  <form class="form-container" [formGroup]="modalFormGroup">
+  <form
+    class="form-container"
+    [formGroup]="modalFormGroup"
+    (ngSubmit)="onSubmit()"
+  >
     @for (controlField of modalFormGroup.value | keyvalue; track
     controlField.key) {
     <div class="form-field">
@@ -18,8 +36,17 @@
       />
     </div>
     }
+
+    <app-modal-form-button
+      [buttonText]="'Terminer et sortir'"
+    ></app-modal-form-button>
+    <app-modal-form-button
+      [buttonText]="'Annuler'"
+      [confirm]="false"
+      (click)="cancelModal()"
+    ></app-modal-form-button>
   </form>
   }
 </div>
 
-<div class="modal-overlay"></div>
+<div class="modal-overlay" (click)="cancelModal()"></div>
