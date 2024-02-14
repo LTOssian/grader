@@ -1,0 +1,25 @@
+<div class="modal-container">
+  <h1>
+    {{ title }}
+  </h1>
+  @if (modalFormGroup) {
+  <form class="form-container" [formGroup]="modalFormGroup">
+    @for (controlField of modalFormGroup.value | keyvalue; track
+    controlField.key) {
+    <div class="form-field">
+      <label [for]="controlField.key">{{
+        getLabelNameFromInputs(controlField.key)
+      }}</label>
+      <input
+        [type]="getTypeOf(controlField.value)"
+        [name]="controlField.key"
+        [id]="controlField.key"
+        [formControlName]="getFormControlKey(controlField.key)"
+      />
+    </div>
+    }
+  </form>
+  }
+</div>
+
+<div class="modal-overlay"></div>
