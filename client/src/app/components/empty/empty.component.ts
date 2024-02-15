@@ -1,16 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-empty',
   standalone: true,
   imports: [],
-  template: ` <div class="empty-home-container">
+  template: ` <div class="empty-container">
     <p>
-      {{ emptyIndication }}
+      {{ emptyIndication() }}
     </p>
   </div>`,
   styles: `
-    .empty-home-container {
+    .empty-container {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -24,5 +24,5 @@ import { Component, Input } from '@angular/core';
   `,
 })
 export class EmptyComponent {
-  @Input() emptyIndication: string = 'Sélectionnez ou ajoutez un groupe';
+  public emptyIndication = input<string>('Sélectionnez ou ajoutez un groupe');
 }
