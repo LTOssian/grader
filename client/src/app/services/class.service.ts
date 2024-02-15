@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { ApiServiceMaker } from './interface/api-service.abstract';
-import { GroupModel } from '../interfaces/group.model';
 import { ClassModel } from '../interfaces/class.model';
+import { GroupModel } from '../interfaces/group.model';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
