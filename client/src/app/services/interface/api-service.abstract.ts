@@ -1,14 +1,16 @@
+import { EndpointBuilderService } from '../endpoint-builder.service';
 import { environment } from '../../../environments/environment';
-import { ErrorModel } from '../../interfaces/error-model';
+import { ErrorModel } from '../../interfaces/error.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export abstract class ApiServiceMaker {
-  protected abstract apiEndpoint: string;
+  protected abstract apiEndpoint?: string;
 
-  protected httpClient = inject(HttpClient);
+  private httpClient = inject(HttpClient);
+  protected endPointBuilderService = inject(EndpointBuilderService);
 
   protected getAllEntities<T>(params?: HttpParams): Observable<{ data: T }> {
     const results = this.httpClient.get<{ data: T }>(

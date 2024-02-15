@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonPipe, KeyValuePipe } from '@angular/common';
 
-import { ErrorModel } from '../../interfaces/error-model';
-import { FormType } from '../../interfaces/form-model';
+import { ErrorModel } from '../../interfaces/error.model';
+import { FormType } from '../../interfaces/form.model';
 import { GroupService } from '../../services/group.service';
 import { MdbModalModule, MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ModalFormButtonComponent } from './modal-form-button/modal-form-button.component';
