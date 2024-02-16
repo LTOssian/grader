@@ -1,0 +1,5 @@
+@import "./../../../styles/mixins.scss";
+
+.entity-container {
+  @include entity-group-container;
+}
