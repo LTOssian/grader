@@ -1,0 +1,19 @@
+<div class="entity-container">
+  <h2>Matières</h2>
+  <ul>
+    <li>
+      <app-entity-add-button [buttonAddText]="'Ajouter une matière'" />
+    </li>
+    @for (class of classes(); track class.class_id) {
+    <li>
+      <span>{{ class.name }}</span>
+      <button type="button">
+        <img
+          [src]="assetsStore.trashSvg.path"
+          [alt]="assetsStore.trashSvg.alt"
+        />
+      </button>
+    </li>
+    }
+  </ul>
+</div>
