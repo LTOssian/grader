@@ -1,27 +1,22 @@
-import {
-  Component,
-  DestroyRef,
-  Input,
-  inject,
-  input,
-  signal,
-} from '@angular/core';
+import { Component, DestroyRef, Input, inject, signal } from '@angular/core';
 
 import { Subject, Subscription, switchMap } from 'rxjs';
 
 import { ClassModel } from '../../interfaces/class.model';
 import { ClassService } from '../../services/class.service';
+import { GroupClassesComponent } from './group-classes/group-classes.component';
 import { GroupModel } from '../../interfaces/group.model';
+import { GroupStudentsComponent } from './group-students/group-students.component';
 import { StudentModel } from '../../interfaces/student.model';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { StudentService } from '../../services/student.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-group-home',
   standalone: true,
-  imports: [],
   templateUrl: './group-home.component.html',
   styleUrl: './group-home.component.scss',
+  imports: [GroupClassesComponent, GroupStudentsComponent],
 })
 export class GroupHomeComponent {
   @Input()
