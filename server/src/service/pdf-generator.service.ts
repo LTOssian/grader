@@ -3,6 +3,7 @@ import { Grades } from "../infrastructure/database/interfaces/student-grades.typ
 import { mentionFormatter } from "../common/helpers/mention-formatter";
 import { Response } from "express";
 import { Student } from "../infrastructure/database/interfaces/students-table.type";
+import { TPDFVersion } from "../infrastructure/api/controllers/pdf/pdf.controller";
 import PDFDocument from "pdfkit-table";
 
 export interface IGeneratorCredentials
@@ -24,7 +25,7 @@ export class PdfGeneratorService {
   public credentials: IGeneratorCredentials;
   public version?: "simple" | "complete";
 
-  public constructor(credentials: IGeneratorCredentials, responseStream: Response, version?: "simple" | "complete") {
+  public constructor(credentials: IGeneratorCredentials, responseStream: Response, version: TPDFVersion) {
     this.credentials = credentials;
     this.version = version;
 
@@ -58,12 +59,10 @@ export class PdfGeneratorService {
     const table: ISimpleTable = {
       title: "",
       headers: ["Matière", "Coefficient", "Note"],
-      rows: [],
+      rows: this.credentials.report.map((reportClass) => {
+        return [reportClass.class, reportClass.coefficient.toString(), reportClass.grade.toString()];
+      }),
     };
-
-    this.credentials.report.forEach((reportClass, index) => {
-      table.rows.push([reportClass.class, reportClass.coefficient.toString(), reportClass.grade.toString()]);
-    });
 
     await document.table(table);
     document.end();
@@ -80,17 +79,10 @@ export class PdfGeneratorService {
       title: `${this.credentials.firstname} ${this.credentials.lastname}`,
       subtitle: `Réalisé le ${gradeDateFormattter({ created_at: this.credentials.created_at })}`,
       headers: ["N°", "Matière", "Coefficient", "Note"],
-      rows: [],
+      rows: this.credentials.report.map((reportClass, index) => {
+        return [index.toString(), reportClass.class, reportClass.coefficient.toString(), reportClass.grade.toString()];
+      }),
     };
-
-    this.credentials.report.forEach((reportClass, index) => {
-      table.rows.push([
-        index.toString(),
-        reportClass.class,
-        reportClass.coefficient.toString(),
-        reportClass.grade.toString(),
-      ]);
-    });
 
     await document.table(table, {
       prepareHeader: () => document.fontSize(12),
