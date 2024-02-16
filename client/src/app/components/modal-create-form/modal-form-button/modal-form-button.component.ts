@@ -1,15 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { Component, Input, input } from '@angular/core';
 
 @Component({
   selector: 'app-modal-form-button',
   standalone: true,
   imports: [],
   template: `<button
-    [class.confirm]="confirm"
-    [type]="confirm ? 'submit' : 'button'"
+    [class.confirm]="isConfirm()"
+    [type]="isConfirm() ? 'submit' : 'button'"
   >
-    {{ buttonText }}
+    {{ buttonText() }}
   </button>`,
   styles: `button {
     background: none;
@@ -31,6 +30,6 @@ import { FormGroup, NgForm } from '@angular/forms';
   `,
 })
 export class ModalFormButtonComponent {
-  @Input({ required: true }) buttonText!: string;
-  @Input() confirm: boolean = true;
+  buttonText = input.required<string>();
+  isConfirm = input<boolean>(true);
 }
