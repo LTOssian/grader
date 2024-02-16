@@ -16,6 +16,7 @@ import { Component } from '@angular/core';
       color: var(--clr-white-secondary);
 
       padding: 16px;
+      margin-bottom: 32px;
       border-radius: 4px;
 
       display: flex;

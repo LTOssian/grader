@@ -1,0 +1,29 @@
+@mixin entity-group-container {
+  h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  ul {
+    list-style: none;
+    white-space: nowrap;
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 16px;
+
+    li:not(:first-child) {
+      border-radius: var(--border-radius);
+      background-color: var(--clr-white-secondary);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 16px;
+      padding: 16px;
+    }
+  }
+}
