@@ -24,5 +24,5 @@ import { Component, input } from '@angular/core';
   `,
 })
 export class EmptyComponent {
-  public emptyIndication = input<string>('Sélectionnez ou ajoutez un groupe');
+  public emptyIndication = input.required<string>();
 }

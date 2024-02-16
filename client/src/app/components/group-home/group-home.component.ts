@@ -1,4 +1,11 @@
-import { Component, DestroyRef, Input, inject, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  Input,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 
 import { Subject, Subscription, switchMap } from 'rxjs';
 
