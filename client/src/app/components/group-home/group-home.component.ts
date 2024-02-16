@@ -7,6 +7,7 @@ import { ClassService } from '../../services/class.service';
 import { GroupModel } from '../../interfaces/group.model';
 import { StudentModel } from '../../interfaces/student.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { StudentService } from '../../services/student.service';
 
 @Component({
   selector: 'app-group-home',
@@ -22,6 +23,7 @@ export class GroupHomeComponent {
   }
 
   private classService = inject(ClassService);
+  private studentService = inject(StudentService);
   private destroyRef = inject(DestroyRef);
 
   // Signals with business data
@@ -42,15 +44,24 @@ export class GroupHomeComponent {
     const classesSubscription = this.getClassesTrigger$
       .pipe(
         switchMap(() =>
-          this.classService.getAllStudentsFromGroup({
-            group_id: group_id,
+          this.classService.getAllClassesFromGroup({
+            group_id,
           })
         ),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((classData) => this.classes.set(classData.data));
 
-    const studentSubscription = this.getStudentsTrigger$.subscribe(); // TODO
+    const studentSubscription = this.getStudentsTrigger$
+      .pipe(
+        switchMap(() =>
+          this.studentService.getAllStudentsFromGroup({
+            group_id,
+          })
+        ),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((studentData) => this.students.set(studentData.data));
 
     // Add subscriptions to main stream
     this.triggersSubscription.add(classesSubscription);

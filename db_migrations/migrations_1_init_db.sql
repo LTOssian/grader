@@ -15,7 +15,9 @@ create table if not exists
     lastname text not null,
     email text not null default '',
     constraint pk_student_id primary key (student_id),
-    constraint fk_group_id foreign key (group_id) references groups (group_id)
+    constraint fk_group_id foreign key (group_id) 
+      references groups (group_id)
+      on delete cascade 
   );
 
 create table if not exists
@@ -25,7 +27,9 @@ create table if not exists
     name text not null,
     coefficient int not null default 1,
     constraint pk_class_id primary key (class_id),
-    constraint fk_group_id foreign key (group_id) references groups (group_id)
+    constraint fk_group_id foreign key (group_id) 
+      references groups (group_id)
+      on delete cascade 
   );
 
 create table if not exists
@@ -36,5 +40,7 @@ create table if not exists
     grade float not null,
     created_at timestamp not null default now (),
     constraint pk_student_grades_id primary key (student_grades_id),
-    constraint fk_student_id foreign key (student_id) references students (student_id)
+    constraint fk_student_id foreign key (student_id) 
+      references students (student_id)
+      on delete cascade
   );

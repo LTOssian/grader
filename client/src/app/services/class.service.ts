@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { ApiServiceMaker } from './interface/api-service.abstract';
-import { GroupModel } from '../interfaces/group.model';
 import { ClassModel } from '../interfaces/class.model';
+import { GroupModel } from '../interfaces/group.model';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class ClassService extends ApiServiceMaker {
    * @param param0 an object with group_id
    * @returns A list of the classes of the group
    */
-  public getAllStudentsFromGroup({ group_id }: Pick<GroupModel, 'group_id'>) {
+  public getAllClassesFromGroup({ group_id }: Pick<GroupModel, 'group_id'>) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
       { routeName: this.parentEndpoint, routeParam: group_id },
       { routeName: '/classes', routeParam: '' },
