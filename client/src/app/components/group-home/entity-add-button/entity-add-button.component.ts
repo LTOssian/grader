@@ -16,6 +16,7 @@ import { AssetPath } from '../../../../assets/assets-path';
       border: none;
       border-radius: var(--border-radius);
       padding: 16px;
+      height: 100%;
       cursor: pointer;
 
       color: var(--clr-white-primary);
