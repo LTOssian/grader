@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { ApiServiceMaker } from './interface/api-service.abstract';
-import { GradeModel, GradeModel_Get } from '../interfaces/grade.model';
+import {
+  GradeModel,
+  GradeModel_Get,
+  GradeModel_Post,
+} from '../interfaces/grade.model';
 import { GroupModel } from '../interfaces/group.model';
 import { HttpParams } from '@angular/common/http';
 
@@ -46,5 +50,14 @@ export class GradeService extends ApiServiceMaker {
     ]);
 
     return this.deleteEntityById();
+  }
+
+  public createGradeWithReportBody(body: GradeModel_Post, group_id: string) {
+    this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
+      { routeName: this.parentEndpoint, routeParam: group_id },
+      { routeName: 'grades', routeParam: '' },
+    ]);
+
+    return this.createEntityWithBody<GradeModel & { student_id: string }>(body);
   }
 }
