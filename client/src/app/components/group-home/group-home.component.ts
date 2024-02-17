@@ -193,7 +193,7 @@ export class GroupHomeComponent {
         labelsByInput: {
           firstname: 'Prénom',
           lastname: 'Nom',
-          email: 'Email',
+          email: 'Email (non requis)',
         },
         placeholdersByInput: {
           firstname: 'Entrez le prénom',
