@@ -11,7 +11,10 @@
   <ul class="grade-list">
     @for (grade of grades(); track grade.student_grades_id) {
     <li class="grade-item">
-      <div class="grade-student-name">
+      <div
+        class="grade-student-name"
+        [title]="grade.firstname + ' ' + grade.lastname"
+      >
         {{ grade.firstname }} {{ grade.lastname }}
       </div>
       <div class="grade-student-average">Moyenne: {{ grade.grade }}</div>
