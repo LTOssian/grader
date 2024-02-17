@@ -78,7 +78,7 @@ class StudentController {
       // Validate that the group exists
       await groupRepository.getGroupById({ group_id });
 
-      const student = await studentRepository.getStudentByID({ group_id, student_id });
+      const student = await studentRepository.getStudentByID({ group_id, student_id }, true);
 
       res.json({
         data: student,
