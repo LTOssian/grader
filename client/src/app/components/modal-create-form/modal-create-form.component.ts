@@ -42,6 +42,7 @@ export class ModalCreateFormComponent {
   public title: string | null = null;
   public subtitle: string | null = null;
   public labelsByInput: Record<string, string> | null = null;
+  public typeByInput: Record<string, string> | null = null;
   public placeholdersByInput: Record<string, string | number> | null = null;
   public entityToCreate: FormType | null = null;
   public modalFormGroup: FormGroup | null = null;
@@ -55,8 +56,8 @@ export class ModalCreateFormComponent {
    * @param value var with unknown value
    * @returns type as string
    */
-  public getTypeOf(value: any): string {
-    return typeof value;
+  public getTypeOf(controlFieldKey: any): string {
+    return this.typeByInput?.[controlFieldKey] || 'text';
   }
 
   /**

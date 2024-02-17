@@ -73,7 +73,11 @@ export class GroupGradesComponent {
       ModalCreateFormComponent,
       Omit<
         IModalRef,
-        'group_id' | 'modalFormGroup' | 'labelsByInput' | 'placeholdersByInput'
+        | 'group_id'
+        | 'modalFormGroup'
+        | 'labelsByInput'
+        | 'placeholdersByInput'
+        | 'typeByInput'
       >
     >(ModalCreateFormComponent, {
       data: {

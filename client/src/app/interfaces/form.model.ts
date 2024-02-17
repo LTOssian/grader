@@ -24,6 +24,7 @@ export interface IModalRef {
   subtitle: string;
   labelsByInput: Record<string, string>;
   placeholdersByInput: Record<string, string | number>;
+  typeByInput: Record<string, string>;
   entityToCreate: FormType;
   modalFormGroup: FormGroup<any>;
 }

@@ -194,10 +194,15 @@ export class GroupHomeComponent {
           lastname: 'Nom',
           email: 'Email (non requis)',
         },
+        typeByInput: {
+          firstname: 'text',
+          lastname: 'text',
+          email: 'email',
+        },
         placeholdersByInput: {
           firstname: 'Entrez le prénom',
           lastname: 'Entrez le nom',
-          email: "Entrez l'email",
+          email: 'pedro_pascal@example.eu',
         },
         ...(entity_type === 'class' && {
           title: 'Ajouter une matière',
@@ -208,6 +213,10 @@ export class GroupHomeComponent {
           placeholdersByInput: {
             name: 'Entrez le nom',
             coefficient: 'Entrez le coefficient',
+          },
+          typeByInput: {
+            name: 'text',
+            coefficient: 'number',
           },
         }),
         entityToCreate: entity_type,
