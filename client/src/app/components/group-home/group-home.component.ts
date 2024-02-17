@@ -20,9 +20,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class GroupHomeComponent {
   @Input()
-  set group_id(group_id: string) {
-    this.initializeTriggers({ group_id });
+  set group_id_param(group_id_param: string) {
+    this.group_id.set(group_id_param);
+    this.initializeTriggers({ group_id: group_id_param });
   }
+
+  public group_id = signal<string>('');
 
   private classService = inject(ClassService);
   private studentService = inject(StudentService);
@@ -35,6 +38,8 @@ export class GroupHomeComponent {
   // Subjects triggers
   private getClassesTrigger$ = new Subject<void>();
   private getStudentsTrigger$ = new Subject<void>();
+  private deleteClassesTrigger$ = new Subject<string>();
+  private deleteStudentsTriggers$ = new Subject<string>();
 
   // Main subscription
   private triggersSubscription = new Subscription();
@@ -42,7 +47,7 @@ export class GroupHomeComponent {
   private initializeTriggers({ group_id }: Pick<GroupModel, 'group_id'>) {
     this.resetSubscription();
 
-    // Set up subscriptions
+    // Set up subscriptions and triggers
     const classesSubscription = this.getClassesTrigger$
       .pipe(
         switchMap(() =>
@@ -65,6 +70,29 @@ export class GroupHomeComponent {
       )
       .subscribe((studentData) => this.students.set(studentData.data));
 
+    this.deleteClassesTrigger$
+      .pipe(
+        switchMap((entity_id) =>
+          this.classService.deleteClassById({
+            group_id,
+            class_id: entity_id,
+          })
+        ),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe(() => this.getClassesTrigger$.next());
+
+    this.deleteStudentsTriggers$
+      .pipe(
+        switchMap((entity_id) =>
+          this.studentService.deleteStudentById({
+            group_id,
+            student_id: entity_id,
+          })
+        )
+      )
+      .subscribe(() => this.getStudentsTrigger$.next());
+
     // Add subscriptions to main stream
     this.triggersSubscription.add(classesSubscription);
     this.triggersSubscription.add(studentSubscription);
@@ -77,5 +105,19 @@ export class GroupHomeComponent {
   private resetSubscription() {
     this.triggersSubscription.unsubscribe();
     this.triggersSubscription = new Subscription();
+  }
+
+  public removeEntityFromGroup(credentials: {
+    type: 'student' | 'class';
+    id: string;
+  }): void {
+    switch (credentials.type) {
+      case 'student':
+        this.deleteStudentsTriggers$.next(credentials.id);
+        break;
+      case 'class':
+        this.deleteClassesTrigger$.next(credentials.id);
+        break;
+    }
   }
 }

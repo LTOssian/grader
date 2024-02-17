@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, EventEmitter, Output, input } from '@angular/core';
 
 import { AssetPath } from '../../../../assets/assets-path';
 import { ClassModel } from '../../../interfaces/class.model';
@@ -13,6 +13,8 @@ import { EntityAddButtonComponent } from '../entity-add-button/entity-add-button
 })
 export class GroupClassesComponent {
   public classes = input.required<ClassModel[]>();
+  @Output() onDeleteClick: EventEmitter<{ type: 'class'; id: string }> =
+    new EventEmitter();
 
   public assetsStore = {
     trashSvg: {
@@ -20,4 +22,8 @@ export class GroupClassesComponent {
       alt: 'Icône de poubelle rouge',
     },
   };
+
+  public deleteClass({ class_id }: Pick<ClassModel, 'class_id'>): void {
+    this.onDeleteClick.emit({ type: 'class', id: class_id });
+  }
 }

@@ -9,7 +9,7 @@ export const routes: Routes = [
     data: { emptyIndication: 'Sélectionnez ou ajoutez un groupe' },
   },
   {
-    path: 'group/:group_id',
+    path: 'group/:group_id_param',
     component: GroupHomeComponent,
     data: {
       gradeEmptyIndication: 'Aucun bulletin généré',

@@ -7,7 +7,7 @@
     @for (class of classes(); track class.class_id) {
     <li>
       <span>{{ class.name }}</span>
-      <button type="button">
+      <button type="button" (click)="deleteClass({ class_id: class.class_id })">
         <img
           [src]="assetsStore.trashSvg.path"
           [alt]="assetsStore.trashSvg.alt"
