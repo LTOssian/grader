@@ -19,7 +19,7 @@ export class GroupClassesComponent {
   public assetsStore = {
     trashSvg: {
       path: AssetPath.TRASH,
-      alt: 'Icône de poubelle rouge',
+      alt: 'Icône de poubelle',
     },
   };
 
