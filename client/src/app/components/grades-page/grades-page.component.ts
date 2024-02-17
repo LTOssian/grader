@@ -4,9 +4,9 @@ import { Subject, Subscription, switchMap } from 'rxjs';
 
 import { GradeModel_Get } from '../../interfaces/grade.model';
 import { GradeService } from '../../services/grade.service';
+import { GroupGradesComponent } from '../group-home/group-grades/group-grades.component';
 import { GroupModel } from '../../interfaces/group.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { GroupGradesComponent } from '../group-home/group-grades/group-grades.component';
 
 @Component({
   selector: 'app-grades-page',
@@ -18,6 +18,7 @@ import { GroupGradesComponent } from '../group-home/group-grades/group-grades.co
 export class GradesPageComponent {
   private destroyRef = inject(DestroyRef);
   private gradeService = inject(GradeService);
+
   @Input()
   set group_id_param(group_id_param: string) {
     this.group_id.set(group_id_param);

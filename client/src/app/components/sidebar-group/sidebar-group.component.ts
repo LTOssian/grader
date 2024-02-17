@@ -107,7 +107,7 @@ export class SidebarGroupComponent {
   public openModalForm() {
     this.modalCreateRef = this.modalService.open<
       ModalCreateFormComponent,
-      IModalRef
+      Omit<IModalRef, 'subtitle'>
     >(ModalCreateFormComponent, {
       data: {
         title: 'Ajoutez un groupe',

@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 
-export type FormType = 'group' | 'student' | 'class';
+export type FormType = 'group' | 'student' | 'class' | 'pdf';
 
 interface ModalMessage {
   isSuccess: boolean;
@@ -19,7 +19,9 @@ export interface ModalFailMessage extends ModalMessage {
 
 export interface IModalRef {
   group_id?: string;
+  entity_id?: string;
   title: string;
+  subtitle: string;
   labelsByInput: Record<string, string>;
   placeholdersByInput: Record<string, string | number>;
   entityToCreate: FormType;

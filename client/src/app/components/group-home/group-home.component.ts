@@ -182,10 +182,9 @@ export class GroupHomeComponent {
   }
 
   public openModalForm(entity_type: FormType) {
-    console.log("tentative d'ouverture");
     this.modalCreateRef = this.modalService.open<
       ModalCreateFormComponent,
-      IModalRef
+      Omit<IModalRef, 'subtitle'>
     >(ModalCreateFormComponent, {
       data: {
         group_id: this.group_id(),
