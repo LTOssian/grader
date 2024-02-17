@@ -16,6 +16,7 @@ import { GroupModel } from '../../interfaces/group.model';
 import { GroupService } from '../../services/group.service';
 import { ModalCreateFormComponent } from '../modal-create-form/modal-create-form.component';
 import {
+  IModalRef,
   ModalFailMessage,
   ModalSuccesMessage,
 } from '../../interfaces/form.model';
@@ -104,7 +105,10 @@ export class SidebarGroupComponent {
    * Opens a modal and listens for its close state to perform a new fetch if it is successful
    */
   public openModalForm() {
-    this.modalCreateRef = this.modalService.open(ModalCreateFormComponent, {
+    this.modalCreateRef = this.modalService.open<
+      ModalCreateFormComponent,
+      IModalRef
+    >(ModalCreateFormComponent, {
       data: {
         title: 'Ajoutez un groupe',
         labelsByInput: {

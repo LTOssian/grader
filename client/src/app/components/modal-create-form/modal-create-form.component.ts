@@ -2,11 +2,18 @@ import { Component, inject } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonPipe, KeyValuePipe } from '@angular/common';
 
-import { ErrorModel } from '../../interfaces/error.model';
-import { FormType } from '../../interfaces/form.model';
-import { GroupService } from '../../services/group.service';
 import { MdbModalModule, MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { Observable } from 'rxjs';
+
+import { ClassModel } from '../../interfaces/class.model';
+import { ClassService } from '../../services/class.service';
+import { ErrorModel } from '../../interfaces/error.model';
+import { FormType, ModalMessageEnum } from '../../interfaces/form.model';
+import { GroupModel } from '../../interfaces/group.model';
+import { GroupService } from '../../services/group.service';
 import { ModalFormButtonComponent } from './modal-form-button/modal-form-button.component';
+import { StudentModel } from '../../interfaces/student.model';
+import { StudentService } from '../../services/student.service';
 
 @Component({
   selector: 'app-modal-create-form',
@@ -24,7 +31,9 @@ import { ModalFormButtonComponent } from './modal-form-button/modal-form-button.
 })
 export class ModalCreateFormComponent {
   public modalRef = inject(MdbModalRef<ModalCreateFormComponent>);
+  private classService = inject(ClassService);
   private groupService = inject(GroupService);
+  private studentService = inject(StudentService);
 
   // Modal bound properties
   public title: string | null = null;
@@ -32,6 +41,7 @@ export class ModalCreateFormComponent {
   public placeholdersByInput: Record<string, string | number> | null = null;
   public entityToCreate: FormType | null = null;
   public modalFormGroup: FormGroup | null = null;
+  public group_id: string | null = null;
 
   public formState?: ErrorModel;
 
@@ -77,28 +87,28 @@ export class ModalCreateFormComponent {
   public onSubmit(): void {
     if (!this.entityToCreate) this.cancelModal();
     if (!this.modalFormGroup) return;
-
+    console.log(this.modalFormGroup.value);
     switch (this.entityToCreate) {
       case 'group':
-        this.groupService
-          .createGroupWithBody(this.modalFormGroup.value)
-          .subscribe({
-            next: (responseData) => {
-              this.modalRef.close({
-                message: 'Entitée crée avec succès',
-                isSuccess: true,
-                entity: responseData.data,
-              });
-            },
-            error: (responseError) => {
-              this.formState = responseError.error;
-            },
+        this.executeEntityCreation(
+          this.groupService.createGroupWithBody(this.modalFormGroup.value)
+        );
+        break;
+      case 'class':
+        this.executeEntityCreation(
+          this.classService.createClassWithBody({
+            ...this.modalFormGroup.value,
+            group_id: this.group_id,
           })
-          .add(() => {
-            if (this.formState) {
-              setTimeout(() => (this.formState = undefined), 8000);
-            }
-          });
+        );
+        break;
+      case 'student':
+        this.executeEntityCreation(
+          this.studentService.createStudentWithBody({
+            ...this.modalFormGroup.value,
+            group_id: this.group_id,
+          })
+        );
         break;
     }
   }
@@ -111,5 +121,37 @@ export class ModalCreateFormComponent {
       message: 'Opération annulée',
       isSuccess: false,
     });
+  }
+
+  /**
+   * Executes the rxjs processing of the given method's result
+   * @param serviceMethod Observable result of a service method
+   */
+  private executeEntityCreation(
+    serviceMethod: Observable<
+      | ErrorModel
+      | {
+          data: StudentModel | ClassModel | GroupModel;
+        }
+    >
+  ) {
+    serviceMethod
+      .subscribe({
+        next: (responseData) => {
+          this.modalRef.close({
+            message: ModalMessageEnum,
+            isSuccess: true,
+            entity: responseData.data,
+          });
+        },
+        error: (responseError) => {
+          this.formState = responseError.error;
+        },
+      })
+      .add(() => {
+        if (this.formState) {
+          setTimeout(() => (this.formState = undefined), 8000);
+        }
+      });
   }
 }
