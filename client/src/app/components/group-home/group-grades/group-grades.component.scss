@@ -1,0 +1,53 @@
+.grade-container {
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
+
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h2 {
+      font-size: var(--fs-title);
+      font-weight: 500;
+      display: inline-block;
+
+      & + a {
+        font-size: var(--fs-small);
+        color: var(--clr-accent-purple);
+
+        &:hover {
+          color: var(--clr-black-primary);
+        }
+      }
+    }
+  }
+
+  .grade-list {
+    list-style: none;
+
+    display: flex;
+    flex-flow: row wrap;
+    gap: 16px;
+
+    .grade-item {
+      display: flex;
+      flex-flow: column;
+      gap: 16px;
+      padding: 16px 48px 16px 16px;
+
+      background-color: var(--clr-white-secondary);
+      border-radius: var(--border-radius);
+
+      .grade-student-average {
+        font-weight: 500;
+      }
+
+      .grade-cta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+    }
+  }
+}

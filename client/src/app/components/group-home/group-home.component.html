@@ -1,5 +1,9 @@
 <div class="group-container">
-  <div class="entity-container">bulletins</div>
+  <app-group-grades
+    [grades]="grades()"
+    (onDeleteClick)="removeEntityFromGroup($event)"
+  />
+
   <app-group-students
     [students]="students()"
     (onDeleteClick)="removeEntityFromGroup($event)"
