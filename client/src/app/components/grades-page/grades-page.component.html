@@ -1,0 +1,8 @@
+<div class="grades-container">
+  <app-group-grades
+    [grades]="grades()"
+    [group_id]="group_id()"
+    [isGradesPage]="true"
+    (onDeleteClick)="removeGradeFromGroup($event)"
+  />
+</div>
