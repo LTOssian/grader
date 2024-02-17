@@ -37,6 +37,7 @@
       flex-flow: column;
       gap: 16px;
       padding: 16px 48px 16px 16px;
+      width: 172px;
 
       background-color: var(--clr-white-secondary);
       border-radius: var(--border-radius);
@@ -49,6 +50,11 @@
         display: flex;
         align-items: center;
         gap: 16px;
+      }
+
+      .grade-date {
+        font-size: var(--fs-small);
+        color: var(--clr-black-secondary);
       }
     }
   }

@@ -50,4 +50,8 @@ export class GroupGradesComponent {
   public goBack() {
     return this.location.back();
   }
+
+  public formatDate(dateAsString: string) {
+    return new Date(dateAsString).toLocaleString();
+  }
 }
