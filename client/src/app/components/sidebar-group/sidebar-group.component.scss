@@ -2,8 +2,6 @@ aside {
   height: -webkit-fill-available;
   padding: 48px 16px;
 
-  border-right: 1px solid var(--clr-black-primary);
-
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -35,6 +33,7 @@ aside {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-weight: 500;
 
       color: var(--clr-white-primary);
       background-color: var(--clr-black-primary);
@@ -60,11 +59,15 @@ aside {
         width: 132px;
 
         color: var(--clr-accent-purple);
-        font-weight: 500;
         text-decoration: none;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        &:hover {
+          font-weight: 500;
+          text-decoration: underline;
+        }
       }
 
       display: flex;

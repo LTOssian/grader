@@ -12,6 +12,7 @@ class StudentRouter extends RouterMaker {
     this._router.get("/", studentController.getStudentsFromGroup);
     this._router.get("/:student_id", studentController.getStudentFromGroupById);
     this._router.post("/", studentController.postStudent);
+    this._router.delete("/:student_id", studentController.deleteStudentFromGroup);
   }
 }
 

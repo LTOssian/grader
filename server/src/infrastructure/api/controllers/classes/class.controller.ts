@@ -27,7 +27,8 @@ class ClassController {
 
   public async postClass(req: Request, res: Response, next: NextFunction) {
     try {
-      const { group_id, name, coefficient } = req.body;
+      const { group_id } = req.params;
+      const { name, coefficient } = req.body;
       const { isValid, errors, message } = classValidatorSingleton.validate({
         group_id,
         name,
@@ -60,9 +61,9 @@ class ClassController {
 
   public async deleteClass(req: Request, res: Response, next: NextFunction) {
     try {
-      const { class_id } = req.params;
+      const { class_id, group_id } = req.params;
 
-      await classRepository.deleteClassFromGroup({ class_id });
+      await classRepository.deleteClassFromGroup({ class_id, group_id });
 
       res.status(204).json();
     } catch (e) {

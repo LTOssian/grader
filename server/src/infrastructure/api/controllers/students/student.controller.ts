@@ -29,7 +29,8 @@ class StudentController {
 
   public async postStudent(req: Request, res: Response, next: NextFunction) {
     try {
-      const { group_id, firstname, lastname, email } = req.body;
+      const { group_id } = req.params;
+      const { firstname, lastname, email } = req.body;
       const { isValid, errors, message } = studentValidatorSingleton.validate({
         group_id,
         firstname,
@@ -82,6 +83,29 @@ class StudentController {
       res.json({
         data: student,
       });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  public async deleteStudentFromGroup(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { group_id, student_id } = req.params;
+      const { isValid, errors, message } = studentValidatorSingleton.validate({ group_id, student_id });
+
+      if (!isValid)
+        throw new ValidationError({
+          message: ErrorMessageEnum.UNKNOWN_ID,
+          code: 403,
+          errors: errors,
+        });
+
+      // Validate that the group exists
+      await groupRepository.getGroupById({ group_id });
+
+      await studentRepository.deleteStudentFromGroup({ student_id, group_id });
+
+      res.status(204).json();
     } catch (e) {
       next(e);
     }

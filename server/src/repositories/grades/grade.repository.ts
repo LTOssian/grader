@@ -10,15 +10,17 @@ class GradeRepository {
   /**
    * Gets the grades of the students of the specified group
    * @param credentials contains the group's id
+   * @param limit number of entities wanted
    * @returns List of grades
    */
-  public async getGradesFromGroup(credentials: Pick<Group, "group_id">): Promise<Partial<Grades>[]> {
-    const rows = await DbClient.selectFrom("student_grades")
+  public async getGradesFromGroup(credentials: Pick<Group, "group_id">, limit?: number): Promise<Partial<Grades>[]> {
+    const query = DbClient.selectFrom("student_grades")
       .innerJoin("students", "students.student_id", "student_grades.student_id")
       .select(["student_grades_id", "students.firstname", "students.lastname", "students.email", "grade", "created_at"])
       .where("students.group_id", "=", credentials.group_id)
-      .orderBy("created_at", "desc")
-      .execute();
+      .orderBy("created_at", "desc");
+
+    const rows = limit ? await query.limit(limit).execute() : query.execute();
 
     return rows;
   }

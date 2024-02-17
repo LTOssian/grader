@@ -18,7 +18,7 @@ export class ClassService extends ApiServiceMaker {
   public getAllClassesFromGroup({ group_id }: Pick<GroupModel, 'group_id'>) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
       { routeName: this.parentEndpoint, routeParam: group_id },
-      { routeName: '/classes', routeParam: '' },
+      { routeName: 'classes', routeParam: '' },
     ]);
 
     return this.getAllEntities<ClassModel[]>();
@@ -37,10 +37,10 @@ export class ClassService extends ApiServiceMaker {
   }) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
       { routeName: this.parentEndpoint, routeParam: group_id },
-      { routeName: '/classes', routeParam: '' },
+      { routeName: 'classes', routeParam: class_id },
     ]);
 
-    return this.deleteEntityById(class_id);
+    return this.deleteEntityById();
   }
 
   /**
@@ -51,7 +51,7 @@ export class ClassService extends ApiServiceMaker {
   public createClassWithBody(body: Omit<ClassModel, 'class_id'>) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
       { routeName: this.parentEndpoint, routeParam: body.group_id },
-      { routeName: '/classes', routeParam: '' },
+      { routeName: 'classes', routeParam: '' },
     ]);
 
     return this.createEntityWithBody<Omit<ClassModel, 'class_id'>, ClassModel>(

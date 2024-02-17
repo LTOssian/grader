@@ -1,1 +1,16 @@
-<p>group-home works!</p>
+<div class="group-container">
+  <app-group-grades
+    [grades]="grades()"
+    [group_id]="group_id()"
+    (onDeleteClick)="removeEntityFromGroup($event)"
+  />
+
+  <app-group-students
+    [students]="students()"
+    (onDeleteClick)="removeEntityFromGroup($event)"
+  />
+  <app-group-classes
+    [classes]="classes()"
+    (onDeleteClick)="removeEntityFromGroup($event)"
+  />
+</div>

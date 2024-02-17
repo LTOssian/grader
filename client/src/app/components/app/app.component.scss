@@ -4,10 +4,11 @@ main {
   padding: 32px;
   display: flex;
   flex-flow: column;
-  gap: 32px;
+
+  border-left: 1px solid var(--clr-black-primary);
 }
 
 :host app-sidebar-group {
   min-height: 100%;
-  width: 234px;
+  min-width: 234px;
 }

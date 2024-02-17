@@ -1,0 +1,23 @@
+<div class="entity-container">
+  <h2>Matières</h2>
+  <ul>
+    <li>
+      <app-entity-add-button [buttonAddText]="'Ajouter une matière'" />
+    </li>
+    @for (class of classes(); track class.class_id) {
+    <li>
+      <span>{{ class.name }}</span>
+      <button type="button" (click)="deleteClass({ class_id: class.class_id })">
+        <img
+          [src]="assetsStore.trashSvg.path"
+          [alt]="assetsStore.trashSvg.alt"
+        />
+      </button>
+    </li>
+    }
+  </ul>
+
+  @if (!classes().length) {
+  <app-empty [emptyIndication]="classEmptyText()" />
+  }
+</div>

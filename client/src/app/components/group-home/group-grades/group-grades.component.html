@@ -1,0 +1,42 @@
+<div class="grade-container">
+  <div>
+    <h2>Derniers bulletins du groupe</h2>
+    @if (!isGradesPage()) {
+    <a [routerLink]="['/grades', group_id()]">Tout voir</a>
+    } @else {
+    <a [routerLink]="['/group', group_id()]">Retour au groupe</a>
+    }
+  </div>
+
+  <ul class="grade-list">
+    @for (grade of grades(); track grade.student_grades_id) {
+    <li class="grade-item">
+      <div class="grade-student-name">
+        {{ grade.firstname }} {{ grade.lastname }}
+      </div>
+      <div class="grade-student-average">Moyenne: {{ grade.grade }}</div>
+      <div class="grade-cta">
+        <button type="button">
+          <img
+            [src]="assetsStore.downloadSvg.path"
+            [alt]="assetsStore.downloadSvg.alt"
+          />
+        </button>
+
+        <button
+          type="button"
+          (click)="deleteGrade({ student_grades_id: grade.student_grades_id })"
+        >
+          <img
+            [src]="assetsStore.trashSvg.path"
+            [alt]="assetsStore.trashSvg.alt"
+          />
+        </button>
+      </div>
+    </li>
+    }
+  </ul>
+  @if (!grades().length) {
+  <app-empty [emptyIndication]="gradeEmptyText()" />
+  }
+</div>

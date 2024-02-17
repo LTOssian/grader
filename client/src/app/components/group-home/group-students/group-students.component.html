@@ -1,0 +1,29 @@
+<div class="entity-container">
+  <h2>Étudiants</h2>
+  <ul>
+    <li>
+      <app-entity-add-button [buttonAddText]="'Ajouter un étudiant'" />
+    </li>
+    @for (student of students(); track student.student_id) {
+    <li>
+      <span>{{ student.firstname }} {{ student.lastname }}</span>
+      <a [routerLink]="['/grade', student.student_id]">
+        <img [src]="assetsStore.tabSvg.path" [alt]="assetsStore.tabSvg.alt" />
+      </a>
+      <button
+        type="button"
+        (click)="deleteStudent({ student_id: student.student_id })"
+      >
+        <img
+          [src]="assetsStore.trashSvg.path"
+          [alt]="assetsStore.trashSvg.alt"
+        />
+      </button>
+    </li>
+    }
+  </ul>
+
+  @if (!students().length) {
+  <app-empty [emptyIndication]="studentEmptyText()" />
+  }
+</div>
