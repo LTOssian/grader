@@ -13,6 +13,10 @@ export class GroupService extends ApiServiceMaker {
    * @returns A list of the groups
    */
   public getAllGroups() {
+    this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
+      { routeName: '/groups', routeParam: '' },
+    ]);
+
     return this.getAllEntities<GroupModel[]>();
   }
 
@@ -21,7 +25,11 @@ export class GroupService extends ApiServiceMaker {
    * @param groupId uuid of the group
    */
   public deleteGroupById({ group_id }: Pick<GroupModel, 'group_id'>) {
-    return this.deleteEntityById(group_id);
+    this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
+      { routeName: '/groups', routeParam: group_id },
+    ]);
+
+    return this.deleteEntityById();
   }
 
   /**
@@ -30,6 +38,10 @@ export class GroupService extends ApiServiceMaker {
    * @returns An error object or the new group object
    */
   public createGroupWithBody(body: Omit<GroupModel, 'group_id'>) {
+    this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
+      { routeName: '/groups', routeParam: '' },
+    ]);
+
     return this.createEntityWithBody<Omit<GroupModel, 'group_id'>, GroupModel>(
       body
     );

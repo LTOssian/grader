@@ -19,7 +19,6 @@ export class StudentService extends ApiServiceMaker {
       { routeName: this.parentEndpoint, routeParam: group_id },
       { routeName: '/students', routeParam: '' },
     ]);
-
     return this.getAllEntities<StudentModel[]>();
   }
   /**
@@ -35,10 +34,10 @@ export class StudentService extends ApiServiceMaker {
   }) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
       { routeName: this.parentEndpoint, routeParam: group_id },
-      { routeName: '/students', routeParam: '' },
+      { routeName: '/students', routeParam: student_id },
     ]);
 
-    return this.deleteEntityById(student_id);
+    return this.deleteEntityById();
   }
 
   /**

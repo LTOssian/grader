@@ -37,10 +37,10 @@ export class ClassService extends ApiServiceMaker {
   }) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
       { routeName: this.parentEndpoint, routeParam: group_id },
-      { routeName: '/classes', routeParam: '' },
+      { routeName: '/classes', routeParam: class_id },
     ]);
 
-    return this.deleteEntityById(class_id);
+    return this.deleteEntityById();
   }
 
   /**

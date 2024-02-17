@@ -21,12 +21,9 @@ export abstract class ApiServiceMaker {
     return results;
   }
 
-  protected deleteEntityById<T>(
-    entityId: string,
-    params?: HttpParams
-  ): Observable<void> {
+  protected deleteEntityById<T>(params?: HttpParams): Observable<void> {
     return this.httpClient.delete<void>(
-      `${environment.apiBaseUrl}${this.apiEndpoint}/${entityId}`,
+      `${environment.apiBaseUrl}${this.apiEndpoint}`,
       { params }
     );
   }
