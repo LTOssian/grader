@@ -1,7 +1,11 @@
 <div class="grade-container">
   <div>
     <h2>Derniers bulletins du groupe</h2>
-    <a [routerLink]="['grades']">Tout voir</a>
+    @if (!isGradesPage()) {
+    <a [routerLink]="['/grades', group_id()]">Tout voir</a>
+    } @else {
+    <a [routerLink]="['/group', group_id()]">Retour au groupe</a>
+    }
   </div>
 
   <ul class="grade-list">

@@ -1,6 +1,7 @@
 <div class="group-container">
   <app-group-grades
     [grades]="grades()"
+    [group_id]="group_id()"
     (onDeleteClick)="removeEntityFromGroup($event)"
   />
 
