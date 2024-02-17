@@ -1,6 +1,7 @@
+import { Injectable } from '@angular/core';
+
 import { ApiServiceMaker } from './interface/api-service.abstract';
 import { GroupModel } from '../interfaces/group.model';
-import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class GroupService extends ApiServiceMaker {
    */
   public getAllGroups() {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
-      { routeName: '/groups', routeParam: '' },
+      { routeName: 'groups', routeParam: '' },
     ]);
 
     return this.getAllEntities<GroupModel[]>();
@@ -26,7 +27,7 @@ export class GroupService extends ApiServiceMaker {
    */
   public deleteGroupById({ group_id }: Pick<GroupModel, 'group_id'>) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
-      { routeName: '/groups', routeParam: group_id },
+      { routeName: 'groups', routeParam: group_id },
     ]);
 
     return this.deleteEntityById();
@@ -39,7 +40,7 @@ export class GroupService extends ApiServiceMaker {
    */
   public createGroupWithBody(body: Omit<GroupModel, 'group_id'>) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
-      { routeName: '/groups', routeParam: '' },
+      { routeName: 'groups', routeParam: '' },
     ]);
 
     return this.createEntityWithBody<Omit<GroupModel, 'group_id'>, GroupModel>(

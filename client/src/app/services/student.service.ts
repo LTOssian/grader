@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { ApiServiceMaker } from './interface/api-service.abstract';
 import { StudentModel } from '../interfaces/student.model';
 
@@ -11,13 +12,13 @@ export class StudentService extends ApiServiceMaker {
 
   /**
    * Gets all the student available in the group
-   * @param param0 an object with gorup_id
-   * @returns A list of the students of the gorup
+   * @param param0 an object with group_id
+   * @returns A list of the students of the group
    */
   public getAllStudentsFromGroup({ group_id }: Pick<StudentModel, 'group_id'>) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
       { routeName: this.parentEndpoint, routeParam: group_id },
-      { routeName: '/students', routeParam: '' },
+      { routeName: 'students', routeParam: '' },
     ]);
     return this.getAllEntities<StudentModel[]>();
   }
@@ -34,7 +35,7 @@ export class StudentService extends ApiServiceMaker {
   }) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
       { routeName: this.parentEndpoint, routeParam: group_id },
-      { routeName: '/students', routeParam: student_id },
+      { routeName: 'students', routeParam: student_id },
     ]);
 
     return this.deleteEntityById();
@@ -48,7 +49,7 @@ export class StudentService extends ApiServiceMaker {
   public createStudentWithBody(body: Omit<StudentModel, 'student_id'>) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
       { routeName: this.parentEndpoint, routeParam: body.group_id },
-      { routeName: '/students', routeParam: '' },
+      { routeName: 'students', routeParam: '' },
     ]);
 
     return this.createEntityWithBody<

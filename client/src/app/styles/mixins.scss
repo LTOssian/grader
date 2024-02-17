@@ -1,6 +1,6 @@
 @mixin entity-group-container {
   h2 {
-    font-size: 32px;
+    font-size: var(--fs-title);
     font-weight: 500;
     margin-bottom: 16px;
   }

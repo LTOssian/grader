@@ -5,4 +5,5 @@ export const enum AssetPath {
   LOGOTYPE = '/assets/svg/logotype.svg',
   TAB_NOTE = '/assets/svg/tab-note.svg',
   PLUS = '/assets/svg/plus.svg',
+  DOWNLOAD = '/assets/svg/download.svg',
 }
