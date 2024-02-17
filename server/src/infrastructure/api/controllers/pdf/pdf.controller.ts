@@ -14,12 +14,15 @@ class PdfController {
 
       const credentials: IGeneratorCredentials = await gradeRepository.getGradeById({ student_grades_id: grade_id });
 
+      // set headers
+      res.setHeader("Content-Type", "application/pdf");
       res.setHeader(
         "Content-Disposition",
         `attachment; filename="${credentials.firstname}_${credentials.lastname}_Bulletin_${gradeDateFormattter({
           created_at: credentials.created_at,
-        })}-.pdf`
+        })}.pdf`
       );
+      res.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
 
       new PdfGeneratorService(credentials, res, version);
     } catch (e) {
