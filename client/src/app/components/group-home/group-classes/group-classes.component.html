@@ -16,4 +16,8 @@
     </li>
     }
   </ul>
+
+  @if (!classes().length) {
+  <app-empty [emptyIndication]="classEmptyText()" />
+  }
 </div>

@@ -22,4 +22,8 @@
     </li>
     }
   </ul>
+
+  @if (!students().length) {
+  <app-empty [emptyIndication]="studentEmptyText()" />
+  }
 </div>
