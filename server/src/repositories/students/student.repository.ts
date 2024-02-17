@@ -15,18 +15,16 @@ class StudentRepository {
     return rows;
   }
 
-  public async getStudentByID(credentials: Pick<Student, "group_id" | "student_id">, includeClass = false) {
+  public async getStudentByID(credentials: Pick<Student, "student_id">, includeClass = false) {
     const baseQuery = DbClient.selectFrom("students")
       .innerJoin(
         (eb) =>
           eb
             .selectFrom("group_classes")
             .select(["group_classes.coefficient", "group_classes.group_id", "group_classes.name"])
-            .where("group_classes.group_id", "=", credentials.group_id)
             .as("subjects"),
         (join) => join.onRef("subjects.group_id", "=", "students.group_id")
       )
-      .where("students.group_id", "=", credentials.group_id)
       .where("students.student_id", "=", credentials.student_id);
 
     const student = <Student & { classes: Omit<Classes, "class_id">[] }>(
