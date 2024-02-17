@@ -33,7 +33,7 @@ export abstract class ApiServiceMaker {
     params?: HttpParams
   ): Observable<{ data: R } | ErrorModel> {
     return this.httpClient.post<{ data: R }>(
-      `${environment.apiBaseUrl}${this.apiEndpoint}/`,
+      `${environment.apiBaseUrl}${this.apiEndpoint}`,
       body,
       { params }
     );
