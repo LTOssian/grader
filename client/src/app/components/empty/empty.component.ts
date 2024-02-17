@@ -14,12 +14,12 @@ import { Component, input } from '@angular/core';
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 16px;
     }
 
     p {
       color: var(--clr-black-secondary);
-      text-decoration: underline;
-      font-weight: 600;
+      font-weight: 500;
     }
   `,
 })

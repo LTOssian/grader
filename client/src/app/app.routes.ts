@@ -11,10 +11,5 @@ export const routes: Routes = [
   {
     path: 'group/:group_id_param',
     component: GroupHomeComponent,
-    data: {
-      gradeEmptyIndication: 'Aucun bulletin généré',
-      studentEmptyIndication: 'Aucun étudiant.',
-      classEmptyIndiciation: 'Aucune matière.',
-    },
   },
 ];
