@@ -2,7 +2,10 @@
   <h2>Matières</h2>
   <ul>
     <li>
-      <app-entity-add-button [buttonAddText]="'Ajouter une matière'" />
+      <app-entity-add-button
+        [buttonAddText]="'Ajouter une matière'"
+        (click)="openModal('class')"
+      />
     </li>
     @for (class of classes(); track class.class_id) {
     <li>

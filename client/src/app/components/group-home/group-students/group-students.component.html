@@ -1,7 +1,7 @@
 <div class="entity-container">
   <h2>Étudiants</h2>
   <ul>
-    <li>
+    <li (click)="openModal()">
       <app-entity-add-button [buttonAddText]="'Ajouter un étudiant'" />
     </li>
     @for (student of students(); track student.student_id) {

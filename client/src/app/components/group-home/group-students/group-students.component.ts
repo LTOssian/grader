@@ -2,8 +2,8 @@ import { Component, EventEmitter, Output, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { AssetPath } from '../../../../assets/assets-path';
-import { EntityAddButtonComponent } from '../entity-add-button/entity-add-button.component';
 import { EmptyComponent } from '../../empty/empty.component';
+import { EntityAddButtonComponent } from '../entity-add-button/entity-add-button.component';
 import { StudentModel } from '../../../interfaces/student.model';
 
 @Component({
@@ -16,6 +16,8 @@ import { StudentModel } from '../../../interfaces/student.model';
 export class GroupStudentsComponent {
   public students = input.required<StudentModel[]>();
   @Output() onDeleteClick: EventEmitter<{ type: 'student'; id: string }> =
+    new EventEmitter();
+  @Output() onModalClick: EventEmitter<{ type: 'student' }> =
     new EventEmitter();
 
   public studentEmptyText = signal<string>('Aucun étudiant.');
@@ -32,5 +34,10 @@ export class GroupStudentsComponent {
 
   public deleteStudent({ student_id }: Pick<StudentModel, 'student_id'>): void {
     this.onDeleteClick.emit({ type: 'student', id: student_id });
+  }
+
+  public openModal() {
+    console.log('student');
+    this.onModalClick.emit({ type: 'student' });
   }
 }

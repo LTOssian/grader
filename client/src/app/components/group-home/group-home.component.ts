@@ -1,19 +1,32 @@
 import { Component, DestroyRef, Input, inject, signal } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { Subject, Subscription, switchMap } from 'rxjs';
+import {
+  MdbModalModule,
+  MdbModalRef,
+  MdbModalService,
+} from 'mdb-angular-ui-kit/modal';
 
+import { BuildFormByModalFormTypeService } from '../../services/build-form-by-modal-form-type.service';
 import { ClassModel } from '../../interfaces/class.model';
 import { ClassService } from '../../services/class.service';
+import {
+  FormType,
+  IModalRef,
+  ModalFailMessage,
+  ModalSuccesMessage,
+} from '../../interfaces/form.model';
 import { GradeModel_Get } from '../../interfaces/grade.model';
 import { GradeService } from '../../services/grade.service';
 import { GroupClassesComponent } from './group-classes/group-classes.component';
 import { GroupGradesComponent } from './group-grades/group-grades.component';
 import { GroupModel } from '../../interfaces/group.model';
 import { GroupStudentsComponent } from './group-students/group-students.component';
-import { HttpParams } from '@angular/common/http';
+import { ModalCreateFormComponent } from '../modal-create-form/modal-create-form.component';
 import { StudentModel } from '../../interfaces/student.model';
 import { StudentService } from '../../services/student.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-group-home',
@@ -24,6 +37,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     GroupClassesComponent,
     GroupStudentsComponent,
     GroupGradesComponent,
+    MdbModalModule,
   ],
 })
 export class GroupHomeComponent {
@@ -35,10 +49,14 @@ export class GroupHomeComponent {
 
   public group_id = signal<string>('');
 
+  private buildModalFormService = inject(BuildFormByModalFormTypeService);
   private classService = inject(ClassService);
   private gradeService = inject(GradeService);
+  private modalService = inject(MdbModalService);
   private studentService = inject(StudentService);
   private destroyRef = inject(DestroyRef);
+
+  private modalCreateRef: MdbModalRef<ModalCreateFormComponent> | null = null;
 
   // Signals with business data
   public classes = signal<ClassModel[]>([]);
@@ -161,5 +179,55 @@ export class GroupHomeComponent {
         this.deleteGradesTriggers$.next(credentials.id);
         break;
     }
+  }
+
+  public openModalForm(entity_type: FormType) {
+    console.log("tentative d'ouverture");
+    this.modalCreateRef = this.modalService.open<
+      ModalCreateFormComponent,
+      IModalRef
+    >(ModalCreateFormComponent, {
+      data: {
+        group_id: this.group_id(),
+        title: 'Ajouter un étudiant',
+        labelsByInput: {
+          firstname: 'Prénom',
+          lastname: 'Nom',
+          email: 'Email',
+        },
+        placeholdersByInput: {
+          firstname: 'Entrez le prénom',
+          lastname: 'Entrez le nom',
+          email: "Entrez l'email",
+        },
+        ...(entity_type === 'class' && {
+          title: 'Ajouter une matière',
+          labelsByInput: {
+            name: 'Nom de la matière',
+            coefficient: 'Coefficient',
+          },
+          placeholdersByInput: {
+            name: 'Entrez le nom',
+            coefficient: 'Entrez le coefficient',
+          },
+        }),
+        entityToCreate: entity_type,
+        modalFormGroup:
+          this.buildModalFormService.buildFormByModalFormType(entity_type),
+      },
+    });
+
+    this.modalCreateRef.onClose.subscribe(
+      (message: ModalFailMessage | ModalSuccesMessage) => {
+        if (!message.isSuccess) return;
+        console.log(message.message);
+
+        if (entity_type === 'class') {
+          this.getClassesTrigger$.next();
+        }
+
+        this.getStudentsTrigger$.next();
+      }
+    );
   }
 }
