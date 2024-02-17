@@ -12,11 +12,12 @@ class GradeController {
   public async getAllGrades(req: Request, res: Response, next: NextFunction) {
     try {
       const { group_id } = req.params;
+      const { limit } = req.query;
 
       // Validate that the group exists
       await groupRepository.getGroupById({ group_id });
 
-      const grades = await gradeRepository.getGradesFromGroup({ group_id });
+      const grades = await gradeRepository.getGradesFromGroup({ group_id }, Number(limit));
 
       res.json({
         data: grades,
