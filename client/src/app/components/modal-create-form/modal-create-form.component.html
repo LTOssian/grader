@@ -1,7 +1,10 @@
 <div class="modal-container">
-  <h2>
-    {{ title }}
-  </h2>
+  <div class="modal-header">
+    <h2>
+      {{ title }}
+    </h2>
+    <span>{{ subtitle }}</span>
+  </div>
 
   <!-- Error display -->
   @if (formState) {
@@ -16,7 +19,8 @@
   }
 
   <!-- Form -->
-  @if (modalFormGroup) {
+  @if (modalFormGroup && ('group' == entityToCreate || 'student' ==
+  entityToCreate || 'class' == entityToCreate)) {
   <form
     class="form-container"
     [formGroup]="modalFormGroup"
@@ -38,15 +42,31 @@
     </div>
     }
 
-    <app-modal-form-button
-      [buttonText]="'Terminer et sortir'"
-    ></app-modal-form-button>
+    <app-modal-form-button [buttonText]="'Terminer et sortir'" />
+
     <app-modal-form-button
       [buttonText]="'Annuler'"
       [isConfirm]="false"
       (click)="cancelModal()"
-    ></app-modal-form-button>
+    />
   </form>
+  } @if (entityToCreate == 'pdf') {
+  <div class="form-container">
+    <app-modal-form-button
+      [buttonText]="'Version simple'"
+      (click)="downloadPdf('simple')"
+    />
+    <app-modal-form-button
+      [buttonText]="'Version complète'"
+      (click)="downloadPdf('complete')"
+    />
+
+    <app-modal-form-button
+      [buttonText]="'Annuler'"
+      [isConfirm]="false"
+      (click)="cancelModal()"
+    />
+  </div>
   }
 </div>
 

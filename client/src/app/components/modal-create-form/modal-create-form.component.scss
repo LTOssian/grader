@@ -17,10 +17,16 @@
 
   padding: 32px 16px;
 
-  h2 {
+  .modal-header {
     color: var(--clr-white-primary);
-    font-size: var(--fs-title);
-    font-weight: 500;
+    h2 {
+      font-size: var(--fs-title);
+      font-weight: 500;
+    }
+
+    span {
+      font-size: var(--fs-small);
+    }
   }
 
   .form-container {
