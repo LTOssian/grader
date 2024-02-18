@@ -12,17 +12,19 @@ L'application Grader vise à générer les bulletins de notes d'étudiants sous 
 
 ```bash
 make up-dev # ou make up-prod
-make logs
+make logs-dev # ou make logs-prod
 ```
 
 ### Sans Docker
 
 ```bash
 # depuis la racine
-cd server
 
 # mettez en place la base de donnée
 psql -U username -d database_name -a -f ./db_migrations/migrations_1_init_db.sql
+
+# depuis la racine
+cd server
 
 # mettez en place le .env
 echo "DATABASE_URL=<URL de votre database ici>" > .env
@@ -37,9 +39,13 @@ npm install && npm run build
 npm run start
 ```
 
-Interagissez avec l'api via `http://localhost:4001/api/` | Le fichier `./documentation/Grader-Louisan-tchitoula.postman_collection.json` peut être importé dans postman afin de tester les endpoints de l'API ou lu en tant que documentation !
+Interagissez avec l'api via `http://localhost:4001/api/`
 
 Interagissez avec le client via `http://localhost:4200/` en dev ou `http://localhost:8080/` en prod
+
+## API Documentation
+
+Le fichier `./documentation/Grader-Louisan-tchitoula.postman_collection.json` peut être importé dans postman afin d'obtenir la collection d'endpoints de l'API et les tester !
 
 ## Infrastructure et architecture
 
