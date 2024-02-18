@@ -182,10 +182,9 @@ export class GroupHomeComponent {
   }
 
   public openModalForm(entity_type: FormType) {
-    console.log("tentative d'ouverture");
     this.modalCreateRef = this.modalService.open<
       ModalCreateFormComponent,
-      IModalRef
+      Omit<IModalRef, 'subtitle'>
     >(ModalCreateFormComponent, {
       data: {
         group_id: this.group_id(),
@@ -195,10 +194,15 @@ export class GroupHomeComponent {
           lastname: 'Nom',
           email: 'Email (non requis)',
         },
+        typeByInput: {
+          firstname: 'text',
+          lastname: 'text',
+          email: 'email',
+        },
         placeholdersByInput: {
           firstname: 'Entrez le prénom',
           lastname: 'Entrez le nom',
-          email: "Entrez l'email",
+          email: 'pedro_pascal@example.eu',
         },
         ...(entity_type === 'class' && {
           title: 'Ajouter une matière',
@@ -209,6 +213,10 @@ export class GroupHomeComponent {
           placeholdersByInput: {
             name: 'Entrez le nom',
             coefficient: 'Entrez le coefficient',
+          },
+          typeByInput: {
+            name: 'text',
+            coefficient: 'number',
           },
         }),
         entityToCreate: entity_type,

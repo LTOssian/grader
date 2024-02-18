@@ -46,6 +46,13 @@
         font-weight: 500;
       }
 
+      .grade-student-name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+
       .grade-cta {
         display: flex;
         align-items: center;

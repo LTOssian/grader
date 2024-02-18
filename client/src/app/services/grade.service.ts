@@ -1,13 +1,16 @@
+import { HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { map } from 'rxjs';
+
 import { ApiServiceMaker } from './interface/api-service.abstract';
+import { environment } from '../../environments/environment';
 import {
   GradeModel,
   GradeModel_Get,
   GradeModel_Post,
 } from '../interfaces/grade.model';
 import { GroupModel } from '../interfaces/group.model';
-import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -59,5 +62,35 @@ export class GradeService extends ApiServiceMaker {
     ]);
 
     return this.createEntityWithBody<GradeModel & { student_id: string }>(body);
+  }
+
+  public downloadGradeById({
+    student_grades_id,
+    params,
+  }: Pick<GradeModel, 'student_grades_id'> & {
+    params: HttpParams;
+  }) {
+    this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
+      { routeName: 'generate', routeParam: student_grades_id },
+    ]);
+
+    return this.httpClient
+      .get<Blob & MediaSource>(`${environment.apiBaseUrl}${this.apiEndpoint}`, {
+        params,
+        headers: {
+          'Content-Type': 'application/pdf',
+          Accept: 'application/pdf',
+        },
+        responseType: 'blob' as 'json',
+        observe: 'response',
+      })
+      .pipe(
+        map((response: HttpResponse<Blob>) => {
+          return {
+            body: response.body,
+            filename: response.headers.get('Content-Disposition'),
+          };
+        })
+      );
   }
 }

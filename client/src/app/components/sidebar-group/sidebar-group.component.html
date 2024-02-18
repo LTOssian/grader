@@ -1,5 +1,5 @@
 <aside>
-  <a class="logotype-container" [routerLink]="['']">
+  <a class="logotype-container" [routerLink]="['']" tabindex="0">
     <img
       [src]="assetsStore.logotypeSvg.path"
       [alt]="assetsStore.logotypeSvg.alt"
@@ -31,6 +31,7 @@
       <li class="group-container">
         <a
           class="group-name"
+          tabindex="0"
           [title]="group.name"
           (click)="navigateToGroup({ group_id: group.group_id })"
         >
