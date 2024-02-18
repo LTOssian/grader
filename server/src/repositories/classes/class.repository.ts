@@ -33,14 +33,11 @@ class ClassRepository {
    * Delete the class with its id
    * @param credentials contains the class id
    */
-  public async deleteClassFromGroup(credentials: Pick<Classes, "class_id" | "group_id">): Promise<void> {
+  public async deleteClassFromGroup(credentials: Pick<Classes, "class_id">): Promise<void> {
     // check validity of the id
     await this.getClassById(credentials);
 
-    await DbClient.deleteFrom("group_classes")
-      .where("class_id", "=", credentials.class_id)
-      .where("group_id", "=", credentials.group_id)
-      .execute();
+    await DbClient.deleteFrom("group_classes").where("class_id", "=", credentials.class_id).execute();
   }
 
   /**
@@ -48,11 +45,10 @@ class ClassRepository {
    * @param credentials contains the class id
    * @returns The class
    */
-  public async getClassById(credentials: Pick<Classes, "class_id" | "group_id">): Promise<Classes> {
+  public async getClassById(credentials: Pick<Classes, "class_id">): Promise<Classes> {
     const rows = await DbClient.selectFrom("group_classes")
       .selectAll()
       .where("class_id", "=", credentials.class_id)
-      .where("group_id", "=", credentials.group_id)
       .executeTakeFirst();
 
     if (!rows) throw new NotFoundError({ message: ErrorMessageEnum.UNKNOWN_CLASS, code: 404 });
