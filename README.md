@@ -37,6 +37,18 @@ npm install && npm run build
 npm run start
 ```
 
-Interagissez avec l'api via `http://localhost:4001/api/` | Le fichier `./server/Grader-Louisan-tchitoula.postman_collection.json` peut être importé dans postman afin de tester les endpoints de l'API ou lu en tant que documentation !
+Interagissez avec l'api via `http://localhost:4001/api/` | Le fichier `./documentation/Grader-Louisan-tchitoula.postman_collection.json` peut être importé dans postman afin de tester les endpoints de l'API ou lu en tant que documentation !
 
 Interagissez avec le client via `http://localhost:4200/` en dev ou `http://localhost:8080/` en prod
+
+## Infrastructure et architecture
+
+![Schema of the project's infrastrcture](./documentation/infrastructure_schema.png)
+
+## Useful resources
+
+- [Angular Documentation](https://angular.dev/overview)
+- [PDFKit Documentation](http://pdfkit.org/docs/getting_started.html) & [PDFKit Table](https://github.com/natancabral/pdfkit-table/tree/main)
+- [StackOverflow question: How to read Content-Dispotion from response Headers](https://stackoverflow.com/questions/42898162/how-to-read-content-disposition-headers-from-server-response-angular-2) ? (To get the filename in my case)
+- [This issue on Angular's repository](https://github.com/angular/angular/issues/18586), bug from 2017 but still to date lol
+- [Docker's documentation](https://docs.docker.com/get-started/09_image_best/)
