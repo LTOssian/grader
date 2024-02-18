@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export abstract class ApiServiceMaker {
   protected abstract apiEndpoint?: string;
 
-  private httpClient = inject(HttpClient);
+  protected httpClient = inject(HttpClient);
   protected endPointBuilderService = inject(EndpointBuilderService);
 
   protected getAllEntities<T>(params?: HttpParams): Observable<{ data: T }> {
