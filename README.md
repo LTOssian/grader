@@ -37,6 +37,6 @@ npm install && npm run build
 npm run start
 ```
 
-Interagissez avec l'api via `http://localhost:4001/api/`
+Interagissez avec l'api via `http://localhost:4001/api/` | Le fichier `./server/Grader-Louisan-tchitoula.postman_collection.json` peut être importé dans postman afin de tester les endpoints de l'API ou lu en tant que documentation !
 
 Interagissez avec le client via `http://localhost:4200/` en dev ou `http://localhost:8080/` en prod

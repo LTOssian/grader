@@ -1,0 +1,812 @@
+{
+	"info": {
+		"_postman_id": "802618cf-046a-4878-8850-1036cc9363c8",
+		"name": "HETIC Grader",
+		"description": "# 🚀 Get started here\n\nAll endpoints of the API and the params and bodies specififities.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26434649",
+		"_collection_link": "https://cloudy-equinox-473294.postman.co/workspace/4f478cdb-34db-42ec-9dd0-cea2deb3ef7a/collection/26434649-802618cf-046a-4878-8850-1036cc9363c8?action=share&source=collection_link&creator=26434649"
+	},
+	"item": [
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "Post group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"groupe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/groups/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DELETE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/groups/12aed6c5-8a61-4e3e-a83d-9244566bbdbc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								"12aed6c5-8a61-4e3e-a83d-9244566bbdbc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get groups",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/groups/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Requests handling the 'Group' entities"
+		},
+		{
+			"name": "Students",
+			"item": [
+				{
+					"name": "Get students by GroupID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code is 200', function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"})",
+									"",
+									"pm.test('Response has the required fields', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    const requiredFields = [",
+									"        'student_id',",
+									"        'group_id',",
+									"        'firstname',",
+									"        'lastname',",
+									"        'email'",
+									"    ];",
+									"    requiredFields.forEach(function (field) {",
+									"        pm.expect(responseData[field]).to.exist;",
+									"    });",
+									"})",
+									"",
+									"pm.test('Verify that the \\'data\\' array is present and contains at least one element', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/groups/{{base_group_id}}/students/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								"{{base_group_id}}",
+								"students",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post students by GroupID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"group_id\": \"5573463f-8b5c-4a11-8bba-243b9b873d14\",\n    \"firstname\": \"Zoe\",\n    \"lastname\": \"T\",\n    \"email\": \"zt@hetic.eu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/groups/{{base_group_id}}/students",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								"{{base_group_id}}",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Student By StudentID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/groups/{{base_group_id}}/students/340b3bed-d7ab-4828-a84f-184659486eba",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								"{{base_group_id}}",
+								"students",
+								"340b3bed-d7ab-4828-a84f-184659486eba"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Requests handling the 'Student' entities"
+		},
+		{
+			"name": "Classes",
+			"item": [
+				{
+					"name": "Get classes by GroupID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"class_id is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData.data).to.exist.and.to.be.an('array');",
+									"  responseData.data.forEach(function(classData) {",
+									"    pm.expect(classData.class_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"class_id should not be empty\");",
+									"  });",
+									"});",
+									"",
+									"",
+									"pm.test(\"group_id is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    pm.expect(responseData.data).to.be.an('array');",
+									"    responseData.data.forEach(function (classData) {",
+									"        pm.expect(classData.group_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"group_id should not be empty\");",
+									"    });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Name is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.data).to.exist.and.to.be.an('array');",
+									"  ",
+									"  responseData.data.forEach(function(classData) {",
+									"    pm.expect(classData.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+									"  });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/groups/{{base_group_id}}/classes/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								"{{base_group_id}}",
+								"classes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post class by GroupID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 201\", function () {",
+									"  pm.expect(pm.response.code).to.equal(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required fields\", function () {",
+									"  const responseData = pm.response.json();",
+									"",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.data).to.exist;",
+									"",
+									"  const requiredFields = ['class_id', 'group_id', 'name', 'coefficient'];",
+									"  requiredFields.forEach(function (field) {",
+									"    pm.expect(responseData.data[field]).to.exist;",
+									"  });",
+									"});",
+									"",
+									"",
+									"pm.test(\"Class_id is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.data.class_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Group_id is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"  ",
+									"  pm.expect(responseData.data).to.be.an('object');",
+									"  pm.expect(responseData.data.group_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Group_id should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Name is a non-empty string\", function () {",
+									"  const responseData = pm.response.json();",
+									"",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.data.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"group_id\": \"728df710-3108-4a1f-bd03-b59d0192f7d2\",\n    \"name\": \"Cours de backend\",\n    \"coefficient\": \"10\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/groups/{{base_group_id}}/classes/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								"{{base_group_id}}",
+								"classes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete class by ClassID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 404\", function () {",
+									"  pm.expect(pm.response.code).to.equal(404);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'error' field is present in the response\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.error).to.exist;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that the 'data' field is null in the response\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.be.null;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response time is within an acceptable range\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify Content-Type header is set to 'application/json'\", function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.equal('application/json');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/groups/{{base_group_id}}/classes/e171e60e-2147-47c5-b68b-d99ba8bd8493",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								"{{base_group_id}}",
+								"classes",
+								"e171e60e-2147-47c5-b68b-d99ba8bd8493"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Requests handling the 'Class' entities"
+		},
+		{
+			"name": "Grades",
+			"item": [
+				{
+					"name": "Get grades from GroupID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code is 200', function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"})",
+									"",
+									"pm.test('Email is in a valid format', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    responseData.data.forEach(function (student) {",
+									"        pm.expect(student.email).to.match(/^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$/);",
+									"    });",
+									"})",
+									"",
+									"pm.test('Grade is a non-negative integer', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.data).to.be.an('array');",
+									"    responseData.data.forEach(function (student) {",
+									"        pm.expect(student.grade).to.be.a('number').and.to.be.at.least(0);",
+									"    });",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/groups/{{base_group_id}}/grades",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								"{{base_group_id}}",
+								"grades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete grade by GroupID & GradeID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code is 404', function () {",
+									"    pm.expect(pm.response.code).to.equal(404);",
+									"})",
+									"",
+									"pm.test('Error field is a non-empty string', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.error).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+									"})",
+									"",
+									"pm.test('Data field should be null', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.data).to.be.null;",
+									"})",
+									"",
+									"pm.test('Content-Type is application/json', function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/groups/{{base_group_id}}/grades/605893ac-a7f1-4273-9a7d-52b7b2743fa9",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"groups",
+								"{{base_group_id}}",
+								"grades",
+								"605893ac-a7f1-4273-9a7d-52b7b2743fa9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Generate",
+			"item": [
+				{
+					"name": "Generate PDF by GradeID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/generate/f7ed0dd1-17ef-442b-aa4f-346d2bf9c132?version=complete",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate",
+								"f7ed0dd1-17ef-442b-aa4f-346d2bf9c132"
+							],
+							"query": [
+								{
+									"key": "version",
+									"value": "complete"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Grade Form for Student by StudentID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {",
+									"  pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"Response has the required fields\", function () {",
+									"  const responseData = pm.response.json();",
+									"",
+									"  pm.expect(responseData).to.be.an('object');",
+									"  pm.expect(responseData.data.student_id).to.exist;",
+									"  pm.expect(responseData.data.group_id).to.exist;",
+									"  pm.expect(responseData.data.firstname).to.exist;",
+									"  pm.expect(responseData.data.lastname).to.exist;",
+									"  pm.expect(responseData.data.email).to.exist;",
+									"  pm.expect(responseData.data.classes).to.exist;",
+									"});",
+									"",
+									"",
+									"pm.test(\"Verify that student_id is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    pm.expect(responseData.data.student_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"});",
+									"",
+									"pm.test(\"Verify that group_id is a non-empty string\", function () {",
+									"    const responseData = pm.response.json();",
+									"",
+									"    pm.expect(responseData.data.group_id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+									"});",
+									"",
+									"pm.test(\"Verify that the classes field is an array and is not empty\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.data.classes).to.be.an('array', \"Classes field should be an array\");",
+									"    pm.expect(responseData.data.classes).to.have.lengthOf.at.least(1, \"Classes field should not be empty\");",
+									"});",
+									"",
+									"",
+									"pm.test(\"Each class object in the classes array has the required fields\", function () {",
+									"    const responseData = pm.response.json();",
+									"    ",
+									"    pm.expect(responseData.data).to.be.an('object');",
+									"    pm.expect(responseData.data.classes).to.be.an('array');",
+									"    ",
+									"    responseData.data.classes.forEach(function(classObj){",
+									"        pm.expect(classObj).to.have.property('coefficient');",
+									"        pm.expect(classObj).to.have.property('group_id');",
+									"        pm.expect(classObj).to.have.property('name');",
+									"    });",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/generate/student/34122489-19f6-4e43-b95d-22a0279ec098",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate",
+								"student",
+								"34122489-19f6-4e43-b95d-22a0279ec098"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post grades from StudentID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Response status code is 201', function () {",
+									"    pm.expect(pm.response.code).to.equal(201);",
+									"})",
+									"",
+									"pm.test('Response has required fields', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"    pm.expect(responseData.data).to.exist;",
+									"    const data = responseData.data;",
+									"    pm.expect(data.student_grades_id).to.exist.and.to.be.a('string');",
+									"    pm.expect(data.student_id).to.exist.and.to.be.a('string');",
+									"    pm.expect(data.grade).to.exist.and.to.be.a('number');",
+									"    pm.expect(data.created_at).to.exist.and.to.be.a('string');",
+									"})",
+									"",
+									"pm.test('Student ID is a non-empty string', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.data).to.be.an('object');",
+									"    pm.expect(responseData.data.student_id).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Value should not be empty');",
+									"})",
+									"",
+									"pm.test('Grade is a non-negative integer', function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData.data).to.be.an('object');",
+									"    pm.expect(responseData.data.grade).to.be.a('number').and.to.be.at.least(0);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"student_id\": \"34122489-19f6-4e43-b95d-22a0279ec098\",\n    \"report\": [\n    {\n      \"class\": \"Math\",\n      \"coefficient\": 2,\n      \"grade\": 12\n    },\n    {\n      \"class\": \"Science\",\n      \"coefficient\": 1,\n      \"grade\": 20\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/generate/grade/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"generate",
+								"grade",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Requests handling the 'PDF' flow, with the grade creation, the grade retrition and the PDF generation."
+		},
+		{
+			"name": "HealthCheck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response status code is 404', function () {",
+							"    pm.expect(pm.response.code).to.equal(404);",
+							"})",
+							"",
+							"pm.test('Error field is a non-empty string', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData.error).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Error field should not be empty');",
+							"})",
+							"",
+							"pm.test('Data field should be null', function () {",
+							"    const responseData = pm.response.json();",
+							"    pm.expect(responseData.data).to.be.null;",
+							"})",
+							"",
+							"pm.test('Content-Type header is set to application/json', function () {",
+							"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/health",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "http://localhost:4001/api",
+			"type": "string"
+		},
+		{
+			"key": "base_group_id",
+			"value": "5573463f-8b5c-4a11-8bba-243b9b873d14"
+		}
+	]
+}
