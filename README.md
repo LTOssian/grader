@@ -1,4 +1,4 @@
-# Grader - HETIC
+# Grader
 
 ## Contexte
 
