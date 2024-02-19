@@ -6,6 +6,8 @@ Grader est un projet réalisé dans le cadre du cours d'API à HETIC. La consign
 
 L'application Grader vise à générer les bulletins de notes d'étudiants sous format PDF.
 
+![alt text](./documentation/app-model.png)
+
 ## Installation
 
 ### Avec Docker
