@@ -31,7 +31,7 @@ class StudentRepository {
       await baseQuery.selectAll("students").executeTakeFirst()
     );
 
-    if (!student) throw new NotFoundError({ message: ErrorMessageEnum.UNKNOWN_STUDENT, code: 404 });
+    if (!student) throw new NotFoundError({ message: ErrorMessageEnum.STUDENT_WITH_NO_CLASSES, code: 404 });
 
     if (includeClass) student.classes = await baseQuery.selectAll("subjects").execute();
 

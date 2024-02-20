@@ -8,6 +8,7 @@ export enum ErrorMessageEnum {
   UNKNOWN_GROUP = "This ID does not match any group.",
   UNKNOWN_ID = "This ID does not match.",
   UNKNOWN_STUDENT = "This ID does not match any student.",
+  STUDENT_WITH_NO_CLASSES = "This student's group does not have classes.",
 }
 
 export enum MentionEnum {

@@ -3,6 +3,11 @@
     font-size: var(--fs-title);
     font-weight: 500;
     margin-bottom: 16px;
+
+    .error-text {
+      font-size: var(--fs-small);
+      color: var(--clr-accent-red);
+    }
   }
 
   ul {

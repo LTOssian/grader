@@ -68,7 +68,7 @@ export class StudentService extends ApiServiceMaker {
     student_id,
   }: Pick<StudentModel, 'student_id'>) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
-      { routeName: '/generate/student', routeParam: student_id },
+      { routeName: 'generate/student', routeParam: student_id },
     ]);
 
     return this.getAllEntities<
