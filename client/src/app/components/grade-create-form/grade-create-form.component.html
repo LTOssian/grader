@@ -36,20 +36,20 @@
 
     <div class="cta-container">
       <app-modal-form-button
-        [isSubmit]="true"
+        [isSubmit]="false"
         buttonText="Générer le PDF"
         (click)="onSubmit(true)"
       />
       <app-modal-form-button
         class="grader-form-button done-button"
-        [isSubmit]="false"
+        [isSubmit]="true"
         buttonText="Créer le bulletin"
       />
       <app-modal-form-button
         [isSubmit]="false"
         [isOkButton]="false"
         buttonText="Annuler"
-        (click)="goToGroup()"
+        (click)="goBackToGroup()"
       />
     </div>
   </form>

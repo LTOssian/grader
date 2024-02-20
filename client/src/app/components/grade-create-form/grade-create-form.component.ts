@@ -39,7 +39,6 @@ export class GradeCreateFormComponent {
   set student_id_param(student_id_param: string) {
     this.student_id.set(student_id_param);
     this.initializeFormData({ student_id: student_id_param });
-    this.initializeTriggers({ student_id: student_id_param });
   }
 
   private studentService = inject(StudentService);
@@ -55,6 +54,7 @@ export class GradeCreateFormComponent {
 
   public gradeFormGroup: FormGroup<GradeFormGroup> = new FormGroup({});
   public isError = signal<boolean>(false);
+  public hasUsedDownloadButton = signal<boolean>(false);
 
   // Signals with business data
   public classes = signal<Omit<ClassModel, 'class_id'>[]>([]);
@@ -64,7 +64,9 @@ export class GradeCreateFormComponent {
   private createGradeTrigger$ = new Subject<GradeModel_Post>();
   private getPdfTrigger$ = new Subject<GradeModel_Post>();
 
-  constructor() {}
+  constructor() {
+    this.initializeTriggers();
+  }
 
   private initializeFormData({ student_id }: Pick<StudentModel, 'student_id'>) {
     this.studentService
@@ -84,11 +86,11 @@ export class GradeCreateFormComponent {
       });
   }
 
-  public goToGroup() {
+  public goBackToGroup() {
     this.router.navigate(['group', this.student().group_id]);
   }
 
-  private initializeTriggers({ student_id }: Pick<StudentModel, 'student_id'>) {
+  private initializeTriggers() {
     this.createGradeTrigger$
       .pipe(
         switchMap((body) =>
@@ -100,41 +102,21 @@ export class GradeCreateFormComponent {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe({
-        next: () => this.goToGroup(),
-        error: () => this.isError.set(true),
-      });
-
-    this.getPdfTrigger$
-      .pipe(
-        switchMap((body) =>
-          this.gradeService.createGradeWithReportBody(
-            body,
-            this.student().group_id
-          )
-        ),
-        takeUntilDestroyed(this.destroyRef)
-      )
-      .subscribe({
         next: ({ data }) => {
-          if (data) {
-            this.openDownloadModal(data);
-          } else {
-            this.isError.set(true);
+          this.goBackToGroup();
+          if (data && this.hasUsedDownloadButton()) {
+            this.openDownloadModal({
+              student_grades_id: data.student_grades_id,
+              created_at: data.created_at,
+            });
           }
         },
         error: () => this.isError.set(true),
       });
   }
 
-  public onSubmit(handleDownload?: boolean) {
-    if (!this.gradeFormGroup.valid) {
-      this.isError.set(true);
-      setTimeout(() => {
-        this.isError.set(false);
-      }, 3000);
-
-      return;
-    }
+  public onSubmit(handleDownload: boolean = false) {
+    if (!this.isFormValid()) return;
 
     const requestBody: GradeModel_Post = {
       student_id: this.student_id(),
@@ -149,12 +131,19 @@ export class GradeCreateFormComponent {
       ),
     };
 
-    if (handleDownload) {
-      this.getPdfTrigger$.next(requestBody);
-      return;
+    this.hasUsedDownloadButton.set(handleDownload);
+    this.createGradeTrigger$.next(requestBody);
+  }
+
+  private isFormValid(): boolean {
+    if (!this.gradeFormGroup.valid) {
+      this.isError.set(true);
+      setTimeout(() => {
+        this.isError.set(false);
+      }, 3000);
     }
 
-    this.createGradeTrigger$.next(requestBody);
+    return this.gradeFormGroup.valid;
   }
 
   private openDownloadModal(
@@ -181,11 +170,11 @@ export class GradeCreateFormComponent {
       },
     });
 
-    this.modalCreateRef.onClose
-      .subscribe((message: ModalFailMessage | ModalSuccesMessage) => {
+    this.modalCreateRef.onClose.subscribe(
+      (message: ModalFailMessage | ModalSuccesMessage) => {
         if (!message.isSuccess) return;
         console.info(message.message);
-      })
-      .add(() => this.goToGroup());
+      }
+    );
   }
 }
