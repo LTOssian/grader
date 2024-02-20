@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export type FormType = 'group' | 'student' | 'class' | 'pdf';
 
@@ -31,4 +31,11 @@ export interface IModalRef {
 
 export enum ModalMessageEnum {
   SUCCESS = 'Entitée crée avec succès',
+}
+
+export interface GradeFormGroup {
+  [key: string]: FormGroup<{
+    coefficient: FormControl<number | null>;
+    grade: FormControl<number | null>;
+  }>;
 }
