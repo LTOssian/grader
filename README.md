@@ -8,7 +8,7 @@
   - [Sans Docker](#sans-docker)
 - [API Documentation](#api-documentation)
 - [Infrastructure et architecture](#infrastructure-et-architecture)
-  - [Ce que j'ai appris](#what-i-learned)
+  - [Ce que j'ai appris](#ce-que-jai-appris)
   - [Développement continu](#développement-continu)
 - [Remerciement](#remerciement)
 - [Ressources](#ressources)
@@ -78,34 +78,34 @@ Avec ces gros objectifs techniques, Grader m'a permis d'approfondir beaucoup d'a
 
 Le développement s'est déroulé entièrement sous conteneur.
 
-J'ai pu appliquer des subtilités apprises dans la documentation comme le multi-stage building afin de créer des image de production ou de développement à partir d'unique Dockerfile par infrastructure.
+J'ai pu appliquer des subtilités apprises dans la documentation comme le `multi-stage building` afin de créer des images de production ou de développement à partir d'un unique Dockerfile par infrastructure.
 
 #### Design Pattern (et 0.01% de la notion de 'Clean Code')
 
 J'ai trouvé un intêret à intégrer dans mon code les patternes Singleton et
 Builder (i.e: `router.abstract.ts`, `api-service.abstract.ts`, `validator.ts`).
 
-Ces derniers mon permis d'écrire du code plus rapidement tout en le rendant plus robuste et consistente.
+Ces derniers m'ont permis d'écrire du code plus rapidement tout en le rendant plus robuste et consistant.
 
 #### Nouvelle version d'Angular (17)
 
-- Prise en main du nouveau paradigme (Angular promeut dorénavant un code plus déclaratif avec les `signal(), input(), inject()`)
+- Prise en main du nouveau paradigme (Angular promeut dorénavant un code plus déclaratif avec `signal(), input(), inject()`).
 - Nouvelle syntaxe de templating (`@if, @for, @empty`...).
 
 J'ai aussi pris le temps de découvrir des points manquant dans mon bagage technique Angular :
 
-- Les Guards de routes
-- Les Reactive Forms
-- RxJs (Surtout pour les `Subscription` et les `Subject`)
+- Les Guards de routes.
+- Les Reactive Forms.
+- RxJs (Surtout pour les `Subscription` et les `Subject`).
 
 #### TypeScript
 
 Pour un code maintenable et évolutif, j'ai du creuse dans de nouvelle notions découverte dans la documentation:
 
-- L'héritage entre les interfaces
-- Les interfaces de classes `abstract`
-- Le typage générique
-- Les Utility Types
+- L'héritage entre les interfaces.
+- Les interfaces de classes `abstract`.
+- Le typage générique.
+- Les Utility Types.
 
 ### Développement continu
 
@@ -113,9 +113,9 @@ L'application est entièrement Dockerisée. Pour la suite, il sera intéressant 
 
 Pistes :
 
-- Vercel: hoster le backend et/ou infrastructure de base de donnée ? **A creuser**
-- Scaleway: obtenir mon domaine et reprendre l'image nginx du côté client pour un déploiement léger et rapide
-- Github Actions: pour l'automatisation du déploiement, puisque scaleway permet la connexion ssh vers le domaine build le container puis le `cp` dans l'environnement remote serait simple.
+- Vercel: hoster le backend et/ou infrastructure de base de donnée ? **A creuser**.
+- Scaleway: obtenir mon domaine et reprendre l'image nginx du côté client pour un déploiement léger et rapide.
+- Github Actions: pour l'automatisation du déploiement, puisque Scaleway permet la connexion remote (par ssh) vers le domaine, builder le container puis le `cp` dans l'environnement remote serait simple.
 
 ## Remerciement
 
