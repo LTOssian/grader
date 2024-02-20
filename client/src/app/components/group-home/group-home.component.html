@@ -7,6 +7,7 @@
 
   <app-group-students
     [students]="students()"
+    [isAllowedToGrade]="classes().length > 0"
     (onDeleteClick)="removeEntityFromGroup($event)"
     (onModalClick)="openModalForm($event.type)"
   />

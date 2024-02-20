@@ -1,5 +1,12 @@
-import { Component, EventEmitter, Output, input, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 import { AssetPath } from '../../../../assets/assets-path';
 import { EmptyComponent } from '../../empty/empty.component';
@@ -15,12 +22,16 @@ import { StudentModel } from '../../../interfaces/student.model';
 })
 export class GroupStudentsComponent {
   public students = input.required<StudentModel[]>();
+  public isAllowedToGrade = input<boolean>(false);
   @Output() onDeleteClick: EventEmitter<{ type: 'student'; id: string }> =
     new EventEmitter();
   @Output() onModalClick: EventEmitter<{ type: 'student' }> =
     new EventEmitter();
 
+  private router = inject(Router);
+
   public studentEmptyText = signal<string>('Aucun étudiant.');
+  public isError = signal<boolean>(false);
   public assetsStore = {
     trashSvg: {
       path: AssetPath.TRASH,
@@ -37,7 +48,18 @@ export class GroupStudentsComponent {
   }
 
   public openModal() {
-    console.log('student');
     this.onModalClick.emit({ type: 'student' });
+  }
+
+  public goToGradeForm(student_id: string) {
+    if (this.isAllowedToGrade()) {
+      this.router.navigate(['/student', student_id]);
+    } else {
+      this.isError.set(true);
+
+      setTimeout(() => {
+        this.isError.set(false);
+      }, 4000);
+    }
   }
 }
