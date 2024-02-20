@@ -5,7 +5,11 @@ import { map } from 'rxjs';
 
 import { ApiServiceMaker } from './interface/api-service.abstract';
 import { environment } from '../../environments/environment';
-import { GradeModel, GradeModel_Get } from '../interfaces/grade.model';
+import {
+  GradeModel,
+  GradeModel_Get,
+  GradeModel_Post,
+} from '../interfaces/grade.model';
 import { GroupModel } from '../interfaces/group.model';
 
 @Injectable({
@@ -49,6 +53,14 @@ export class GradeService extends ApiServiceMaker {
     ]);
 
     return this.deleteEntityById();
+  }
+
+  public createGradeWithReportBody(body: GradeModel_Post, group_id: string) {
+    this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
+      { routeName: 'generate/grade', routeParam: '' },
+    ]);
+
+    return this.createEntityWithBody<GradeModel_Post, GradeModel_Get>(body);
   }
 
   public downloadGradeById({

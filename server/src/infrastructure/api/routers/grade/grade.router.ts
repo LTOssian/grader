@@ -10,7 +10,6 @@ class GradeRouter extends RouterMaker {
 
   protected initRoutes(): void {
     this._router.get("/", gradeController.getAllGrades);
-    this._router.post("/", gradeController.postGrade);
     this._router.delete("/:student_grades_id", gradeController.deleteGrade);
   }
 }

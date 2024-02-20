@@ -30,3 +30,13 @@
     }
   }
 }
+
+@mixin cta-router {
+  font-size: var(--fs-small);
+  color: var(--clr-accent-purple);
+  text-decoration: underline;
+
+  &:hover {
+    color: var(--clr-black-primary);
+  }
+}

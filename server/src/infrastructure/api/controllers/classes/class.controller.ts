@@ -61,9 +61,9 @@ class ClassController {
 
   public async deleteClass(req: Request, res: Response, next: NextFunction) {
     try {
-      const { class_id, group_id } = req.params;
+      const { class_id } = req.params;
 
-      await classRepository.deleteClassFromGroup({ class_id, group_id });
+      await classRepository.deleteClassFromGroup({ class_id });
 
       res.status(204).json();
     } catch (e) {

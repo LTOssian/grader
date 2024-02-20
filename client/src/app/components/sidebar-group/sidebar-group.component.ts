@@ -11,7 +11,7 @@ import {
 } from 'mdb-angular-ui-kit/modal';
 
 import { AssetPath } from '../../../assets/assets-path';
-import { BuildFormByModalFormTypeService } from '../../services/build-form-by-modal-form-type.service';
+import { BuildFormService } from '../../services/form-builder.service';
 import { GroupModel } from '../../interfaces/group.model';
 import { GroupService } from '../../services/group.service';
 import { ModalCreateFormComponent } from '../modal-create-form/modal-create-form.component';
@@ -29,7 +29,7 @@ import {
   styleUrl: './sidebar-group.component.scss',
 })
 export class SidebarGroupComponent {
-  private buildModalFormService = inject(BuildFormByModalFormTypeService);
+  private buildModalFormService = inject(BuildFormService);
   private destroyRef = inject(DestroyRef);
   private groupService = inject(GroupService);
   private modalService = inject(MdbModalService);

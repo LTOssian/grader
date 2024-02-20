@@ -5,8 +5,8 @@ import { Component, Input, input } from '@angular/core';
   standalone: true,
   imports: [],
   template: `<button
-    [class.confirm]="isConfirm()"
-    [type]="isConfirm() ? 'submit' : 'button'"
+    [class.confirm]="isOkButton()"
+    [type]="isSubmit() ? 'submit' : 'button'"
   >
     {{ buttonText() }}
   </button>`,
@@ -31,5 +31,6 @@ import { Component, Input, input } from '@angular/core';
 })
 export class ModalFormButtonComponent {
   buttonText = input.required<string>();
-  isConfirm = input<boolean>(true);
+  isSubmit = input<boolean>(true);
+  isOkButton = input<boolean>(true);
 }

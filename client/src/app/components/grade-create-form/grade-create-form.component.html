@@ -1,0 +1,56 @@
+<div class="grade-form-container">
+  <a [routerLink]="['/group', student().group_id]">Retour au groupe</a>
+  <h2>{{ student().firstname }} {{ student().lastname }}</h2>
+
+  @if (isError()) {
+  <p class="error-message">Vos entrées sont invalides.</p>
+  }
+
+  <form action="" (ngSubmit)="onSubmit()" [formGroup]="gradeFormGroup">
+    @for (class of classes(); track class.name) {
+    <div [formGroupName]="class.name" class="input-container">
+      <div>{{ class.name }}</div>
+
+      <div>
+        <label [for]="class.name" class="grade-container">
+          <p>
+            Note
+            <input
+              type="number"
+              formControlName="grade"
+              placeholder="?"
+              max="20"
+              min="0"
+              [name]="class.name"
+              [id]="class.name"
+            />
+            / 20
+          </p>
+        </label>
+        <p>
+          Coef <span>{{ class.coefficient }}</span>
+        </p>
+      </div>
+    </div>
+    }
+
+    <div class="cta-container">
+      <app-modal-form-button
+        [isSubmit]="false"
+        buttonText="Générer le PDF"
+        (click)="onSubmit(true)"
+      />
+      <app-modal-form-button
+        class="grader-form-button done-button"
+        [isSubmit]="true"
+        buttonText="Créer le bulletin"
+      />
+      <app-modal-form-button
+        [isSubmit]="false"
+        [isOkButton]="false"
+        buttonText="Annuler"
+        (click)="goBackToGroup()"
+      />
+    </div>
+  </form>
+</div>

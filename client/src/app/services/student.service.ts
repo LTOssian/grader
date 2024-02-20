@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ApiServiceMaker } from './interface/api-service.abstract';
+import { ClassModel } from '../interfaces/class.model';
 import { StudentModel } from '../interfaces/student.model';
 
 @Injectable({
@@ -56,5 +57,22 @@ export class StudentService extends ApiServiceMaker {
       Omit<StudentModel, 'student_id'>,
       StudentModel
     >(body);
+  }
+
+  /**
+   * Retrieves the values needed for the grading form
+   * @param param0 contains the student id
+   * @returns A student instance with a list of classes as property
+   */
+  public getFormValuesByStudentId({
+    student_id,
+  }: Pick<StudentModel, 'student_id'>) {
+    this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
+      { routeName: '/generate/student', routeParam: student_id },
+    ]);
+
+    return this.getAllEntities<
+      StudentModel & { classes: Omit<ClassModel, 'class_id'>[] }
+    >();
   }
 }

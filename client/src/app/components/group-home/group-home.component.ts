@@ -9,7 +9,7 @@ import {
   MdbModalService,
 } from 'mdb-angular-ui-kit/modal';
 
-import { BuildFormByModalFormTypeService } from '../../services/build-form-by-modal-form-type.service';
+import { BuildFormService } from '../../services/form-builder.service';
 import { ClassModel } from '../../interfaces/class.model';
 import { ClassService } from '../../services/class.service';
 import {
@@ -49,7 +49,7 @@ export class GroupHomeComponent {
 
   public group_id = signal<string>('');
 
-  private buildModalFormService = inject(BuildFormByModalFormTypeService);
+  private buildModalFormService = inject(BuildFormService);
   private classService = inject(ClassService);
   private gradeService = inject(GradeService);
   private modalService = inject(MdbModalService);

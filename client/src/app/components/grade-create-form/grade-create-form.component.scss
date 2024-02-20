@@ -1,0 +1,77 @@
+@import "../../styles/mixins.scss";
+
+.grade-form-container {
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
+
+  h2 {
+    font-size: var(--fs-title);
+    font-weight: 500;
+    display: inline-block;
+  }
+  a {
+    @include cta-router;
+  }
+  .error-message {
+    color: var(--clr-accent-red);
+    font-size: var(--fs-body-small);
+    position: absolute;
+    right: 32px;
+  }
+  form {
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+    padding: 16px;
+
+    div {
+      &.ng-valid[required],
+      &.ng-valid.required,
+      &.ng-invalid {
+        border: 1px solid var(--clr-accent-red);
+      }
+    }
+
+    .input-container {
+      padding: 16px;
+      border-radius: var(--border-radius);
+      background-color: var(--clr-white-secondary);
+      display: flex;
+      justify-content: space-between;
+
+      input {
+        width: 50px;
+        color: var(--clr-accent-purple);
+      }
+
+      div + div {
+        display: flex;
+        gap: 32px;
+
+        p:has(span) {
+          span {
+            color: var(--clr-accent-purple);
+          }
+          opacity: 0.4;
+        }
+      }
+    }
+
+    .cta-container {
+      display: flex;
+      padding: 16px 32px;
+      gap: 16px;
+
+      app-modal-form-button {
+        &.done-button {
+          button {
+            background-color: var(--clr-accent-purple);
+          }
+        }
+
+        width: 100%;
+      }
+    }
+  }
+}

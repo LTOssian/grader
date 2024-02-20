@@ -1,4 +1,6 @@
+import { gradeController } from "../../controllers/grades/grade.controller";
 import { pdfController } from "../../controllers/pdf/pdf.controller";
+import { studentController } from "../../controllers/students/student.controller";
 import RouterMaker from "../interfaces/router.abstract";
 import SingletonWrapper from "../../../../common/helpers/singleton-wrapper";
 
@@ -10,6 +12,8 @@ class PdfRouter extends RouterMaker {
 
   protected initRoutes(): void {
     this._router.get("/:grade_id", pdfController.getPDF);
+    this._router.get("/student/:student_id", studentController.getStudentById);
+    this._router.post("/grade/", gradeController.postGrade);
   }
 }
 

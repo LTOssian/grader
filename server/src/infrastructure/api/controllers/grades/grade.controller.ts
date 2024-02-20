@@ -29,7 +29,6 @@ class GradeController {
 
   public async postGrade(req: Request, res: Response, next: NextFunction) {
     try {
-      const { group_id } = req.params;
       const { student_id, report } = req.body;
 
       const { isValid, errors, message } = gradeValidatorSingleton.validate({
@@ -45,7 +44,7 @@ class GradeController {
         });
 
       // Validate that the student exists
-      await studentRepository.getStudentByID({ group_id, student_id });
+      await studentRepository.getStudentByID({ student_id });
 
       const createdGrade = await gradeRepository.createGradeFromStudent({ student_id, report });
 
