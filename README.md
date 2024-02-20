@@ -28,10 +28,12 @@ L'application Grader vise à générer les bulletins de notes d'étudiants sous 
 
 ```bash
 make up-dev # ou make up-prod |
-make logs-dev # ou make logs-prod
+```
 
-# Si make ne fonctionne pas en local (copiez les commandes depuis le fichier Makefile)
-docker-compose --project-name grader_dev -f docker-compose.yml -f docker-compose.dev.yml up -d --build # ou docker-compose --project-name grader_prod up -d --build
+Et i make ne fonctionne pas:
+```bash
+docker-compose -p grader_dev -f docker-compose.yml -f docker-compose.dev.yml up -d --build # env dev
+docker-compose -p grader_prod up -d --build # env prod
 ```
 
 ### Sans Docker
