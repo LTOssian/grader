@@ -64,6 +64,12 @@
       gap: 16px;
 
       app-modal-form-button {
+        &.done-button {
+          button {
+            background-color: var(--clr-accent-purple);
+          }
+        }
+
         width: 100%;
       }
     }

@@ -2,18 +2,25 @@ import { Component, DestroyRef, Input, inject, signal } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { MdbModalService, MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import { ModalCreateFormComponent } from '../modal-create-form/modal-create-form.component';
 import { Subject, switchMap } from 'rxjs';
 
 import { BuildFormService } from '../../services/form-builder.service';
 import { ClassModel } from '../../interfaces/class.model';
-import { GradeFormGroup } from '../../interfaces/form.model';
-import { GradeModel_Post, TReport } from '../../interfaces/grade.model';
+import {
+  GradeFormGroup,
+  IModalRef,
+  ModalFailMessage,
+  ModalSuccesMessage,
+} from '../../interfaces/form.model';
+import { GradeModel, GradeModel_Post } from '../../interfaces/grade.model';
 import { GradeService } from '../../services/grade.service';
 import { ModalFormButtonComponent } from '../modal-create-form/modal-form-button/modal-form-button.component';
 import { StudentModel } from '../../interfaces/student.model';
 import { StudentService } from '../../services/student.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-grade-create-form',
@@ -39,7 +46,10 @@ export class GradeCreateFormComponent {
   private gradeService = inject(GradeService);
   private destroyRef = inject(DestroyRef);
   private formBuilder = inject(BuildFormService);
+  private modalService = inject(MdbModalService);
   private router = inject(Router);
+
+  private modalCreateRef: MdbModalRef<ModalCreateFormComponent> | null = null;
 
   public student_id = signal<string>('');
 
@@ -52,7 +62,7 @@ export class GradeCreateFormComponent {
 
   // Subjects triggers
   private createGradeTrigger$ = new Subject<GradeModel_Post>();
-  private getPdfTrigger$ = new Subject<void>();
+  private getPdfTrigger$ = new Subject<GradeModel_Post>();
 
   constructor() {}
 
@@ -93,28 +103,89 @@ export class GradeCreateFormComponent {
         next: () => this.goToGroup(),
         error: () => this.isError.set(true),
       });
+
+    this.getPdfTrigger$
+      .pipe(
+        switchMap((body) =>
+          this.gradeService.createGradeWithReportBody(
+            body,
+            this.student().group_id
+          )
+        ),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe({
+        next: ({ data }) => {
+          if (data) {
+            this.openDownloadModal(data);
+          } else {
+            this.isError.set(true);
+          }
+        },
+        error: () => this.isError.set(true),
+      });
   }
 
-  public onSubmit() {
-    if (this.gradeFormGroup.valid) {
-      this.createGradeTrigger$.next({
-        student_id: this.student_id(),
-        report: Object.entries(this.gradeFormGroup.value).map(
-          ([className, gradeCoef]) => {
-            return {
-              class: className,
-              coefficient: gradeCoef?.coefficient || 0,
-              grade: gradeCoef?.grade || 1,
-            };
-          }
-        ),
-      });
-    } else {
+  public onSubmit(handleDownload?: boolean) {
+    if (!this.gradeFormGroup.valid) {
       this.isError.set(true);
-
       setTimeout(() => {
         this.isError.set(false);
       }, 3000);
+
+      return;
     }
+
+    const requestBody: GradeModel_Post = {
+      student_id: this.student_id(),
+      report: Object.entries(this.gradeFormGroup.value).map(
+        ([className, gradeCoef]) => {
+          return {
+            class: className,
+            coefficient: gradeCoef?.coefficient || 0,
+            grade: gradeCoef?.grade || 1,
+          };
+        }
+      ),
+    };
+
+    if (handleDownload) {
+      this.getPdfTrigger$.next(requestBody);
+      return;
+    }
+
+    this.createGradeTrigger$.next(requestBody);
+  }
+
+  private openDownloadModal(
+    gradeCredentials: Pick<GradeModel, 'created_at' | 'student_grades_id'>
+  ) {
+    this.modalCreateRef = this.modalService.open<
+      ModalCreateFormComponent,
+      Omit<
+        IModalRef,
+        | 'group_id'
+        | 'modalFormGroup'
+        | 'labelsByInput'
+        | 'placeholdersByInput'
+        | 'typeByInput'
+      >
+    >(ModalCreateFormComponent, {
+      data: {
+        title: 'Télécharger le bulletin',
+        subtitle: `du ${new Date(
+          gradeCredentials.created_at || ''
+        ).toLocaleString()}`,
+        entityToCreate: 'pdf',
+        entity_id: gradeCredentials.student_grades_id,
+      },
+    });
+
+    this.modalCreateRef.onClose
+      .subscribe((message: ModalFailMessage | ModalSuccesMessage) => {
+        if (!message.isSuccess) return;
+        console.info(message.message);
+      })
+      .add(() => this.goToGroup());
   }
 }
