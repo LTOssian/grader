@@ -19,7 +19,7 @@ export const routes: Routes = [
     component: GradesPageComponent,
   },
   {
-    path: 'student/:student_id',
+    path: 'student/:student_id_param',
     component: GradeCreateFormComponent,
   },
 ];
