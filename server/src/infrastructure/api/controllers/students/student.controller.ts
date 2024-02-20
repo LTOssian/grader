@@ -62,7 +62,7 @@ class StudentController {
     }
   }
 
-  public async getStudentFromGroupById(req: Request, res: Response, next: NextFunction) {
+  public async getStudentById(req: Request, res: Response, next: NextFunction) {
     try {
       const { student_id } = req.params;
 

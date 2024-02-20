@@ -57,11 +57,10 @@ export class GradeService extends ApiServiceMaker {
 
   public createGradeWithReportBody(body: GradeModel_Post, group_id: string) {
     this.apiEndpoint = this.endPointBuilderService.buildEndpoint([
-      { routeName: this.parentEndpoint, routeParam: group_id },
-      { routeName: 'grades', routeParam: '' },
+      { routeName: 'generate/grade', routeParam: '' },
     ]);
 
-    return this.createEntityWithBody<GradeModel & { student_id: string }>(body);
+    return this.createEntityWithBody<GradeModel_Post, GradeModel_Get>(body);
   }
 
   public downloadGradeById({

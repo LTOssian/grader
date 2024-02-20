@@ -12,7 +12,7 @@ class PdfRouter extends RouterMaker {
 
   protected initRoutes(): void {
     this._router.get("/:grade_id", pdfController.getPDF);
-    this._router.get("/student/:student_id", studentController.getStudentFromGroupById);
+    this._router.get("/student/:student_id", studentController.getStudentById);
     this._router.post("/grade/", gradeController.postGrade);
   }
 }
