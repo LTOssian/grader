@@ -94,7 +94,10 @@ J'ai aussi pris le temps de découvrir des points manquant dans mon bagage techn
 
 #### TypeScript
 
-Notamment l'héritage entre les interfaces, des interfaces de classes `abstract` et les Utility Types.
+- L'héritage entre les interfaces
+- Les interfaces de classes `abstract`
+- Le typage générique
+- Les Utility Types
 
 ### Développement continu
 
@@ -124,7 +127,7 @@ Julien Heitz :
 
 - [Angular Documentation](https://angular.dev/overview)
 - [PDFKit Documentation](http://pdfkit.org/docs/getting_started.html) & [PDFKit Table](https://github.com/natancabral/pdfkit-table/tree/main)
-- [StackOverflow question: How to read Content-Dispotion from response Headers](https://stackoverflow.com/questions/42898162/how-to-read-content-disposition-headers-from-server-response-angular-2) ? (To get the filename in my case)
+- [StackOverflow question: How to read Content-Dispotion from response Headers](https://stackoverflow.com/questions/42898162/how-to-read-content-disposition-headers-from-server-response-angular-2) ? (To get the filename of the generated PDF in my case)
 - [This issue on Angular's repository](https://github.com/angular/angular/issues/18586), bug from 2017 but still to date lol
 - [Docker's documentation](https://docs.docker.com/get-started/09_image_best/)
 
