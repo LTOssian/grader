@@ -27,8 +27,11 @@ L'application Grader vise à générer les bulletins de notes d'étudiants sous 
 ### Avec Docker
 
 ```bash
-make up-dev # ou make up-prod
+make up-dev # ou make up-prod |
 make logs-dev # ou make logs-prod
+
+# Si make ne fonctionne pas en local (copiez les commandes depuis le fichier Makefile)
+docker-compose --project-name grader_dev -f docker-compose.yml -f docker-compose.dev.yml up -d --build # ou docker-compose --project-name grader_prod up -d --build
 ```
 
 ### Sans Docker
@@ -75,24 +78,29 @@ Avec ces gros objectifs techniques, Grader m'a permis d'approfondir beaucoup d'a
 
 Le développement s'est déroulé entièrement sous conteneur.
 
-J'ai pu appliquer des subtilités apprises dans la documentation comme le multi-stage building afin de créer des builds de prod et de développement à partir d'unique Dockerfile par infrastructure.
+J'ai pu appliquer des subtilités apprises dans la documentation comme le multi-stage building afin de créer des image de production ou de développement à partir d'unique Dockerfile par infrastructure.
 
 #### Design Pattern (et 0.01% de la notion de 'Clean Code')
 
 J'ai trouvé un intêret à intégrer dans mon code les patternes Singleton et
-Builder (`router.abstract.ts` et `api-service.abstract.ts`) par pour un développement plus rapide, robuste et consistent.
+Builder (i.e: `router.abstract.ts`, `api-service.abstract.ts`, `validator.ts`).
 
-#### Nouvelle version d'Angular
+Ces derniers mon permis d'écrire du code plus rapidement tout en le rendant plus robuste et consistente.
 
-Prise en main des nouveau paradigme et de la nouvelle syntaxe de templating.
+#### Nouvelle version d'Angular (17)
+
+- Prise en main du nouveau paradigme (Angular promeut dorénavant un code plus déclaratif avec les `signal(), input(), inject()`)
+- Nouvelle syntaxe de templating (`@if, @for, @empty`...).
 
 J'ai aussi pris le temps de découvrir des points manquant dans mon bagage technique Angular :
 
 - Les Guards de routes
 - Les Reactive Forms
-- Signals
+- RxJs (Surtout pour les `Subscription` et les `Subject`)
 
 #### TypeScript
+
+Pour un code maintenable et évolutif, j'ai du creuse dans de nouvelle notions découverte dans la documentation:
 
 - L'héritage entre les interfaces
 - Les interfaces de classes `abstract`
