@@ -7,7 +7,7 @@ class App {
     const expressApp = ExpressAppSingleton.build();
 
     expressApp.listen(this._PORT, () => {
-      console.log(`Server listening`);
+      console.info(`Server listening`);
     });
   }
 }

@@ -15,7 +15,6 @@ export const validReportRule = (
   higherLimit: number
 ): TValidationResult => {
   let outOfBoundsKeys: string[] = [];
-  console.log(typeof credentials.report);
 
   (
     credentials.report as unknown as {
