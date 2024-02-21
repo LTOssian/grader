@@ -24,7 +24,7 @@ COPY . .
 RUN npm run build
 
 # Prod target
-FROM node:21-alpine as prod
+FROM prod_build as prod
 
 WORKDIR /home/app
 
