@@ -46,7 +46,7 @@ class StudentRepository {
 
   public async deleteStudentFromGroup(credentials: Pick<Student, "student_id" | "group_id">): Promise<void> {
     // check validity of the id
-    await this.getStudentByID(credentials);
+    // await this.getStudentByID(credentials); // Method no longer valid for this use case, TODO Set up new validator
 
     await DbClient.deleteFrom("students")
       .where("student_id", "=", credentials.student_id)

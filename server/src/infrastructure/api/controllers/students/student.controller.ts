@@ -92,7 +92,7 @@ class StudentController {
 
       if (!isValid)
         throw new ValidationError({
-          message: ErrorMessageEnum.UNKNOWN_ID,
+          message: message,
           code: 403,
           errors: errors,
         });

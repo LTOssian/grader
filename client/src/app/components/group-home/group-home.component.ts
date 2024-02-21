@@ -135,7 +135,10 @@ export class GroupHomeComponent {
         ),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe(() => this.getStudentsTrigger$.next());
+      .subscribe(() => {
+        this.getStudentsTrigger$.next();
+        this.getGradesTrigger$.next();
+      });
 
     this.deleteGradesTriggers$
       .pipe(
