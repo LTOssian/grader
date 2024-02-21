@@ -27,6 +27,7 @@ services:
       - "4001:4001"
     volumes:
       - ./server:/home/app
+      - /home/app/node_modules
     depends_on:
       - pg_db
     environment:
