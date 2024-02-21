@@ -231,7 +231,7 @@ export class GroupHomeComponent {
     this.modalCreateRef.onClose.subscribe(
       (message: ModalFailMessage | ModalSuccesMessage) => {
         if (!message.isSuccess) return;
-        console.log(message.message);
+        console.info(message.message);
 
         if (entity_type === 'class') {
           this.getClassesTrigger$.next();

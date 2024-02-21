@@ -32,7 +32,6 @@ export class GroupClassesComponent {
   }
 
   public openModal(entity_type: FormType) {
-    console.log(entity_type);
     this.onModalClick.emit({ type: entity_type });
   }
 }

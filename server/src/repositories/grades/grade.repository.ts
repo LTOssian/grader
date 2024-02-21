@@ -31,7 +31,6 @@ class GradeRepository {
    * @returns The grade created
    */
   public async createGradeFromStudent(credentials: Omit<NewGrades, "grade">): Promise<Omit<Grades, "report">> {
-    console.log(credentials.report[0]);
     const [rows] = await DbClient.insertInto("student_grades")
       .values({
         ...credentials,
