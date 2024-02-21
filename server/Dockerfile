@@ -4,12 +4,10 @@ WORKDIR /home/app
 
 COPY package*.json .
 
-RUN npm install
-
 # Dev target
 FROM build as dev
 
-COPY ./src/ .
+RUN npm install
 
 COPY . .
 
@@ -18,6 +16,8 @@ EXPOSE 4001
 CMD [ "npm", "run", "start:dev" ]
 
 FROM build as prod_build
+
+RUN npm ci 
 
 COPY . .
 
@@ -28,11 +28,11 @@ FROM prod_build as prod
 
 WORKDIR /home/app
 
-COPY --from=prod_build /home/app/package*.json .
+COPY --from=prod_build /home/app/dist ./dist
 
-RUN npm install --only=production
+COPY package*.json .
 
-COPY --from=prod_build /home/app/dist/ ./dist/
+RUN npm ci --only=production
 
 EXPOSE 4001
 
