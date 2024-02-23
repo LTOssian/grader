@@ -27,10 +27,11 @@ L'application Grader vise à générer les bulletins de notes d'étudiants sous 
 ### Avec Docker
 
 ```bash
-make up-dev # ou make up-prod |
+make up-dev # ou make up-prod
 ```
 
 Si make ne fonctionne pas:
+
 ```bash
 docker-compose -p grader_dev -f docker-compose.yml -f docker-compose.dev.yml up -d --build # env dev
 docker-compose -p grader_prod up -d --build # env prod
@@ -102,7 +103,7 @@ J'ai aussi pris le temps de découvrir des points manquant dans mon bagage techn
 
 #### TypeScript
 
-Pour un code maintenable et évolutif, j'ai du creuse dans de nouvelle notions découverte dans la documentation:
+Pour un code maintenable et évolutif, j'ai du creuser dans de nouvelle notions découverte dans la documentation:
 
 - L'héritage entre les interfaces.
 - Les interfaces de classes `abstract`.
