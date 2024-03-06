@@ -1,6 +1,6 @@
 # Grader
 
-## Table of contents
+## Table des matières
 
 - [Contexte](#contexte)
 - [Installation](#installation)
@@ -79,23 +79,23 @@ Avec ces gros objectifs techniques, Grader m'a permis d'approfondir beaucoup d'a
 
 #### DevOps
 
-Le développement s'est déroulé entièrement sous conteneur.
+Le développement s'est déroulé entièrement dans des conteneurs Docker.
 
 J'ai pu appliquer des subtilités apprises dans la documentation comme le `multi-stage building` afin de créer des images de production ou de développement à partir d'un unique Dockerfile par infrastructure.
 
 #### Design Pattern (et 0.01% de la notion de 'Clean Code')
 
-J'ai trouvé un intêret à intégrer dans mon code les patternes Singleton et
+J'ai trouvé un intêret à intégrer dans mon code les patternes Singleton et Abstract
 Builder (i.e: `router.abstract.ts`, `api-service.abstract.ts`, `validator.ts`).
 
 Ces derniers m'ont permis d'écrire du code plus rapidement tout en le rendant plus robuste et consistant.
 
 #### Nouvelle version d'Angular (17)
 
-- Prise en main du nouveau paradigme (Angular promeut dorénavant un code plus déclaratif avec `signal(), input(), inject()`).
+- Prise en main du nouveau paradigme (Angular promeut dorénavant un code plus réactif avec `signal(), input(), inject()`).
 - Nouvelle syntaxe de templating (`@if, @for, @empty`...).
 
-J'ai aussi pris le temps de découvrir des points manquant dans mon bagage technique Angular :
+J'ai aussi pris le temps de découvrir des notions manquantes dans mon bagage technique Angular :
 
 - Les Guards de routes.
 - Les Reactive Forms.
@@ -103,7 +103,7 @@ J'ai aussi pris le temps de découvrir des points manquant dans mon bagage techn
 
 #### TypeScript
 
-Pour un code maintenable et évolutif, j'ai du creuser dans de nouvelle notions découverte dans la documentation:
+Pour un code maintenable et évolutif, j'ai du creuser dans de nouvelles notions découverte dans la documentation:
 
 - L'héritage entre les interfaces.
 - Les interfaces de classes `abstract`.
@@ -112,7 +112,7 @@ Pour un code maintenable et évolutif, j'ai du creuser dans de nouvelle notions 
 
 ### Développement continu
 
-L'application est entièrement Dockerisée. Pour la suite, il sera intéressant d'y ajouter une couche d'authentifiaction et d'autorisation afin de la déployer.
+L'application est entièrement Dockerisée. Pour la suite, il serait intéressant d'ajouter une couche d'authentifiaction et d'autorisation afin de la déployer.
 
 Pistes :
 
