@@ -1,4 +1,3 @@
-import { ErrorMessageEnum } from "../../../../common/constants";
 import { gradeRepository } from "../../../../repositories/grades/grade.repository";
 import { gradeValidatorSingleton } from "../../../../common/validators/grade.validator";
 import { groupRepository } from "../../../../repositories/groups/group.repository";
@@ -37,11 +36,11 @@ class GradeController {
       });
 
       if (!isValid)
-        throw new ValidationError({
+        next(new ValidationError({
           message: message,
           code: 403,
           errors: errors,
-        });
+        }));
 
       // Validate that the student exists
       await studentRepository.getStudentByID({ student_id });
