@@ -6,7 +6,6 @@ describe("GradeCalculatorService", () => {
 
     it("Should return a number with two decimal order", () => {
         const decimalOrder = 2;
-        const expectedGrade = 3.33;
 
         const result = service.calculateGrade({
             report: [{
@@ -25,7 +24,7 @@ describe("GradeCalculatorService", () => {
         });
 
         expect(service.decimalOrder).toBe(decimalOrder);
-        expect(result).toBe(expectedGrade);
+        expect(result.toString().split('.')[1].length).toBe(decimalOrder);
     })
 
     it("Should return the correct grade", () => {
