@@ -9,7 +9,7 @@ import { TValidationResult } from "../interfaces/validation.type";
 export const requiredCredentialsRule = (credentials: Record<string, any>): TValidationResult => {
   const missingKeys: string[] = [];
 
-  // Loop over keys and store every keys with no values
+  // Loop over keys and store every key with no values
   for (const key of Object.keys(credentials)) {
     const value = credentials[key];
     if (value === undefined || value === null || value === "" || value <= 0) {

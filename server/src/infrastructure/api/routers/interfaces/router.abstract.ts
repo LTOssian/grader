@@ -3,7 +3,7 @@ import { Router } from "express";
 export default abstract class RouterMaker {
   protected _router: Router;
 
-  public constructor() {
+  protected constructor() {
     this._router = Router({ mergeParams: true });
   }
 
