@@ -6,7 +6,7 @@ import morgan from "morgan";
 import SingletonWrapper from "./common/helpers/singleton-wrapper";
 
 class ExpressApp {
-  private _app: Express;
+  private readonly _app: Express;
   private _appIsInitialized: boolean = false;
 
   public constructor() {
