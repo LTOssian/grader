@@ -124,12 +124,12 @@ Pistes :
 
 Merci à Julien Heitz et Djédjé Gboble pour les code reviews, les sessions de tests et le partage de ressources durant le développement !
 
-Djédjé Gboble :
+Djédjé GBOBLE :
 
 - [LinkedIn](https://www.linkedin.com/in/djédjé-gboble-3100b1228/)
 - [GitHub](https://github.com/Kobrae-San)
 
-Julien Heitz :
+Julien HEITZ :
 
 - [LinkedIn](https://www.linkedin.com/in/heitzjulien/)
 - [GitHub](https://github.com/heitzjulien)
@@ -144,6 +144,6 @@ Julien Heitz :
 
 ## Auteur
 
-Louisan Tchitoula:
+Louisan TCHITOULA
 
 - [LinkedIn](https://www.linkedin.com/in/louisan-tchitoula/)
