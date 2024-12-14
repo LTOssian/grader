@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  src: url('./assets/fonts/Inter-VariableFont_opsz\,wght.ttf') format('truetype');
+}
 
 :root {
   --clr-black-primary: #1e1e1e;
@@ -29,8 +34,10 @@
 }
 
 body {
+  font-family: var(--ff-primary);
   background-color: var(--clr-white-primary);
 }
+
 
 button {
   background: none;
